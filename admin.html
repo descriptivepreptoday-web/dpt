@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>DPT Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+<style>
+:root{--accent:#2563eb;--ah:#1d4ed8;--adim:rgba(37,99,235,.08);--aborder:rgba(37,99,235,.25);--green:#16a34a;--gdim:rgba(22,163,74,.08);--gborder:rgba(22,163,74,.25);--red:#dc2626;--rdim:rgba(220,38,38,.08);--rborder:rgba(220,38,38,.25);--amber:#d97706;--r:10px;--rs:6px;--tr:.18s ease;}
+[data-theme=dark]{--bg:#0d1117;--bg2:#161b22;--bg3:#1c2128;--bg4:#22272e;--t:#e6edf3;--t2:#8b949e;--t3:#3d444d;--b:#30363d;}
+[data-theme=light]{--bg:#f6f8fa;--bg2:#fff;--bg3:#f0f2f5;--bg4:#e8ecf0;--t:#1a1f2e;--t2:#57606a;--t3:#c8d0da;--b:#d0d7de;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);min-height:100vh;font-size:14px;}
+.ic{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.ic svg{stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+
+/* LOGIN */
+#ls{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px}
+.lbox{background:var(--bg2);border:1px solid var(--b);border-radius:14px;padding:40px 34px;width:100%;max-width:390px}
+.llogo{width:42px;height:42px;background:var(--accent);border-radius:var(--rs);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;color:#fff}
+.ltitle{font-size:1.1rem;font-weight:700;text-align:center;margin-bottom:4px}
+.lsub{font-size:.78rem;color:var(--t2);text-align:center;margin-bottom:26px}
+.lf label{font-size:.68rem;color:var(--t2);text-transform:uppercase;letter-spacing:.08em;display:block;margin-bottom:5px;font-weight:500}
+.lf input{width:100%;background:var(--bg3);border:1px solid var(--b);border-radius:var(--rs);padding:9px 12px;color:var(--t);font-size:.85rem;outline:none;font-family:'Inter',sans-serif;transition:border-color var(--tr);margin-bottom:12px}
+.lf input:focus{border-color:var(--accent)}
+.lbtn{width:100%;background:var(--accent);color:#fff;border:none;padding:10px;border-radius:var(--rs);font-size:.85rem;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:background var(--tr)}
+.lbtn:hover{background:var(--ah)}
+.lerr{color:var(--red);font-size:.75rem;text-align:center;margin-top:10px;display:none}
+.lhint{font-size:.68rem;color:var(--t2);text-align:center;margin-top:14px}
+
+/* SHELL */
+#sh{display:none}
+.topbar{background:var(--bg2);border-bottom:1px solid var(--b);height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;position:sticky;top:0;z-index:100}
+.tb-l{display:flex;align-items:center;gap:9px}
+.tlogo{width:26px;height:26px;background:var(--accent);border-radius:5px;display:flex;align-items:center;justify-content:center;color:#fff;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700}
+.tname{font-size:.85rem;font-weight:700}
+.tbadge{font-size:.65rem;background:var(--bg3);border:1px solid var(--b);color:var(--t2);padding:2px 8px;border-radius:10px;font-family:'JetBrains Mono',monospace}
+.tb-r{display:flex;align-items:center;gap:7px}
+.saved{font-size:.72rem;color:var(--green)}
+.ib{width:30px;height:30px;border-radius:var(--rs);border:1px solid var(--b);background:transparent;color:var(--t2);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all var(--tr)}
+.ib:hover{border-color:var(--accent);color:var(--accent)}
+.tb-btn{font-size:.72rem;padding:4px 11px;border-radius:var(--rs);border:1px solid var(--b);background:transparent;color:var(--t2);cursor:pointer;font-family:'Inter',sans-serif;transition:all var(--tr)}
+.tb-btn:hover{border-color:var(--accent);color:var(--accent)}
+.tb-btn.danger:hover{border-color:var(--red);color:var(--red)}
+
+.layout{display:flex;min-height:calc(100vh - 52px)}
+.sb{width:200px;background:var(--bg2);border-right:1px solid var(--b);padding:10px 0;flex-shrink:0;position:sticky;top:52px;height:calc(100vh - 52px);overflow-y:auto}
+.ng{font-size:.62rem;color:var(--t2);text-transform:uppercase;letter-spacing:.1em;padding:10px 14px 4px;margin-top:4px}
+.ni{display:flex;align-items:center;gap:8px;padding:7px 14px;font-size:.8rem;color:var(--t2);cursor:pointer;transition:all var(--tr);border-left:2px solid transparent}
+.ni:hover{color:var(--t);background:var(--bg3)}
+.ni.on{color:var(--accent);border-left-color:var(--accent);background:var(--adim)}
+.main{flex:1;padding:22px;overflow-y:auto;max-width:1000px}
+
+/* PAGES */
+.pg{display:none}.pg.on{display:block}
+.ph{margin-bottom:22px}
+.ph-ey{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px}
+.ph-ti{font-size:1.2rem;font-weight:700;letter-spacing:-.3px;margin-bottom:3px}
+.ph-su{font-size:.78rem;color:var(--t2)}
+
+/* CARD */
+.card{background:var(--bg2);border:1px solid var(--b);border-radius:var(--r);overflow:hidden;margin-bottom:14px}
+.ch{background:var(--bg3);padding:11px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--b)}
+.cht{font-size:.8rem;font-weight:600}
+.cb{padding:16px}
+
+/* STAT */
+.sg{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:18px}
+.st{background:var(--bg2);border:1px solid var(--b);border-radius:var(--r);padding:14px 12px}
+.sv{font-family:'JetBrains Mono',monospace;font-size:1.5rem;font-weight:600;color:var(--accent);line-height:1;margin-bottom:3px}
+.sl{font-size:.62rem;color:var(--t2);text-transform:uppercase;letter-spacing:.07em}
+.ss{font-size:.68rem;color:var(--t2);margin-top:3px}
+
+/* FORM */
+.fr{display:grid;gap:10px;margin-bottom:10px}
+.fr.c2{grid-template-columns:1fr 1fr}.fr.c3{grid-template-columns:1fr 1fr 1fr}.fr.c1{grid-template-columns:1fr}
+.ff label{font-size:.65rem;color:var(--t2);text-transform:uppercase;letter-spacing:.08em;display:block;margin-bottom:4px;font-weight:500}
+.ff input,.ff select,.ff textarea{width:100%;background:var(--bg3);border:1px solid var(--b);border-radius:var(--rs);padding:8px 11px;color:var(--t);font-size:.8rem;outline:none;font-family:'Inter',sans-serif;transition:border-color var(--tr)}
+.ff input:focus,.ff select:focus,.ff textarea:focus{border-color:var(--accent)}
+.ff select option{background:var(--bg2)}
+.ff textarea{resize:vertical;min-height:70px;line-height:1.6}
+.ff textarea.tall{min-height:120px}
+.hint{font-size:.68rem;color:var(--t2);margin-top:3px;line-height:1.5}
+
+/* BTN */
+.btn{display:inline-flex;align-items:center;gap:5px;padding:7px 14px;border-radius:var(--rs);font-size:.78rem;font-weight:600;cursor:pointer;border:none;font-family:'Inter',sans-serif;transition:all var(--tr)}
+.bp{background:var(--accent);color:#fff}.bp:hover{background:var(--ah)}
+.bo{background:transparent;border:1px solid var(--b);color:var(--t2)}.bo:hover{border-color:var(--accent);color:var(--accent)}
+.bd{background:var(--rdim);color:var(--red);border:1px solid var(--rborder)}.bd:hover{background:rgba(220,38,38,.15)}
+.bs{background:var(--gdim);color:var(--green);border:1px solid var(--gborder)}
+.sm{padding:4px 10px;font-size:.72rem;border-radius:5px}
+
+/* TABLE */
+.dt{width:100%;border-collapse:collapse}
+.dt th{text-align:left;padding:8px 12px;font-size:.62rem;color:var(--t2);text-transform:uppercase;letter-spacing:.07em;border-bottom:1px solid var(--b);background:var(--bg3);font-weight:500}
+.dt td{padding:10px 12px;font-size:.78rem;border-bottom:1px solid var(--bg3);vertical-align:middle}
+.dt tr:last-child td{border-bottom:none}
+.dt tr:hover td{background:rgba(37,99,235,.02)}
+.td-p{max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--t2)}
+.tda{display:flex;gap:5px}
+
+/* BADGE */
+.bge{display:inline-block;font-size:.62rem;padding:2px 7px;border-radius:4px;font-family:'JetBrains Mono',monospace}
+.bg-g{background:var(--gdim);color:var(--green);border:1px solid var(--gborder)}
+.bg-r{background:var(--rdim);color:var(--red);border:1px solid var(--rborder)}
+.bg-b{background:var(--adim);color:var(--accent);border:1px solid var(--aborder)}
+.bg-a{background:rgba(217,119,6,.08);color:var(--amber);border:1px solid rgba(217,119,6,.25)}
+
+/* TOGGLE */
+.tgl{display:flex;align-items:center;gap:7px;font-size:.8rem;color:var(--t2);margin-top:7px}
+.tgl-sw{position:relative;width:32px;height:17px;cursor:pointer;flex-shrink:0}
+.tgl-sw input{opacity:0;width:0;height:0}
+.tgl-tr{position:absolute;inset:0;background:var(--bg4);border:1px solid var(--b);border-radius:9px;transition:.25s}
+.tgl-tr::before{content:'';position:absolute;width:11px;height:11px;left:2px;bottom:2px;background:var(--t2);border-radius:50%;transition:.25s}
+.tgl-sw input:checked+.tgl-tr{background:var(--accent);border-color:var(--accent)}
+.tgl-sw input:checked+.tgl-tr::before{transform:translateX(15px);background:#fff}
+
+/* MODAL */
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:200;display:none;align-items:center;justify-content:center;padding:20px}
+.ov.op{display:flex}
+.mo{background:var(--bg2);border:1px solid var(--b);border-radius:14px;width:100%;max-width:640px;max-height:90vh;overflow-y:auto}
+.mh{padding:14px 20px;border-bottom:1px solid var(--b);display:flex;align-items:center;justify-content:space-between}
+.mt{font-size:.95rem;font-weight:700}
+.mc{background:transparent;border:none;color:var(--t2);font-size:1.2rem;cursor:pointer;line-height:1;padding:0 2px}
+.mc:hover{color:var(--t)}
+.mb{padding:20px}
+.mf{padding:12px 20px;border-top:1px solid var(--b);display:flex;justify-content:flex-end;gap:7px}
+
+/* TOAST */
+.toast{position:fixed;bottom:18px;right:18px;background:var(--bg2);border:1px solid var(--b);border-radius:var(--r);padding:10px 15px;font-size:.78rem;z-index:300;transform:translateY(50px);opacity:0;transition:all .3s;display:flex;align-items:center;gap:7px}
+.toast.show{transform:translateY(0);opacity:1}
+.toast.ok{border-color:var(--gborder);color:var(--green)}
+.toast.er{border-color:var(--rborder);color:var(--red)}
+
+/* COLOR SWATCHES */
+.sw-row{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}
+.sw{width:26px;height:26px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:transform .15s,border-color .15s}
+.sw:hover,.sw.on{transform:scale(1.2);border-color:var(--t)}
+
+/* TIMING ROW */
+.tr-row{display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--bg3);font-size:.8rem}
+.tr-row:last-child{border-bottom:none}
+.mn-in{width:58px;background:var(--bg3);border:1px solid var(--b);border-radius:var(--rs);padding:4px 8px;color:var(--t);font-size:.78rem;text-align:center;outline:none;font-family:'JetBrains Mono',monospace}
+.mn-in:focus{border-color:var(--accent)}
+
+.div{height:1px;background:var(--b);margin:16px 0}
+.empty{text-align:center;padding:36px;color:var(--t2);font-size:.8rem}
+
+/* TEXT EDITOR ROWS */
+.text-editor-row{background:var(--bg3);border:1px solid var(--b);border-radius:var(--rs);padding:12px;margin-bottom:8px}
+.ter-label{font-size:.65rem;color:var(--t2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px;font-weight:500}
+.ter-input{width:100%;background:transparent;border:none;color:var(--t);font-size:.82rem;outline:none;font-family:'Inter',sans-serif;line-height:1.5;resize:none}
+
+@media(max-width:720px){.sb{display:none}.sg{grid-template-columns:repeat(2,1fr)}.fr.c2,.fr.c3{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="ls">
+  <div class="lbox">
+    <div class="llogo"><span class="ic" style="width:20px;height:20px"><svg width="20" height="20" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></span></div>
+    <div class="ltitle">Admin Panel</div>
+    <div class="lsub">Descriptive Prep Today</div>
+    <div class="lf">
+      <label>Username</label><input type="text" id="lu" placeholder="admin"/>
+      <label>Password</label><input type="password" id="lp" placeholder="••••••••" onkeydown="if(event.key==='Enter')login()"/>
+      <button class="lbtn" onclick="login()">Sign In</button>
+    </div>
+    <div class="lerr" id="lerr">Incorrect credentials.</div>
+    <div class="lhint">Default: admin / dpt@2026</div>
+  </div>
+</div>
+
+<!-- SHELL -->
+<div id="sh">
+  <div class="topbar">
+    <div class="tb-l">
+      <div class="tlogo">DPT</div>
+      <div class="tname">Admin</div>
+      <div class="tbadge">Descriptive Prep Today</div>
+    </div>
+    <div class="tb-r">
+      <span class="saved" id="saved"></span>
+      <button class="tb-btn bs" onclick="window.open('dpt-student.html','_blank')">Preview Site</button>
+      <button class="ib" onclick="toggleTheme()" title="Theme">
+        <span class="ic" id="ico-d" style="width:14px;height:14px"><svg width="14" height="14" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg></span>
+        <span class="ic" id="ico-l" style="display:none;width:14px;height:14px"><svg width="14" height="14" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg></span>
+      </button>
+      <button class="tb-btn danger" onclick="logout()">Sign Out</button>
+    </div>
+  </div>
+
+  <div class="layout">
+    <div class="sb">
+      <div class="ng">Overview</div>
+      <div class="ni on" data-p="dash" onclick="nav('dash')"><span class="ic" style="width:14px;height:14px"><svg width="14" height="14" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></span>Dashboard</div>
+      <div class="ng">Content</div>
+      <div class="ni" data-p="qs" onclick="nav('qs')"><span class="ic" style="width:14px;height:14px"><svg width="14" height="14" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span>Questions</div>
+      <div class="ni" data-p="exams" onclick="nav('exams')"><span class="ic" style="width:14px;height:14px"><svg width="14" height="14" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></span>Exams</div>
+      <div class="ni" data-p="secs" onclick="nav('secs')"><span class="ic" style="width:14px;height:14px"><svg width="14" height="14" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="9" x2="9" y2="21"/></svg></span>Sections</div>
+      <div class="ni" data-p="typing" onclick="nav('typing')"><span class="ic" style="width:14px;height:14px"><svg width="14" height="14" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M8 12h.01M12 12h.01M16 12h.01M7 16h10"/></svg></span>Typing Paras</div>
+      <div class="ng">Settings</div>
+      <div class="ni" data-p="timing" onclick="nav('timing')"><span class="ic" style="width:14px;height:14px"><svg width="14" height="14" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>Timing</div>
+      <div class="ni" data-p="appear" onclick="nav('appear')"><span class="ic" style="width:14px;height:14px"><svg width="14" height="14" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg></span>Appearance</div>
+      <div class="ni" data-p="content" onclick="nav('content')"><span class="ic" style="width:14px;height:14px"><svg width="14" height="14" viewBox="0 0 24 24"><line x1="17" y1="10" x2="3" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="17" y1="18" x2="3" y2="18"/></svg></span>Page Text</div>
+      <div class="ni" data-p="cfg" onclick="nav('cfg')"><span class="ic" style="width:14px;height:14px"><svg width="14" height="14" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg></span>Settings</div>
+    </div>
+
+    <div class="main">
+      <!-- DASHBOARD -->
+      <div id="pg-dash" class="pg on">
+        <div class="ph"><div class="ph-ey">Overview</div><div class="ph-ti">Dashboard</div></div>
+        <div class="sg" id="d-stats"></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+          <div class="card"><div class="ch"><div class="cht">By Section</div></div><div class="cb" id="d-by-type"></div></div>
+          <div class="card"><div class="ch"><div class="cht">Quick Links</div></div><div class="cb">
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <button class="btn bo" onclick="nav('qs')" style="justify-content:flex-start">Add a new question</button>
+              <button class="btn bo" onclick="nav('content')" style="justify-content:flex-start">Edit homepage text</button>
+              <button class="btn bo" onclick="nav('appear')" style="justify-content:flex-start">Change site colours</button>
+              <button class="btn bo" onclick="nav('cfg')" style="justify-content:flex-start">Set Telegram link</button>
+            </div>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- QUESTIONS -->
+      <div id="pg-qs" class="pg">
+        <div class="ph"><div class="ph-ey">Content</div><div class="ph-ti">Questions</div><div class="ph-su">Add, edit or remove SBI PO practice questions</div></div>
+        <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap">
+          <input style="flex:1;min-width:140px;background:var(--bg3);border:1px solid var(--b);border-radius:var(--rs);padding:7px 11px;color:var(--t);font-size:.78rem;outline:none;font-family:'Inter',sans-serif" placeholder="Search…" oninput="renderQT()" id="qs-s"/>
+          <select style="background:var(--bg3);border:1px solid var(--b);border-radius:var(--rs);padding:7px 11px;color:var(--t);font-size:.78rem;outline:none;font-family:'Inter',sans-serif" id="qs-ft" onchange="renderQT()"><option value="">All Types</option></select>
+          <button class="btn bp" onclick="openQM()"><span class="ic" style="width:12px;height:12px"><svg width="12" height="12" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>Add Question</button>
+        </div>
+        <div class="card"><div class="cb" style="padding:0"><table class="dt"><thead><tr><th>Question</th><th>Type</th><th>Marks</th><th>Words</th><th>Status</th><th>Actions</th></tr></thead><tbody id="q-tb"></tbody></table></div></div>
+      </div>
+
+      <!-- EXAMS -->
+      <div id="pg-exams" class="pg">
+        <div class="ph"><div class="ph-ey">Content</div><div class="ph-ti">Exam Configuration</div><div class="ph-su">Manage SBI PO exam — sections, order, mock duration</div></div>
+        <div id="exam-list"></div>
+        <button class="btn bp" onclick="openEM()"><span class="ic" style="width:12px;height:12px"><svg width="12" height="12" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>Add Exam</button>
+      </div>
+
+      <!-- SECTIONS -->
+      <div id="pg-secs" class="pg">
+        <div class="ph"><div class="ph-ey">Content</div><div class="ph-ti">Section Types</div><div class="ph-su">Email Writing, Situation Analysis, Report, Precis — manage all here</div></div>
+        <div style="display:flex;justify-content:flex-end;margin-bottom:12px"><button class="btn bp" onclick="openSM()"><span class="ic" style="width:12px;height:12px"><svg width="12" height="12" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>Add Section</button></div>
+        <div class="card"><div class="cb" style="padding:0"><table class="dt"><thead><tr><th>Name</th><th>Key</th><th>Word Limit</th><th>Timer</th><th>Marks</th><th>No-timer</th><th>Actions</th></tr></thead><tbody id="sec-tb"></tbody></table></div></div>
+      </div>
+
+      <!-- TYPING PARAS -->
+      <div id="pg-typing" class="pg">
+        <div class="ph"><div class="ph-ey">Content</div><div class="ph-ti">Typing Test Paragraphs</div><div class="ph-su">These paragraphs are shown during the typing speed test. Add banking-related passages.</div></div>
+        <div style="display:flex;justify-content:flex-end;margin-bottom:12px"><button class="btn bp" onclick="addTypingPara()">Add Paragraph</button></div>
+        <div id="typing-para-list"></div>
+      </div>
+
+      <!-- TIMING -->
+      <div id="pg-timing" class="pg">
+        <div class="ph"><div class="ph-ey">Settings</div><div class="ph-ti">Timing Rules</div></div>
+        <div class="card" style="margin-bottom:14px"><div class="ch"><div class="cht">Section Timers</div><button class="btn bp sm" onclick="saveTiming()">Save</button></div><div class="cb" id="sec-timers"></div></div>
+        <div class="card"><div class="ch"><div class="cht">Mock Exam Duration</div><button class="btn bp sm" onclick="saveTiming()">Save</button></div><div class="cb" id="mock-timers"></div></div>
+      </div>
+
+      <!-- APPEARANCE -->
+      <div id="pg-appear" class="pg">
+        <div class="ph"><div class="ph-ey">Settings</div><div class="ph-ti">Appearance</div><div class="ph-su">Control colours, fonts and logo shown to students</div></div>
+
+        <div class="card" style="margin-bottom:14px">
+          <div class="ch"><div class="cht">Logo</div></div>
+          <div class="cb">
+            <div class="fr c2">
+              <div class="ff"><label>Logo — Dark Theme URL</label><input type="text" id="ap-logo-dark" placeholder="https://example.com/logo-white.png" oninput="prevLogo()"/></div>
+              <div class="ff"><label>Logo — Light Theme URL</label><input type="text" id="ap-logo-light" placeholder="https://example.com/logo-dark.png" oninput="prevLogo()"/></div>
+            </div>
+            <div class="hint">Use different logos for dark and light mode. For example, a white logo for dark theme and a dark logo for light theme. Leave a field blank to use the other logo for both themes.</div>
+            <div id="logo-prev" style="margin-top:10px;display:flex;gap:12px;align-items:center"></div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom:14px">
+          <div class="ch"><div class="cht">Accent Colour</div></div>
+          <div class="cb">
+            <div class="hint" style="margin-bottom:10px">Used for buttons, highlights and links on the student site.</div>
+            <div class="sw-row" id="sw-row"></div>
+            <div class="fr c2" style="margin-top:12px"><div class="ff"><label>Custom hex</label><input type="text" id="ap-accent" placeholder="#2563eb" oninput="prevAccent(this.value)"/></div></div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom:14px">
+          <div class="ch"><div class="cht">Background & Text Colours</div></div>
+          <div class="cb">
+            <div class="hint" style="margin-bottom:10px">Override the default dark/light theme colours. Leave blank to use defaults.</div>
+            <div class="fr c2">
+              <div class="ff"><label>Dark BG colour</label><input type="text" id="ap-darkbg" placeholder="#0d1117"/></div>
+              <div class="ff"><label>Dark text colour</label><input type="text" id="ap-darktext" placeholder="#e6edf3"/></div>
+            </div>
+            <div class="fr c2">
+              <div class="ff"><label>Light BG colour</label><input type="text" id="ap-lightbg" placeholder="#f6f8fa"/></div>
+              <div class="ff"><label>Light text colour</label><input type="text" id="ap-lighttext" placeholder="#1a1f2e"/></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom:14px">
+          <div class="ch"><div class="cht">Typography</div></div>
+          <div class="cb">
+            <div class="fr c2">
+              <div class="ff"><label>Font Family</label>
+                <select id="ap-font">
+                  <option value="Inter">Inter (default)</option>
+                  <option value="Roboto">Roboto</option>
+                  <option value="Poppins">Poppins</option>
+                  <option value="Lato">Lato</option>
+                  <option value="Open Sans">Open Sans</option>
+                </select>
+              </div>
+              <div class="ff"><label>Base font size (px)</label><input type="number" id="ap-fs" value="15" min="12" max="20"/></div>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn bp" onclick="saveAppear()">Save Appearance</button>
+      </div>
+
+      <!-- PAGE TEXT -->
+      <div id="pg-content" class="pg">
+        <div class="ph"><div class="ph-ey">Settings</div><div class="ph-ti">Page Text</div><div class="ph-su">Edit every piece of text shown on the student site — headings, descriptions, labels</div></div>
+        <div class="card" style="margin-bottom:14px">
+          <div class="ch"><div class="cht">Site Identity</div><button class="btn bp sm" onclick="saveContent()">Save All</button></div>
+          <div class="cb" id="text-identity"></div>
+        </div>
+        <div class="card" style="margin-bottom:14px">
+          <div class="ch"><div class="cht">Homepage</div></div>
+          <div class="cb" id="text-home"></div>
+        </div>
+        <div class="card" style="margin-bottom:14px">
+          <div class="ch"><div class="cht">Typing Speed Test</div></div>
+          <div class="cb" id="text-typing"></div>
+        </div>
+        <div class="card" style="margin-bottom:14px">
+          <div class="ch"><div class="cht">Telegram Strip</div></div>
+          <div class="cb" id="text-tg"></div>
+        </div>
+        <button class="btn bp" onclick="saveContent()">Save All Text</button>
+      </div>
+
+      <!-- SETTINGS -->
+      <div id="pg-cfg" class="pg">
+        <div class="ph"><div class="ph-ey">Settings</div><div class="ph-ti">Site Settings</div></div>
+
+        <div class="card" style="margin-bottom:14px">
+          <div class="ch"><div class="cht">Telegram Channel</div></div>
+          <div class="cb">
+            <div class="fr c2">
+              <div class="ff"><label>Channel URL</label><input id="cfg-tg" type="text" placeholder="https://t.me/yourchannel"/></div>
+              <div class="ff"><label>Button text</label><input id="cfg-tgt" type="text" placeholder="Join Telegram"/></div>
+            </div>
+            <div class="hint">When set, a banner and header link appear on the student site.</div>
+            <button class="btn bp sm" style="margin-top:10px" onclick="saveCfg()">Save</button>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom:14px">
+          <div class="ch"><div class="cht">AI Evaluation Proxy</div></div>
+          <div class="cb">
+            <div class="fr c1"><div class="ff"><label>Cloudflare Worker URL</label><input id="cfg-proxy" type="text" placeholder="https://your-worker.workers.dev"/></div></div>
+            <div class="hint">Set up a free Cloudflare Worker with your Anthropic API key, paste the URL here. The student site will use it to evaluate answers securely.</div>
+            <button class="btn bp sm" style="margin-top:10px" onclick="saveCfg()">Save</button>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom:14px">
+          <div class="ch"><div class="cht">Change Password</div></div>
+          <div class="cb">
+            <div class="fr c2">
+              <div class="ff"><label>New username</label><input id="new-u" type="text"/></div>
+              <div class="ff"><label>New password</label><input id="new-p" type="password"/></div>
+            </div>
+            <button class="btn bp sm" onclick="changePass()">Update</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="ch"><div class="cht">Publish to GitHub (Cross-device Sync)</div></div>
+          <div class="cb">
+            <div style="background:var(--bg3);border:1px solid var(--b);border-radius:var(--rs);padding:12px 14px;margin-bottom:12px">
+              <div style="font-size:.78rem;font-weight:600;margin-bottom:6px">How cross-device sync works</div>
+              <div style="font-size:.72rem;color:var(--t2);line-height:1.7">
+                1. Click <strong style="color:var(--t)">Download config.json</strong> below<br>
+                2. Go to your GitHub repo → upload this file to the root folder (same place as your HTML files)<br>
+                3. All devices will now load your latest settings, colours, questions and logo automatically
+              </div>
+            </div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <button class="btn bp" onclick="downloadConfig()">Download config.json</button>
+              <button class="btn bo" onclick="exportD()">Export full backup (JSON)</button>
+              <button class="btn bo" onclick="document.getElementById('imp').click()">Import backup</button>
+              <input type="file" id="imp" accept=".json" style="display:none" onchange="importD(event)"/>
+              <button class="btn bd" onclick="resetD()">Reset all data</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Q MODAL -->
+<div class="ov" id="qm">
+  <div class="mo">
+    <div class="mh"><div class="mt" id="qm-t">Add Question</div><button class="mc" onclick="cm('qm')">×</button></div>
+    <div class="mb">
+      <div class="fr c3">
+        <div class="ff"><label>Section Type</label><select id="qm-type"><option value="">Select…</option></select></div>
+        <div class="ff"><label>Marks</label><input type="number" id="qm-marks" value="20" min="1" max="50"/></div>
+        <div class="ff"><label>Difficulty</label><select id="qm-diff"><option value="easy">Easy</option><option value="medium" selected>Medium</option><option value="hard">Hard</option></select></div>
+      </div>
+      <div class="fr c1"><div class="ff"><label>Word Limit</label><input type="text" id="qm-wl" placeholder="e.g. 150–200 words"/></div></div>
+      <div class="fr c1"><div class="ff"><label>Question Text</label><textarea id="qm-text" class="tall" placeholder="Write the full question here…"></textarea></div></div>
+      <div class="fr c1"><div class="ff"><label>Model Answer</label><textarea id="qm-ans" class="tall" placeholder="Write a complete model answer…"></textarea></div></div>
+      <label class="tgl"><label class="tgl-sw"><input type="checkbox" id="qm-active" checked/><span class="tgl-tr"></span></label>Visible to students</label>
+      <input type="hidden" id="qm-id"/>
+    </div>
+    <div class="mf"><button class="btn bo" onclick="cm('qm')">Cancel</button><button class="btn bp" onclick="saveQ()">Save Question</button></div>
+  </div>
+</div>
+
+<!-- EXAM MODAL -->
+<div class="ov" id="em">
+  <div class="mo">
+    <div class="mh"><div class="mt" id="em-t">Edit Exam</div><button class="mc" onclick="cm('em')">×</button></div>
+    <div class="mb">
+      <div class="fr c2">
+        <div class="ff"><label>Exam Name</label><input type="text" id="em-name"/></div>
+        <div class="ff"><label>Mock Duration (minutes)</label><input type="number" id="em-dur" value="30" min="1"/></div>
+      </div>
+      <div class="fr c2">
+        <div class="ff"><label>Status</label><select id="em-status"><option value="active">Active</option><option value="upcoming">Upcoming</option><option value="hidden">Hidden</option></select></div>
+        <div class="ff"><label>Description</label><input type="text" id="em-desc"/></div>
+      </div>
+      <div class="div"></div>
+      <div style="font-size:.8rem;font-weight:600;margin-bottom:8px">Sections (in order)</div>
+      <div id="em-secs"></div>
+      <button class="btn bo sm" style="margin-top:8px" onclick="addESec()">+ Add Section</button>
+      <input type="hidden" id="em-id"/>
+    </div>
+    <div class="mf"><button class="btn bo" onclick="cm('em')">Cancel</button><button class="btn bp" onclick="saveExam()">Save</button></div>
+  </div>
+</div>
+
+<!-- SECTION MODAL -->
+<div class="ov" id="sm">
+  <div class="mo" style="max-width:480px">
+    <div class="mh"><div class="mt" id="sm-t">Add Section</div><button class="mc" onclick="cm('sm')">×</button></div>
+    <div class="mb">
+      <div class="fr c2">
+        <div class="ff"><label>Display Name</label><input type="text" id="sm-name" placeholder="e.g. Letter Writing"/></div>
+        <div class="ff"><label>Key (no spaces)</label><input type="text" id="sm-key" placeholder="e.g. letter" oninput="this.value=this.value.toLowerCase().replace(/[^a-z0-9_]/g,'')"/></div>
+      </div>
+      <div class="fr c2">
+        <div class="ff"><label>Word Limit</label><input type="text" id="sm-wl" placeholder="150–200 words"/></div>
+        <div class="ff"><label>Marks</label><input type="number" id="sm-marks" value="15" min="1"/></div>
+      </div>
+      <div class="fr c2">
+        <div class="ff"><label>Default timer (min)</label><input type="number" id="sm-timer" value="10" min="1"/></div>
+      </div>
+      <label class="tgl"><label class="tgl-sw"><input type="checkbox" id="sm-nt" checked/><span class="tgl-tr"></span></label>Allow no-timer practice</label>
+      <input type="hidden" id="sm-id"/>
+    </div>
+    <div class="mf"><button class="btn bo" onclick="cm('sm')">Cancel</button><button class="btn bp" onclick="saveSec()">Save</button></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ── AUTH ──
+const DCRED={user:'admin',pass:'dpt@2026'};
+const gc=()=>{try{return JSON.parse(localStorage.getItem('dpt_creds'))||DCRED;}catch{return DCRED;}};
+const li=()=>sessionStorage.getItem('dpt_li')==='1';
+function login(){const u=document.getElementById('lu').value.trim(),p=document.getElementById('lp').value,c=gc();if(u===c.user&&p===c.pass){sessionStorage.setItem('dpt_li','1');document.getElementById('ls').style.display='none';document.getElementById('sh').style.display='block';initAdmin();}else document.getElementById('lerr').style.display='block';}
+function logout(){sessionStorage.removeItem('dpt_li');location.reload();}
+function changePass(){const u=document.getElementById('new-u').value.trim(),p=document.getElementById('new-p').value;if(!u||p.length<6){t('Username needed, password 6+ chars','er');return;}localStorage.setItem('dpt_creds',JSON.stringify({user:u,pass:p}));t('Password updated','ok');}
+
+// ── DATA ──
+function D(){try{return JSON.parse(localStorage.getItem('dpt_data'))||DD();}catch{return DD();}}
+function SD(d){localStorage.setItem('dpt_data',JSON.stringify(d));const el=document.getElementById('saved');el.textContent='Saved';setTimeout(()=>el.textContent='',2000);}
+function DD(){return {siteSettings:{name:'Descriptive Prep Today',tagline:'Free SBI PO 2026 Practice Platform',tgLink:'',tgText:'Join Telegram',logoUrl:'',accentColor:'#2563eb',fontFamily:'Inter',fontSize:15,apiProxy:'',darkBg:'',darkText:'',lightBg:'',lightText:'',homeEyebrow:'Free Practice Platform',homeTitle:'SBI PO Descriptive\nPractice 2026',homeSub:'Exam-pattern interface · AI evaluation · Model answers · Typing speed tracker. No registration. No cost. Just practice.',practiceSectionLabel:'Practice Sections',toolsLabel:'Tools',typingCardTitle:'Typing Speed Test',typingCardDesc:'Check your WPM and accuracy. Use a given paragraph or paste your own text.',typingHeading:'Typing Speed Test',typingSubhead:'Test your words per minute and accuracy before the exam',tgStripTitle:'Get daily questions on Telegram',tgStripSub:'Free PDFs, updates and practice material'},sectionTypes:[{id:'email',name:'Email Writing',wordLimit:'150–200 words',marks:20,timer:10,noTimer:true},{id:'situation',name:'Situation Analysis',wordLimit:'100–150 words',marks:15,timer:10,noTimer:true},{id:'report',name:'Report Writing',wordLimit:'100–150 words',marks:15,timer:10,noTimer:true},{id:'precis',name:'Precis Writing',wordLimit:'~1/3rd of passage',marks:15,timer:10,noTimer:true}],exams:[{id:'sbi_po',name:'SBI PO Mains 2026',duration:30,status:'active',desc:'New pattern — Email, Situation Analysis, Report, Precis',sections:['email','situation','report','precis']}],typingParas:['Financial inclusion remains one of India\'s most pressing developmental challenges. Despite significant progress, a large section of the population continues to lack access to formal banking services. The Pradhan Mantri Jan Dhan Yojana has been a landmark initiative, bringing millions of unbanked households into the formal financial fold. However, merely opening bank accounts does not guarantee meaningful financial inclusion.','The Reserve Bank of India plays a pivotal role in maintaining monetary stability and regulating the banking sector. Its primary objectives include controlling inflation, managing foreign exchange reserves, and ensuring the smooth functioning of the payment and settlement system. The RBI also acts as the banker to the government and formulates policies that influence the flow of credit in the economy.'],questions:[{id:'q1',examId:'sbi_po',type:'email',text:'You are a PO at SBI. A customer Mr. Ramesh Gupta has complained that his net banking access has been blocked for 3 days. Write a formal email explaining the reason (scheduled maintenance) and the resolution timeline.',wordLimit:'150–200 words',marks:20,difficulty:'medium',modelAnswer:'To: ramesh.gupta@email.com\nSubject: Resolution of Net Banking Access Issue\n\nDear Mr. Gupta,\n\nI sincerely apologise for the disruption to your net banking services. The temporary suspension was due to scheduled server maintenance from 14th to 16th June 2026. Your access has been fully restored.\n\nPlease reset your password via "Forgot Password" if you face difficulty. For assistance call 1800-11-2211.\n\nYours sincerely,\n[Your Name] | Probationary Officer, SBI',active:true},{id:'q2',examId:'sbi_po',type:'situation',text:'You are a PO at a semi-urban SBI branch. Mrs. Kamla Devi (72) reports she shared her OTP with a fraudster and ₹45,000 was debited. She is in tears. Describe your immediate steps.',wordLimit:'100–150 words',marks:15,difficulty:'medium',modelAnswer:'I would calm Mrs. Kamla Devi and offer her a seat. I would immediately block her debit card and help her call 1800-11-2211 to report the fraud. I would assist in filing a branch complaint and guide her to cybercrime.gov.in. I would explain the RBI Zero Liability policy and educate her about never sharing OTPs with anyone.',active:true},{id:'q3',examId:'sbi_po',type:'report',text:'You participated in a Financial Literacy Camp in village Rampur on 5th June 2026. Write a formal report to your Branch Manager.',wordLimit:'100–150 words',marks:15,difficulty:'easy',modelAnswer:'REPORT ON FINANCIAL LITERACY CAMP — RAMPUR\n\nDate: 6th June 2026\nTo: Branch Manager, SBI\n\nA camp was held at Gram Panchayat Hall on 5th June 2026. Topics covered: PMJDY, RuPay card, UPI, and fraud awareness. 180 villagers attended; 42 new accounts opened.\n\nRecommendation: Continue monthly camps and deploy a Business Correspondent.\n\n[Your Name] | PO',active:true},{id:'q4',examId:'sbi_po',type:'precis',text:'Read the passage and write a precis in ~100 words.\n\n"Financial inclusion remains one of India\'s most pressing challenges. Despite PMJDY bringing millions into formal banking, merely opening accounts is not enough. Active usage for credit, savings, insurance and remittances is the real measure of inclusion. Financial literacy, digital infrastructure and trust in banking institutions must be strengthened simultaneously."',wordLimit:'~100 words',marks:15,difficulty:'easy',modelAnswer:'Financial inclusion remains a major challenge in India. While PMJDY has brought millions into the banking system, account ownership alone is insufficient. True inclusion requires active usage for savings, credit, insurance and transfers. Achieving this depends on strengthening financial literacy, expanding digital infrastructure and building public trust in banking institutions.',active:true}]}};
+
+// ── THEME ──
+function getT(){return localStorage.getItem('dpt_admin_t')||'dark';}
+function applyT(t){document.documentElement.setAttribute('data-theme',t);localStorage.setItem('dpt_admin_t',t);document.getElementById('ico-d').style.display=t==='light'?'inline-flex':'none';document.getElementById('ico-l').style.display=t==='dark'?'inline-flex':'none';}
+function toggleTheme(){applyT(getT()==='dark'?'light':'dark');}
+
+// ── NAV ──
+function nav(p){document.querySelectorAll('.pg').forEach(x=>x.classList.remove('on'));document.querySelectorAll('.ni').forEach(x=>x.classList.remove('on'));document.getElementById('pg-'+p).classList.add('on');document.querySelector(`[data-p="${p}"]`).classList.add('on');rp(p);}
+function rp(p){if(p==='dash')rDash();if(p==='qs')rQP();if(p==='exams')rExams();if(p==='secs')rSecs();if(p==='typing')rTypingParas();if(p==='timing')rTiming();if(p==='appear')rAppear();if(p==='content')rContent();if(p==='cfg')rCfg();}
+
+// ── DASHBOARD ──
+function rDash(){const d=D(),tot=d.questions.length,act=d.questions.filter(q=>q.active).length;
+  document.getElementById('d-stats').innerHTML=`<div class="st"><div class="sv">${tot}</div><div class="sl">Questions</div><div class="ss">${act} active</div></div><div class="st"><div class="sv">${d.exams.length}</div><div class="sl">Exams</div></div><div class="st"><div class="sv">${d.sectionTypes.length}</div><div class="sl">Sections</div></div><div class="st"><div class="sv">${tot-act}</div><div class="sl">Hidden</div></div>`;
+  const tm={};d.sectionTypes.forEach(s=>tm[s.id]={name:s.name,count:0});d.questions.forEach(q=>{if(tm[q.type])tm[q.type].count++;});
+  document.getElementById('d-by-type').innerHTML=Object.values(tm).map(x=>`<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:9px;font-size:.8rem"><span style="color:var(--t2)">${x.name}</span><span class="bge bg-b">${x.count}</span></div>`).join('');}
+
+// ── QUESTIONS ──
+function rQP(){const d=D();document.getElementById('qs-ft').innerHTML='<option value="">All Types</option>'+d.sectionTypes.map(s=>`<option value="${s.id}">${s.name}</option>`).join('');renderQT();}
+function renderQT(){const d=D(),s=(document.getElementById('qs-s')||{}).value||'',ft=(document.getElementById('qs-ft')||{}).value||'';const tm={};d.sectionTypes.forEach(s=>tm[s.id]=s.name);const qs=d.questions.filter(q=>(ft?q.type===ft:true)&&(s?q.text.toLowerCase().includes(s.toLowerCase()):true));
+  document.getElementById('q-tb').innerHTML=qs.length===0?'<tr><td colspan="6" style="text-align:center;padding:24px;color:var(--t2)">No questions found.</td></tr>':qs.map(q=>`<tr><td class="td-p">${q.text.substring(0,70)}…</td><td style="font-size:.72rem;color:var(--t2)">${tm[q.type]||q.type}</td><td style="font-family:'JetBrains Mono',monospace;font-size:.72rem">${q.marks}</td><td style="font-size:.72rem;color:var(--t2)">${q.wordLimit}</td><td><span class="bge ${q.active?'bg-g':'bg-r'}">${q.active?'Active':'Hidden'}</span></td><td><div class="tda"><button class="btn bo sm" onclick="openQM('${q.id}')">Edit</button><button class="btn bd sm" onclick="delQ('${q.id}')">Del</button></div></td></tr>`).join('');}
+function openQM(id){const d=D();document.getElementById('qm-type').innerHTML='<option value="">Select…</option>'+d.sectionTypes.map(s=>`<option value="${s.id}">${s.name}</option>`).join('');if(id){const q=d.questions.find(x=>x.id===id);if(!q)return;document.getElementById('qm-t').textContent='Edit Question';document.getElementById('qm-type').value=q.type;document.getElementById('qm-marks').value=q.marks;document.getElementById('qm-wl').value=q.wordLimit;document.getElementById('qm-diff').value=q.difficulty||'medium';document.getElementById('qm-text').value=q.text;document.getElementById('qm-ans').value=q.modelAnswer;document.getElementById('qm-active').checked=q.active;document.getElementById('qm-id').value=q.id;}else{document.getElementById('qm-t').textContent='Add Question';['qm-text','qm-ans','qm-wl','qm-id'].forEach(i=>document.getElementById(i).value='');document.getElementById('qm-marks').value=20;document.getElementById('qm-active').checked=true;}om('qm');}
+function saveQ(){const d=D(),type=document.getElementById('qm-type').value,text=document.getElementById('qm-text').value.trim(),ans=document.getElementById('qm-ans').value.trim();if(!type||!text||!ans){t('Fill all fields','er');return;}const q={id:document.getElementById('qm-id').value||'q_'+Date.now(),examId:'sbi_po',type,text,modelAnswer:ans,wordLimit:document.getElementById('qm-wl').value,marks:parseInt(document.getElementById('qm-marks').value)||15,difficulty:document.getElementById('qm-diff').value,active:document.getElementById('qm-active').checked};const idx=d.questions.findIndex(x=>x.id===q.id);if(idx>=0)d.questions[idx]=q;else d.questions.push(q);SD(d);cm('qm');renderQT();t('Question saved','ok');}
+function delQ(id){if(!confirm('Delete?'))return;const d=D();d.questions=d.questions.filter(q=>q.id!==id);SD(d);renderQT();t('Deleted','ok');}
+
+// ── EXAMS ──
+function rExams(){const d=D();const tm={};d.sectionTypes.forEach(s=>tm[s.id]=s.name);const sc={active:'bg-g',upcoming:'bg-a',hidden:'bg-r'};
+  document.getElementById('exam-list').innerHTML=d.exams.map(e=>`<div class="card" style="margin-bottom:12px"><div class="ch"><div style="display:flex;align-items:center;gap:8px"><span style="font-size:.85rem;font-weight:700">${e.name}</span><span class="bge ${sc[e.status]||'bg-b'}">${e.status}</span><span class="bge bg-a">${e.duration}min</span></div><div style="display:flex;gap:6px"><button class="btn bo sm" onclick="openEM('${e.id}')">Edit</button><button class="btn bd sm" onclick="delExam('${e.id}')">Delete</button></div></div><div class="cb"><div style="font-size:.75rem;color:var(--t2);margin-bottom:8px">${e.desc||''}</div><div style="display:flex;gap:5px;flex-wrap:wrap">${(e.sections||[]).map((sid,i)=>`<span class="bge bg-b">${i+1}. ${tm[sid]||sid}</span>`).join('')}</div></div></div>`).join('');}
+function openEM(id){const d=D();document.getElementById('em-secs').innerHTML='';if(id){const e=d.exams.find(x=>x.id===id);if(!e)return;document.getElementById('em-t').textContent='Edit Exam';document.getElementById('em-name').value=e.name;document.getElementById('em-dur').value=e.duration;document.getElementById('em-status').value=e.status;document.getElementById('em-desc').value=e.desc||'';document.getElementById('em-id').value=e.id;(e.sections||[]).forEach(sid=>addESec(sid));}else{document.getElementById('em-t').textContent='Add Exam';['em-name','em-desc','em-id'].forEach(i=>document.getElementById(i).value='');document.getElementById('em-dur').value=30;document.getElementById('em-status').value='active';}om('em');}
+function addESec(sel){const d=D(),idx=document.getElementById('em-secs').children.length,div=document.createElement('div');div.style.cssText='display:flex;align-items:center;gap:7px;margin-bottom:7px;background:var(--bg3);border:1px solid var(--b);border-radius:var(--rs);padding:8px 11px';div.innerHTML=`<span style="font-size:.7rem;color:var(--t2);min-width:18px">${idx+1}.</span><select style="flex:1;background:var(--bg2);border:1px solid var(--b);border-radius:5px;padding:5px 9px;color:var(--t);font-size:.75rem;outline:none;font-family:'Inter',sans-serif" class="es-t">${d.sectionTypes.map(s=>`<option value="${s.id}" ${s.id===sel?'selected':''}>${s.name}</option>`).join('')}</select><button class="btn bd sm" onclick="this.parentElement.remove()">×</button>`;document.getElementById('em-secs').appendChild(div);}
+function saveExam(){const d=D(),name=document.getElementById('em-name').value.trim();if(!name){t('Name required','er');return;}const sections=[...document.querySelectorAll('.es-t')].map(s=>s.value);const eid=document.getElementById('em-id').value||'exam_'+Date.now();const exam={id:eid,name,duration:parseInt(document.getElementById('em-dur').value)||30,status:document.getElementById('em-status').value,desc:document.getElementById('em-desc').value,sections};const idx=d.exams.findIndex(x=>x.id===eid);if(idx>=0)d.exams[idx]=exam;else d.exams.push(exam);SD(d);cm('em');rExams();t('Saved','ok');}
+function delExam(id){if(!confirm('Delete exam?'))return;const d=D();d.exams=d.exams.filter(e=>e.id!==id);SD(d);rExams();t('Deleted','ok');}
+
+// ── SECTIONS ──
+function rSecs(){const d=D();document.getElementById('sec-tb').innerHTML=d.sectionTypes.map(s=>`<tr><td style="font-weight:600">${s.name}</td><td style="font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--accent)">${s.id}</td><td style="font-size:.75rem;color:var(--t2)">${s.wordLimit}</td><td style="font-family:'JetBrains Mono',monospace;font-size:.72rem">${s.timer}m</td><td style="font-family:'JetBrains Mono',monospace;font-size:.72rem">${s.marks}</td><td><span class="bge ${s.noTimer?'bg-g':'bg-r'}">${s.noTimer?'Yes':'No'}</span></td><td><div class="tda"><button class="btn bo sm" onclick="openSM('${s.id}')">Edit</button><button class="btn bd sm" onclick="delSec('${s.id}')">Del</button></div></td></tr>`).join('');}
+function openSM(id){const d=D();if(id){const s=d.sectionTypes.find(x=>x.id===id);if(!s)return;document.getElementById('sm-t').textContent='Edit Section';document.getElementById('sm-name').value=s.name;document.getElementById('sm-key').value=s.id;document.getElementById('sm-wl').value=s.wordLimit;document.getElementById('sm-marks').value=s.marks;document.getElementById('sm-timer').value=s.timer;document.getElementById('sm-nt').checked=s.noTimer;document.getElementById('sm-id').value=s.id;}else{document.getElementById('sm-t').textContent='Add Section';['sm-name','sm-key','sm-wl','sm-id'].forEach(i=>document.getElementById(i).value='');document.getElementById('sm-marks').value=15;document.getElementById('sm-timer').value=10;document.getElementById('sm-nt').checked=true;}om('sm');}
+function saveSec(){const d=D(),name=document.getElementById('sm-name').value.trim(),key=document.getElementById('sm-key').value.trim();if(!name||!key){t('Name and key required','er');return;}const s={id:document.getElementById('sm-id').value||key,name,wordLimit:document.getElementById('sm-wl').value,marks:parseInt(document.getElementById('sm-marks').value)||15,timer:parseInt(document.getElementById('sm-timer').value)||10,noTimer:document.getElementById('sm-nt').checked};const idx=d.sectionTypes.findIndex(x=>x.id===s.id);if(idx>=0)d.sectionTypes[idx]=s;else d.sectionTypes.push(s);SD(d);cm('sm');rSecs();t('Saved','ok');}
+function delSec(id){if(!confirm('Delete?'))return;const d=D();d.sectionTypes=d.sectionTypes.filter(s=>s.id!==id);SD(d);rSecs();t('Deleted','ok');}
+
+// ── TYPING PARAS ──
+function rTypingParas(){
+  const d=D(),list=document.getElementById('typing-para-list');
+  list.innerHTML='';
+  const paras=d.typingParas||[];
+  if(!paras.length){list.innerHTML='<div class="empty">No typing paragraphs yet. Add some banking-related passages above.</div>';return;}
+  paras.forEach((p,i)=>{
+    const card=document.createElement('div');
+    card.className='card';card.style.marginBottom='10px';
+    const wc=p.trim().split(/\s+/).length;
+    card.innerHTML=`<div class="ch"><div class="cht">Paragraph ${i+1} <span style="font-size:.65rem;color:var(--t2);font-weight:400">${wc} words</span></div><button class="btn bd sm" onclick="delTypingPara(${i})">Delete</button></div><div class="cb"></div>`;
+    const cb=card.querySelector('.cb');
+    const txt=document.createElement('div');
+    txt.style.cssText='font-size:.8rem;color:var(--t2);line-height:1.6';
+    txt.textContent=p;
+    cb.appendChild(txt);
+    list.appendChild(card);
+  });}
+function addTypingPara(){const d=D(),para=prompt('Paste the paragraph text (minimum 30 words):');if(!para||para.trim().split(/\s+/).length<10){t('Too short','er');return;}d.typingParas=d.typingParas||[];d.typingParas.push(para.trim());SD(d);rTypingParas();t('Added','ok');}
+function delTypingPara(i){if(!confirm('Delete this paragraph?'))return;const d=D();d.typingParas.splice(i,1);SD(d);rTypingParas();t('Deleted','ok');}
+
+// ── TIMING ──
+function rTiming(){const d=D();
+  document.getElementById('sec-timers').innerHTML=d.sectionTypes.map(s=>`<div class="tr-row"><div><div style="font-size:.8rem;font-weight:500">${s.name}</div><div style="font-size:.7rem;color:var(--t2)">${s.wordLimit}</div></div><div style="display:flex;align-items:center;gap:10px"><div style="display:flex;align-items:center;gap:5px;font-size:.75rem;color:var(--t2)"><input class="mn-in" type="number" id="st-${s.id}" value="${s.timer}" min="1"/>min</div><label class="tgl" style="margin-top:0"><label class="tgl-sw"><input type="checkbox" id="snt-${s.id}" ${s.noTimer?'checked':''}/><span class="tgl-tr"></span></label><span style="font-size:.72rem">No-timer ok</span></label></div></div>`).join('');
+  document.getElementById('mock-timers').innerHTML=d.exams.map(e=>`<div class="tr-row"><div style="font-size:.8rem;font-weight:500">${e.name}</div><div style="display:flex;align-items:center;gap:5px;font-size:.75rem;color:var(--t2)"><input class="mn-in" type="number" id="mt-${e.id}" value="${e.duration}" min="1"/>minutes</div></div>`).join('');}
+function saveTiming(){const d=D();d.sectionTypes.forEach(s=>{const ti=document.getElementById('st-'+s.id),nt=document.getElementById('snt-'+s.id);if(ti)s.timer=parseInt(ti.value)||10;if(nt)s.noTimer=nt.checked;});d.exams.forEach(e=>{const ti=document.getElementById('mt-'+e.id);if(ti)e.duration=parseInt(ti.value)||30;});SD(d);t('Timing saved','ok');}
+
+// ── APPEARANCE ──
+const SWATCHES=['#2563eb','#7c3aed','#db2777','#dc2626','#ea580c','#16a34a','#0891b2','#374151'];
+function rAppear(){const d=D(),cfg=d.siteSettings||{};
+  document.getElementById('ap-logo-dark').value=cfg.logoUrlDark||cfg.logoUrl||'';
+  document.getElementById('ap-logo-light').value=cfg.logoUrlLight||'';
+  document.getElementById('ap-accent').value=cfg.accentColor||'#2563eb';
+  document.getElementById('ap-font').value=cfg.fontFamily||'Inter';
+  document.getElementById('ap-fs').value=cfg.fontSize||15;
+  document.getElementById('ap-darkbg').value=cfg.darkBg||'';
+  document.getElementById('ap-darktext').value=cfg.darkText||'';
+  document.getElementById('ap-lightbg').value=cfg.lightBg||'';
+  document.getElementById('ap-lighttext').value=cfg.lightText||'';
+  prevLogo();
+  document.getElementById('sw-row').innerHTML=SWATCHES.map(c=>`<div class="sw ${cfg.accentColor===c?'on':''}" style="background:${c}" onclick="pickSw('${c}')" title="${c}"></div>`).join('');}
+function pickSw(c){document.getElementById('ap-accent').value=c;document.querySelectorAll('.sw').forEach(s=>s.classList.toggle('on',s.title===c));}
+function prevAccent(v){if(/^#[0-9a-fA-F]{6}$/.test(v))document.documentElement.style.setProperty('--accent',v);}
+function prevLogo(){
+  const dark=document.getElementById('ap-logo-dark').value;
+  const light=document.getElementById('ap-logo-light').value;
+  const el=document.getElementById('logo-prev');
+  el.innerHTML='';
+  if(dark){
+    const wrap=document.createElement('div');
+    wrap.style.cssText='background:#0d1117;padding:6px 10px;border-radius:6px;border:1px solid var(--b)';
+    const img=document.createElement('img');
+    img.src=dark;img.style.height='28px';img.title='Dark theme logo';
+    img.onerror=()=>img.style.display='none';
+    const lbl=document.createElement('div');
+    lbl.style.cssText='font-size:.6rem;color:#8b949e;margin-top:4px;text-align:center';
+    lbl.textContent='Dark mode';
+    wrap.appendChild(img);wrap.appendChild(lbl);el.appendChild(wrap);
+  }
+  if(light){
+    const wrap=document.createElement('div');
+    wrap.style.cssText='background:#ffffff;padding:6px 10px;border-radius:6px;border:1px solid var(--b)';
+    const img=document.createElement('img');
+    img.src=light;img.style.height='28px';img.title='Light theme logo';
+    img.onerror=()=>img.style.display='none';
+    const lbl=document.createElement('div');
+    lbl.style.cssText='font-size:.6rem;color:#57606a;margin-top:4px;text-align:center';
+    lbl.textContent='Light mode';
+    wrap.appendChild(img);wrap.appendChild(lbl);el.appendChild(wrap);
+  }
+  if(!dark&&!light) el.innerHTML='<span style="font-size:.72rem;color:var(--t2)">No logos set</span>';
+}
+function saveAppear(){const d=D();d.siteSettings.logoUrlDark=document.getElementById('ap-logo-dark').value;d.siteSettings.logoUrlLight=document.getElementById('ap-logo-light').value;d.siteSettings.logoUrl=d.siteSettings.logoUrlDark||d.siteSettings.logoUrlLight;d.siteSettings.accentColor=document.getElementById('ap-accent').value;d.siteSettings.fontFamily=document.getElementById('ap-font').value;d.siteSettings.fontSize=parseInt(document.getElementById('ap-fs').value)||15;d.siteSettings.darkBg=document.getElementById('ap-darkbg').value;d.siteSettings.darkText=document.getElementById('ap-darktext').value;d.siteSettings.lightBg=document.getElementById('ap-lightbg').value;d.siteSettings.lightText=document.getElementById('ap-lighttext').value;SD(d);t('Appearance saved','ok');}
+
+// ── PAGE TEXT ──
+const TEXT_FIELDS=[
+  {section:'identity',label:'Site Name',key:'name'},{section:'identity',label:'Tagline',key:'tagline'},
+  {section:'home',label:'Eyebrow (small text above title)',key:'homeEyebrow'},{section:'home',label:'Main Title (use \\n for line break)',key:'homeTitle'},{section:'home',label:'Subtitle paragraph',key:'homeSub',long:true},{section:'home',label:'"Practice Sections" label',key:'practiceSectionLabel'},{section:'home',label:'"Tools" label',key:'toolsLabel'},
+  {section:'typing',label:'Typing card title',key:'typingCardTitle'},{section:'typing',label:'Typing card description',key:'typingCardDesc'},{section:'typing',label:'Typing page heading',key:'typingHeading'},{section:'typing',label:'Typing page subheading',key:'typingSubhead'},
+  {section:'tg',label:'Telegram strip title',key:'tgStripTitle'},{section:'tg',label:'Telegram strip subtitle',key:'tgStripSub'},
+];
+function rContent(){
+  const d=D(),cfg=d.siteSettings||{};
+  ['identity','home','typing','tg'].forEach(sec=>{
+    const fields=TEXT_FIELDS.filter(f=>f.section===sec);
+    const container=document.getElementById('text-'+sec);
+    container.innerHTML='';
+    fields.forEach(f=>{
+      const wrap=document.createElement('div');
+      wrap.className='text-editor-row';
+      const lbl=document.createElement('div');
+      lbl.className='ter-label';
+      lbl.textContent=f.label;
+      wrap.appendChild(lbl);
+      let inp;
+      if(f.long){
+        inp=document.createElement('textarea');
+        inp.className='ter-input';
+        inp.id='tf-'+f.key;
+        inp.rows=3;
+        inp.style.minHeight='60px';
+        inp.value=cfg[f.key]||'';
+      } else {
+        inp=document.createElement('input');
+        inp.className='ter-input';
+        inp.type='text';
+        inp.id='tf-'+f.key;
+        inp.value=cfg[f.key]||'';
+      }
+      wrap.appendChild(inp);
+      container.appendChild(wrap);
+    });
+  });}
+function saveContent(){const d=D();TEXT_FIELDS.forEach(f=>{const el=document.getElementById('tf-'+f.key);if(el)d.siteSettings[f.key]=el.value;});SD(d);t('Text saved','ok');}
+
+// ── SETTINGS ──
+function rCfg(){const d=D(),cfg=d.siteSettings||{};document.getElementById('cfg-tg').value=cfg.tgLink||'';document.getElementById('cfg-tgt').value=cfg.tgText||'';document.getElementById('cfg-proxy').value=cfg.apiProxy||'';}
+function saveCfg(){const d=D();d.siteSettings.tgLink=document.getElementById('cfg-tg').value;d.siteSettings.tgText=document.getElementById('cfg-tgt').value;d.siteSettings.apiProxy=document.getElementById('cfg-proxy').value;SD(d);t('Saved','ok');}
+
+// ── DATA OPS ──
+function downloadConfig(){const blob=new Blob([JSON.stringify(D(),null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='config.json';a.click();t('config.json downloaded — upload it to your GitHub repo root','ok');}
+function exportD(){const blob=new Blob([JSON.stringify(D(),null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='dpt-backup-'+new Date().toISOString().split('T')[0]+'.json';a.click();t('Exported','ok');}
+function importD(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{try{const d=JSON.parse(ev.target.result);localStorage.setItem('dpt_data',JSON.stringify(d));t('Imported. Refreshing…','ok');setTimeout(()=>rp(document.querySelector('.ni.on').dataset.p),900);}catch{t('Invalid file','er');}};r.readAsText(f);}
+function resetD(){if(!confirm('Reset ALL data? Cannot be undone.'))return;localStorage.removeItem('dpt_data');t('Reset. Reloading…','ok');setTimeout(()=>location.reload(),1000);}
+
+// ── MODAL / TOAST ──
+function om(id){document.getElementById(id).classList.add('op');}
+function cm(id){document.getElementById(id).classList.remove('op');}
+document.addEventListener('click',e=>{if(e.target.classList.contains('ov'))e.target.classList.remove('op');});
+function t(msg,type='ok'){const el=document.getElementById('toast');el.textContent=msg;el.className='toast '+type;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2500);}
+
+// ── INIT ──
+function initAdmin(){applyT(getT());nav('dash');}
+if(li()){document.getElementById('ls').style.display='none';document.getElementById('sh').style.display='block';initAdmin();}
+</script>
+</body>
+</html>
