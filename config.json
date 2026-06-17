@@ -67,26 +67,6 @@
       "timer": 10,
       "icon": "✂️",
       "noTimer": true
-    },
-    {
-      "id": "letter",
-      "name": "Letter Writing",
-      "key": "letter",
-      "wordLimit": "150–200 words",
-      "marks": 20,
-      "timer": 10,
-      "icon": "📮",
-      "noTimer": true
-    },
-    {
-      "id": "essay",
-      "name": "Essay Writing",
-      "key": "essay",
-      "wordLimit": "250",
-      "marks": 15,
-      "timer": 10,
-      "icon": "📄",
-      "noTimer": true
     }
   ],
   "exams": [
