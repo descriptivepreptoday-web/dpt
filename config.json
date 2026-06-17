@@ -87,12 +87,11 @@
     {
       "id": "ibps_po",
       "name": "IBPS PO Mains 2026",
-      "key": "ibps_po",
       "duration": 30,
       "status": "active",
       "desc": "Descriptive paper — Letter & Essay",
       "sections": [
-        "essay",
+        "email",
         "email"
       ]
     }
