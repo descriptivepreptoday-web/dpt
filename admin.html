@@ -186,6 +186,9 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);min-heig
     <div class="tb-r">
       <span class="saved" id="saved"></span>
       <button class="tb-btn bs" onclick="window.open('dpt-student.html','_blank')">Preview Site</button>
+      <button class="tb-btn" id="tb-publish-btn" onclick="quickPublish()" style="display:none;border-color:var(--gborder);color:var(--green)">
+        <span class="ic" style="width:12px;height:12px;margin-right:3px"><svg width="12" height="12" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg></span>Publish
+      </button>
       <button class="ib" onclick="toggleTheme()" title="Theme">
         <span class="ic" id="ico-d" style="width:14px;height:14px"><svg width="14" height="14" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg></span>
         <span class="ic" id="ico-l" style="display:none;width:14px;height:14px"><svg width="14" height="14" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg></span>
@@ -354,15 +357,64 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);min-heig
       <div id="pg-cfg" class="pg">
         <div class="ph"><div class="ph-ey">Settings</div><div class="ph-ti">Site Settings</div></div>
         <div class="card" style="margin-bottom:14px;border-color:var(--gborder)">
-          <div class="ch" style="background:var(--gdim)"><div class="cht" style="color:var(--green)">How to sync changes to all devices (GitHub)</div></div>
+          <div class="ch" style="background:var(--gdim)">
+            <div class="cht" style="color:var(--green)">One-Click Publish to GitHub</div>
+            <div id="gh-status" style="font-size:.72rem;color:var(--t2)"></div>
+          </div>
           <div class="cb">
-            <div style="font-size:.8rem;line-height:1.8;color:var(--t2)">
-              <div style="display:flex;flex-direction:column;gap:8px">
-                <div><span style="background:var(--accent);color:#fff;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;margin-right:6px">1</span>Make your changes here in admin (questions, appearance, text etc.)</div>
-                <div><span style="background:var(--accent);color:#fff;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;margin-right:6px">2</span>Scroll down → click <strong style="color:var(--t)">Download config.json</strong></div>
-                <div><span style="background:var(--accent);color:#fff;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;margin-right:6px">3</span>Go to your GitHub repo → find <strong style="color:var(--t)">config.json</strong> → click it → click the pencil (edit) icon → paste the new content → click <strong style="color:var(--t)">Commit changes</strong></div>
-                <div><span style="background:var(--accent);color:#fff;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;margin-right:6px">4</span>Done — all devices see the changes within 1-2 minutes</div>
+            <!-- Setup section -->
+            <div id="gh-setup">
+              <div style="font-size:.78rem;color:var(--t2);line-height:1.7;margin-bottom:14px">
+                Set this up once. After that, click <strong style="color:var(--t)">Publish to GitHub</strong> and your changes go live on all devices in 2 minutes.
               </div>
+              <div style="background:var(--bg3);border:1px solid var(--b);border-radius:var(--rs);padding:12px 14px;margin-bottom:14px">
+                <div style="font-size:.75rem;font-weight:600;margin-bottom:8px">How to get a GitHub Token (one time only):</div>
+                <div style="font-size:.72rem;color:var(--t2);line-height:1.9">
+                  1. Go to <strong style="color:var(--t)">github.com</strong> → click your profile photo (top right) → <strong style="color:var(--t)">Settings</strong><br>
+                  2. Scroll to bottom of left sidebar → click <strong style="color:var(--t)">Developer settings</strong><br>
+                  3. Click <strong style="color:var(--t)">Personal access tokens</strong> → <strong style="color:var(--t)">Tokens (classic)</strong><br>
+                  4. Click <strong style="color:var(--t)">Generate new token (classic)</strong><br>
+                  5. Give it a name like "DPT Admin" → set expiration to <strong style="color:var(--t)">No expiration</strong><br>
+                  6. Tick only the <strong style="color:var(--t)">repo</strong> checkbox<br>
+                  7. Click <strong style="color:var(--t)">Generate token</strong> → copy the token immediately (you won't see it again)
+                </div>
+              </div>
+              <div class="fr c2">
+                <div class="ff"><label>GitHub Username</label><input type="text" id="gh-user" placeholder="e.g. descriptivepreptoday"/></div>
+                <div class="ff"><label>Repository Name</label><input type="text" id="gh-repo" placeholder="e.g. dpt-website"/></div>
+              </div>
+              <div class="fr c1">
+                <div class="ff">
+                  <label>GitHub Personal Access Token</label>
+                  <div style="position:relative">
+                    <input type="password" id="gh-token" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" style="padding-right:70px"/>
+                    <button onclick="toggleToken()" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);background:transparent;border:none;color:var(--t2);font-size:.72rem;cursor:pointer;font-family:'Inter',sans-serif" id="gh-token-toggle">Show</button>
+                  </div>
+                  <div class="hint">Stored only in your browser — never sent anywhere except GitHub's API.</div>
+                </div>
+              </div>
+              <div style="display:flex;gap:8px;margin-top:4px">
+                <button class="btn bp" onclick="saveGHConfig()">Save GitHub Settings</button>
+                <button class="btn bo" id="gh-clear-btn" onclick="clearGHConfig()" style="display:none">Clear Saved Token</button>
+              </div>
+            </div>
+
+            <!-- Publish section (shown after setup) -->
+            <div id="gh-publish-section" style="display:none">
+              <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">
+                <div>
+                  <div style="font-size:.8rem;font-weight:600" id="gh-repo-display"></div>
+                  <div style="font-size:.72rem;color:var(--t2);margin-top:2px">Token configured · Changes publish to config.json</div>
+                </div>
+                <div style="display:flex;gap:8px">
+                  <button class="btn bp" id="gh-publish-btn" onclick="publishToGitHub()">
+                    <span class="ic" style="width:13px;height:13px"><svg width="13" height="13" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg></span>
+                    Publish to GitHub
+                  </button>
+                  <button class="btn bo sm" onclick="showGHSetup()">Change Settings</button>
+                </div>
+              </div>
+              <div id="gh-publish-log" style="display:none;margin-top:12px;background:var(--bg3);border:1px solid var(--b);border-radius:var(--rs);padding:10px 12px;font-size:.75rem;font-family:'JetBrains Mono',monospace;color:var(--t2);line-height:1.8"></div>
             </div>
           </div>
         </div>
@@ -695,7 +747,7 @@ function rContent(){
 function saveContent(){const d=D();TEXT_FIELDS.forEach(f=>{const el=document.getElementById('tf-'+f.key);if(el)d.siteSettings[f.key]=el.value;});SD(d);t('Text saved','ok');}
 
 // ── SETTINGS ──
-function rCfg(){const d=D(),cfg=d.siteSettings||{};document.getElementById('cfg-tg').value=cfg.tgLink||'';document.getElementById('cfg-tgt').value=cfg.tgText||'';document.getElementById('cfg-proxy').value=cfg.apiProxy||'';}
+function rCfg(){const d=D(),cfg=d.siteSettings||{};document.getElementById('cfg-tg').value=cfg.tgLink||'';document.getElementById('cfg-tgt').value=cfg.tgText||'';document.getElementById('cfg-proxy').value=cfg.apiProxy||'';renderGHSection();}
 function saveCfg(){const d=D();d.siteSettings.tgLink=document.getElementById('cfg-tg').value;d.siteSettings.tgText=document.getElementById('cfg-tgt').value;d.siteSettings.apiProxy=document.getElementById('cfg-proxy').value;SD(d);t('Saved','ok');}
 
 // ── DATA OPS ──
@@ -704,6 +756,138 @@ function exportD(){const blob=new Blob([JSON.stringify(D(),null,2)],{type:'appli
 function importD(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{try{const d=JSON.parse(ev.target.result);localStorage.setItem('dpt_data',JSON.stringify(d));t('Imported. Refreshing…','ok');setTimeout(()=>rp(document.querySelector('.ni.on').dataset.p),900);}catch{t('Invalid file','er');}};r.readAsText(f);}
 function resetD(){if(!confirm('Reset ALL data? Cannot be undone.'))return;localStorage.removeItem('dpt_data');t('Reset. Reloading…','ok');setTimeout(()=>location.reload(),1000);}
 
+// ── GITHUB PUBLISH ──
+function getGHConfig(){
+  try{return JSON.parse(localStorage.getItem('dpt_gh_config'))||null;}catch{return null;}
+}
+function saveGHConfig(){
+  const user=document.getElementById('gh-user').value.trim();
+  const repo=document.getElementById('gh-repo').value.trim();
+  const token=document.getElementById('gh-token').value.trim();
+  if(!user||!repo||!token){t('Fill in all three fields','er');return;}
+  if(!token.startsWith('ghp_')&&!token.startsWith('github_pat_')){
+    t('Token should start with ghp_ or github_pat_','er');return;
+  }
+  localStorage.setItem('dpt_gh_config',JSON.stringify({user,repo,token}));
+  t('GitHub settings saved','ok');
+  renderGHSection();
+}
+function clearGHConfig(){
+  if(!confirm('Remove saved GitHub token?'))return;
+  localStorage.removeItem('dpt_gh_config');
+  renderGHSection();
+  t('Token cleared','ok');
+}
+function toggleToken(){
+  const inp=document.getElementById('gh-token');
+  const btn=document.getElementById('gh-token-toggle');
+  if(inp.type==='password'){inp.type='text';btn.textContent='Hide';}
+  else{inp.type='password';btn.textContent='Show';}
+}
+function showGHSetup(){
+  document.getElementById('gh-setup').style.display='block';
+  document.getElementById('gh-publish-section').style.display='none';
+}
+function renderGHSection(){
+  const cfg=getGHConfig();
+  const setup=document.getElementById('gh-setup');
+  const pub=document.getElementById('gh-publish-section');
+  const tbBtn=document.getElementById('tb-publish-btn');
+  if(cfg&&cfg.user&&cfg.repo&&cfg.token){
+    // Show publish section
+    if(setup) setup.style.display='none';
+    if(pub){pub.style.display='block';}
+    const disp=document.getElementById('gh-repo-display');
+    if(disp) disp.textContent=cfg.user+' / '+cfg.repo;
+    if(tbBtn) tbBtn.style.display='inline-flex';
+    // Pre-fill fields in case they switch back
+    if(document.getElementById('gh-user')) document.getElementById('gh-user').value=cfg.user;
+    if(document.getElementById('gh-repo')) document.getElementById('gh-repo').value=cfg.repo;
+    if(document.getElementById('gh-token')) document.getElementById('gh-token').value=cfg.token;
+    if(document.getElementById('gh-clear-btn')) document.getElementById('gh-clear-btn').style.display='inline-flex';
+  } else {
+    if(setup) setup.style.display='block';
+    if(pub) pub.style.display='none';
+    if(tbBtn) tbBtn.style.display='none';
+  }
+}
+function logPublish(msg,type='info'){
+  const log=document.getElementById('gh-publish-log');
+  if(!log)return;
+  log.style.display='block';
+  const time=new Date().toLocaleTimeString();
+  const color=type==='ok'?'var(--green)':type==='er'?'var(--red)':'var(--t2)';
+  log.innerHTML+=`<div style="color:${color}">[${time}] ${msg}</div>`;
+  log.scrollTop=log.scrollHeight;
+}
+async function publishToGitHub(){
+  const cfg=getGHConfig();
+  if(!cfg){t('Set up GitHub settings first','er');return;}
+  const btn=document.getElementById('gh-publish-btn');
+  const log=document.getElementById('gh-publish-log');
+  if(log){log.innerHTML='';log.style.display='block';}
+  if(btn){btn.textContent='Publishing…';btn.disabled=true;}
+  const statusEl=document.getElementById('gh-status');
+  if(statusEl) statusEl.textContent='Publishing…';
+  try{
+    const data=D();
+    const content=JSON.stringify(data,null,2);
+    const b64=btoa(unescape(encodeURIComponent(content)));
+    const apiBase=`https://api.github.com/repos/${cfg.user}/${cfg.repo}/contents/config.json`;
+    const headers={'Authorization':'token '+cfg.token,'Content-Type':'application/json','Accept':'application/vnd.github.v3+json'};
+    logPublish('Connecting to GitHub…');
+    // Get current file SHA (needed to update existing file)
+    let sha=null;
+    try{
+      const getRes=await fetch(apiBase,{headers});
+      if(getRes.ok){
+        const existing=await getRes.json();
+        sha=existing.sha;
+        logPublish('Found existing config.json (SHA: '+sha.substring(0,7)+'…)');
+      } else if(getRes.status===404){
+        logPublish('config.json not found — will create it');
+      } else {
+        const errData=await getRes.json();
+        throw new Error('GitHub API error: '+(errData.message||getRes.status));
+      }
+    }catch(e){
+      if(e.message.includes('GitHub API error')) throw e;
+      logPublish('Note: '+e.message);
+    }
+    logPublish('Uploading config.json ('+Math.round(content.length/1024)+'KB)…');
+    const body={message:'Update config.json via DPT Admin - '+new Date().toLocaleString(),content:b64};
+    if(sha) body.sha=sha;
+    const putRes=await fetch(apiBase,{method:'PUT',headers,body:JSON.stringify(body)});
+    const putData=await putRes.json();
+    if(putRes.ok){
+      logPublish('Published successfully!','ok');
+      logPublish('Changes will be live in ~2 minutes','ok');
+      if(statusEl) statusEl.textContent='Published '+new Date().toLocaleTimeString();
+      t('Published to GitHub successfully!','ok');
+      // Flash the topbar button
+      const tbBtn=document.getElementById('tb-publish-btn');
+      if(tbBtn){tbBtn.textContent='Published!';tbBtn.style.borderColor='var(--green)';setTimeout(()=>{tbBtn.innerHTML='<span class="ic" style="width:12px;height:12px;margin-right:3px"><svg width="12" height="12" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg></span>Publish';tbBtn.style.borderColor='var(--gborder)';},3000);}
+    } else {
+      const msg=putData.message||'Unknown error';
+      logPublish('Error: '+msg,'er');
+      if(msg.includes('Bad credentials')) logPublish('Your token may be expired or invalid. Go to Settings → regenerate token.','er');
+      if(msg.includes('Not Found')) logPublish('Repo not found. Check username and repo name in settings.','er');
+      throw new Error(msg);
+    }
+  }catch(e){
+    logPublish('Failed: '+e.message,'er');
+    if(statusEl) statusEl.textContent='Publish failed';
+    t('Publish failed: '+e.message,'er');
+  } finally {
+    if(btn){btn.innerHTML='<span class="ic" style="width:13px;height:13px"><svg width="13" height="13" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg></span> Publish to GitHub';btn.disabled=false;}
+  }
+}
+async function quickPublish(){
+  const cfg=getGHConfig();
+  if(!cfg){nav('cfg');t('Set up GitHub settings first in Settings page','er');return;}
+  await publishToGitHub();
+}
+
 // ── MODAL / TOAST ──
 function om(id){document.getElementById(id).classList.add('op');}
 function cm(id){document.getElementById(id).classList.remove('op');}
@@ -711,7 +895,7 @@ document.addEventListener('click',e=>{if(e.target.classList.contains('ov'))e.tar
 function t(msg,type='ok'){const el=document.getElementById('toast');el.textContent=msg;el.className='toast '+type;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2500);}
 
 // ── INIT ──
-function initAdmin(){applyT(getT());nav('dash');}
+function initAdmin(){applyT(getT());nav('dash');renderGHSection();}
 if(li()){document.getElementById('ls').style.display='none';document.getElementById('sh').style.display='block';initAdmin();}
 </script>
 </body>
