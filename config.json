@@ -67,6 +67,14 @@
       "timer": 10,
       "icon": "✂️",
       "noTimer": true
+    },
+    {
+      "id": "essay",
+      "name": "Essay Writing",
+      "wordLimit": "250",
+      "marks": 15,
+      "timer": 15,
+      "noTimer": true
     }
   ],
   "exams": [
@@ -88,11 +96,11 @@
       "id": "ibps_po",
       "name": "IBPS PO Mains 2026",
       "duration": 30,
-      "status": "hidden",
+      "status": "active",
       "desc": "Descriptive paper — Letter & Essay",
       "sections": [
         "email",
-        "email"
+        "essay"
       ]
     }
   ],
