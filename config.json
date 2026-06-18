@@ -159,6 +159,17 @@
       "difficulty": "medium",
       "modelAnswer": "To,\nThe Branch Manager\nPunjab National Bank\n[Branch Address]\n\nDate: 10th June 2026\n\nSubject: Request for Refund of Wrongly Charged Processing Fee — Account No. XXXX1234\n\nRespected Sir/Madam,\n\nI am writing to bring to your attention an erroneous debit of ₹2,500 from my savings account (No. XXXX1234) on 8th June 2026, shown as a loan processing fee. I wish to clarify that I have not applied for any loan with your branch, nor have I authorised any such transaction.\n\nI request you to kindly investigate this matter at the earliest and arrange for an immediate reversal of ₹2,500 to my account. I also request a written explanation of how this charge was applied without my consent.\n\nI trust that this matter will be resolved promptly. Please feel free to contact me at [mobile number].\n\nYours faithfully,\n[Your Name]\n[Account Number]\n[Contact Details]",
       "active": true
+    },
+    {
+      "id": "q_1781760136257",
+      "examId": "sbi_po",
+      "type": "essay",
+      "text": "dfasdvdfgfgf",
+      "modelAnswer": "assdfgafgfgsfgdfdfd",
+      "wordLimit": "100",
+      "marks": 20,
+      "difficulty": "medium",
+      "active": true
     }
   ],
   "typingParas": [
