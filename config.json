@@ -171,6 +171,17 @@
       "marks": 20,
       "difficulty": "medium",
       "active": true
+    },
+    {
+      "id": "q_1781869267383",
+      "examId": "sbi_po",
+      "type": "email",
+      "text": "You are working as a branch manager in Saharanpur branch of ABC Bank. One of\nyour customers, Mr. Shinde has sent a mail to the branch mail id asking for transfer of his\naccounts from your branch to Cochin branch of your bank. You have done the task. Please\ndo send a reply to him.",
+      "modelAnswer": "Email address: e mail of Mr Shinde\nCC: branch e mail of Cochin branch\nSubject: Transfer of Accounts\nDear Sir,\nNamaste / Greetings from ABC Bank.\nWe acknowledge receipt of your email dated DD/MM/YYYY requesting for transfer of your\naccounts to our Cochin branch.\nWe are pleased to inform you that the following accounts have been transferred to Cochin\nBranch Name on DD/MM/YYYY.\ni. Savings Account No xxxxxx\nii. Fixed Deposit Account No xxxxxx\n2. We value your relationship with us. In case of any query or further information, please\nget in touch with Mr. Branch Manager of Cochin branch (, Cochin branch e mail id and\nContact No).\n3. We thank you for banking with us and assure you our best services.\nWith regards,\n< Name>\n<Branch Manager>\n<Saharanpur Branch>\n< Address in Short with City and pin code >\n<Contact details>",
+      "wordLimit": "150",
+      "marks": 20,
+      "difficulty": "medium",
+      "active": true
     }
   ],
   "typingParas": [
