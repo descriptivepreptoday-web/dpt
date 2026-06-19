@@ -73,6 +73,18 @@
         "report",
         "precis"
       ]
+    },
+    {
+      "id": "exam_1781838707550",
+      "name": "SBI PO Mains 2026",
+      "duration": 30,
+      "status": "active",
+      "desc": "",
+      "icon": "https://i.postimg.cc/D0TYjg00/state-bank-india-kiosk-banking-registration-apply-sbi-3.png",
+      "sections": [
+        "email",
+        "report"
+      ]
     }
   ],
   "typingParas": [
