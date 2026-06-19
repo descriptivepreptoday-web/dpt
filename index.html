@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark-default">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Descriptive Prep Today</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+[data-theme="dark-default"]{--bg:#0e1117;--bg2:#161c27;--bg3:#1c2333;--bg4:#232d40;--t:#d1d9e6;--t2:#7a8499;--t3:#3a4150;--b:#252d3d;--accent:#e2b714;--ah:#c9a312;--adim:rgba(226,183,20,.08);--aborder:rgba(226,183,20,.22);--green:#4caf50;--gdim:rgba(76,175,80,.08);--gborder:rgba(76,175,80,.22);--red:#ca4754;--rdim:rgba(202,71,84,.08);--rborder:rgba(202,71,84,.22);--amber:#e2a014;--ch:rgba(255,255,255,.02);--shadow:0 1px 3px rgba(0,0,0,.5);}
+[data-theme="dark-vs"]{--bg:#1e1e1e;--bg2:#252526;--bg3:#2d2d30;--bg4:#333337;--t:#cccccc;--t2:#858585;--t3:#444;--b:#3c3c3c;--accent:#4ec9b0;--ah:#3aab94;--adim:rgba(78,201,176,.08);--aborder:rgba(78,201,176,.22);--green:#4ec9b0;--gdim:rgba(78,201,176,.08);--gborder:rgba(78,201,176,.22);--red:#f44747;--rdim:rgba(244,71,71,.08);--rborder:rgba(244,71,71,.22);--amber:#dcdcaa;--ch:rgba(255,255,255,.02);--shadow:0 1px 3px rgba(0,0,0,.6);}
+[data-theme="dark-obsidian"]{--bg:#0a0a0a;--bg2:#111111;--bg3:#1a1a1a;--bg4:#222222;--t:#e8e8e8;--t2:#666;--t3:#333;--b:#2a2a2a;--accent:#7c6af7;--ah:#6959e5;--adim:rgba(124,106,247,.08);--aborder:rgba(124,106,247,.22);--green:#50fa7b;--gdim:rgba(80,250,123,.08);--gborder:rgba(80,250,123,.22);--red:#ff5555;--rdim:rgba(255,85,85,.08);--rborder:rgba(255,85,85,.22);--amber:#ffb86c;--ch:rgba(255,255,255,.02);--shadow:0 1px 4px rgba(0,0,0,.8);}
+[data-theme="light-default"]{--bg:#f8f9fc;--bg2:#ffffff;--bg3:#f0f2f7;--bg4:#e8ebf2;--t:#1a1d2e;--t2:#5a6278;--t3:#c2c8d8;--b:#dde1ee;--accent:#2563eb;--ah:#1d4ed8;--adim:rgba(37,99,235,.07);--aborder:rgba(37,99,235,.2);--green:#15803d;--gdim:rgba(21,128,61,.07);--gborder:rgba(21,128,61,.2);--red:#dc2626;--rdim:rgba(220,38,38,.07);--rborder:rgba(220,38,38,.2);--amber:#b45309;--ch:rgba(0,0,0,.015);--shadow:0 1px 3px rgba(0,0,0,.07);}
+[data-theme="light-warm"]{--bg:#faf8f5;--bg2:#ffffff;--bg3:#f5f1eb;--bg4:#ede8df;--t:#2c2416;--t2:#7a6e60;--t3:#c8bfb0;--b:#ddd6ca;--accent:#c2460a;--ah:#a83a08;--adim:rgba(194,70,10,.07);--aborder:rgba(194,70,10,.2);--green:#3a7d44;--gdim:rgba(58,125,68,.07);--gborder:rgba(58,125,68,.2);--red:#c0392b;--rdim:rgba(192,57,43,.07);--rborder:rgba(192,57,43,.2);--amber:#b45309;--ch:rgba(0,0,0,.01);--shadow:0 1px 3px rgba(0,0,0,.06);}
+[data-theme="light-clean"]{--bg:#f2f4f8;--bg2:#ffffff;--bg3:#eaedf3;--bg4:#e0e4ec;--t:#1c2237;--t2:#5e6b85;--t3:#bcc4d4;--b:#d4d9e6;--accent:#0f766e;--ah:#0d6560;--adim:rgba(15,118,110,.07);--aborder:rgba(15,118,110,.2);--green:#0f766e;--gdim:rgba(15,118,110,.07);--gborder:rgba(15,118,110,.2);--red:#be123c;--rdim:rgba(190,18,60,.07);--rborder:rgba(190,18,60,.2);--amber:#92400e;--ch:rgba(0,0,0,.01);--shadow:0 1px 3px rgba(0,0,0,.06);}
+:root{--r:10px;--rs:6px;--rl:14px;--fs:15px;--font:"Inter",sans-serif;--mono:"JetBrains Mono",monospace;--tr:.18s ease;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:var(--fs)}
+body{font-family:var(--font);background:var(--bg);color:var(--t);min-height:100vh;transition:background var(--tr),color var(--tr);line-height:1.6;-webkit-font-smoothing:antialiased}
+/* HEADER */
+header{background:var(--bg2);border-bottom:1px solid var(--b);height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 22px;position:sticky;top:0;z-index:100}
+.h-brand{display:flex;align-items:center;gap:9px;cursor:pointer;text-decoration:none;color:inherit;border-radius:var(--rs);padding:4px 8px;margin:-4px -8px;transition:background var(--tr);flex-shrink:1;min-width:0;overflow:hidden}
+.h-brand:hover{background:var(--bg3)}
+.site-logo{height:26px;width:auto;display:none;border-radius:4px;flex-shrink:0;background:#fff;padding:2px 4px;}
+.site-name{font-size:.875rem;font-weight:700;letter-spacing:-.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.h-right{display:flex;align-items:center;gap:6px;flex-shrink:0;margin-left:10px}
+.ib{width:32px;height:32px;border-radius:var(--rs);border:1px solid var(--b);background:transparent;color:var(--t2);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all var(--tr);flex-shrink:0}
+.ib:hover{border-color:var(--accent);color:var(--accent)}
+.ib svg{stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.tg-hbtn{display:none;align-items:center;gap:5px;font-size:.75rem;font-weight:500;padding:5px 11px;border-radius:var(--rs);border:1px solid var(--b);background:transparent;color:var(--t2);cursor:pointer;transition:all var(--tr);text-decoration:none;font-family:var(--font);white-space:nowrap;flex-shrink:0}
+.tg-hbtn:hover{border-color:var(--accent);color:var(--accent)}
+.tg-hbtn.show{display:flex}
+/* PANELS */
+.panel-pop{position:fixed;top:54px;right:14px;background:var(--bg2);border:1px solid var(--b);border-radius:var(--r);padding:16px;z-index:201;display:none;box-shadow:var(--shadow)}
+.panel-pop.open{display:block}
+.pop-title{font-size:.65rem;color:var(--t2);font-weight:600;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px}
+input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
+.fp-row{display:flex;justify-content:space-between;font-size:.68rem;color:var(--t2);margin-top:4px}
+#tp{width:230px}
+.tp-grp{margin-bottom:12px}
+.tp-grp-lbl{font-size:.62rem;color:var(--t2);margin-bottom:6px;text-transform:uppercase;letter-spacing:.07em}
+.t-choice{display:flex;align-items:center;gap:8px;padding:6px 9px;border-radius:var(--rs);border:1px solid transparent;cursor:pointer;transition:all var(--tr);font-size:.75rem;color:var(--t2)}
+.t-choice:hover{background:var(--bg3);color:var(--t)}
+.t-choice.on{border-color:var(--accent);color:var(--accent);background:var(--adim)}
+.t-swatch{width:24px;height:16px;border-radius:3px;flex-shrink:0;border:1px solid rgba(0,0,0,.1)}
+/* SCREENS */
+.screen{display:none}.screen.active{display:block}
+.page-wrap{max-width:740px;margin:0 auto;padding:40px 24px}
+.back-btn{display:inline-flex;align-items:center;gap:6px;font-size:.8rem;color:var(--t2);background:var(--bg2);border:1px solid var(--b);border-radius:var(--rs);padding:6px 14px;cursor:pointer;font-family:var(--font);transition:all var(--tr);margin-bottom:22px}
+.back-btn:hover{border-color:var(--accent);color:var(--accent);background:var(--adim)}
+.back-btn svg{stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+/* HOME */
+#home{max-width:860px;margin:0 auto;padding:52px 24px 40px}
+.eyebrow{font-family:var(--mono);font-size:.63rem;color:var(--accent);letter-spacing:.14em;text-transform:uppercase;margin-bottom:12px}
+.h-title{font-size:2rem;font-weight:700;letter-spacing:-.4px;line-height:1.18;margin-bottom:10px}
+.h-sub{color:var(--t2);font-size:.88rem;line-height:1.7;margin-bottom:36px;max-width:520px}
+.tg-strip{display:none;align-items:center;gap:12px;background:var(--adim);border:1px solid var(--aborder);border-radius:var(--r);padding:12px 16px;margin-bottom:28px}
+.tg-strip.show{display:flex}
+.tg-strip svg{flex-shrink:0}
+.tg-strip-body{flex:1;min-width:0}
+.tgs-title{font-size:.825rem;font-weight:600;margin-bottom:1px}
+.tgs-sub{font-size:.72rem;color:var(--t2)}
+.tgs-cta{flex-shrink:0;background:var(--accent);color:var(--bg);border:none;padding:6px 14px;border-radius:var(--rs);font-size:.72rem;font-weight:700;cursor:pointer;font-family:var(--font)}
+.sec-lbl{font-size:.63rem;font-family:var(--mono);color:var(--t2);text-transform:uppercase;letter-spacing:.1em;margin-bottom:9px}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:9px;margin-bottom:30px}
+.hcard{background:var(--bg2);border:1px solid var(--b);border-radius:var(--r);padding:17px;cursor:pointer;transition:border-color var(--tr),background var(--tr),transform var(--tr);position:relative;overflow:hidden}
+.hcard::after{content:"";position:absolute;inset:0 auto 0 0;width:2px;background:var(--accent);opacity:0;transition:opacity var(--tr)}
+.hcard:hover{border-color:var(--accent);background:var(--ch);transform:translateY(-1px)}
+.hcard:hover::after{opacity:1}
+.hc-icon{width:32px;height:32px;background:var(--adim);border:1px solid var(--aborder);border-radius:var(--rs);display:flex;align-items:center;justify-content:center;color:var(--accent);margin-bottom:10px}
+.hc-icon svg{stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.hc-title{font-size:.85rem;font-weight:600;margin-bottom:3px;letter-spacing:-.1px}
+.hc-desc{font-size:.72rem;color:var(--t2);line-height:1.5}
+.sec-divider{height:1px;background:var(--b);margin:4px 0 26px}
+/* Q SELECT */
+.sec-tabs{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:14px}
+.stab{font-size:.75rem;padding:5px 12px;border-radius:20px;border:1px solid var(--b);background:transparent;color:var(--t2);cursor:pointer;transition:all var(--tr);font-family:var(--font)}
+.stab:hover,.stab.on{border-color:var(--accent);color:var(--accent);background:var(--adim)}
+.timer-box{background:var(--bg2);border:1px solid var(--b);border-radius:var(--r);padding:12px 14px;margin-bottom:13px}
+.tb-lbl{font-size:.68rem;color:var(--t2);font-weight:500;margin-bottom:8px;display:flex;align-items:center;gap:5px}
+.tb-lbl svg{stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;width:11px;height:11px;flex-shrink:0}
+.topts{display:flex;gap:5px;flex-wrap:wrap}
+.tob{font-size:.72rem;padding:4px 11px;border-radius:var(--rs);border:1px solid var(--b);background:transparent;color:var(--t2);cursor:pointer;transition:all var(--tr);font-family:var(--font)}
+.tob:hover,.tob.on{border-color:var(--accent);color:var(--accent);background:var(--adim)}
+.cust-row{display:none;align-items:center;gap:7px;margin-top:8px;font-size:.72rem;color:var(--t2)}
+.cust-row.show{display:flex}
+.mini-n{width:60px;background:var(--bg3);border:1px solid var(--b);border-radius:var(--rs);padding:4px 8px;color:var(--t);font-size:.78rem;text-align:center;outline:none;font-family:var(--mono)}
+.mini-n:focus{border-color:var(--accent)}
+.q-list{display:flex;flex-direction:column;gap:6px}
+.q-item{background:var(--bg2);border:1px solid var(--b);border-radius:var(--r);padding:12px 14px;cursor:pointer;transition:border-color var(--tr),background var(--tr);display:flex;gap:10px;align-items:flex-start}
+.q-item:hover{border-color:var(--accent);background:var(--ch)}
+.q-n{font-family:var(--mono);font-size:.62rem;color:var(--accent);min-width:18px;padding-top:2px;flex-shrink:0}
+.q-prev{font-size:.8rem;color:var(--t2);line-height:1.5}
+.q-item:hover .q-prev{color:var(--t)}
+.chips{display:flex;gap:4px;margin-top:6px;flex-wrap:wrap}
+.chip{font-family:var(--mono);font-size:.6rem;padding:2px 6px;border-radius:3px;background:var(--bg3);border:1px solid var(--b);color:var(--t2)}
+.empty-q{text-align:center;padding:28px;color:var(--t2);font-size:.8rem}
+/* EXAM */
+#exam,#fullmock{max-width:1000px;margin:0 auto;padding:12px 14px}
+.exam-bar{display:flex;align-items:center;justify-content:space-between;background:var(--bg2);border:1px solid var(--b);border-radius:var(--r);padding:8px 14px;margin-bottom:11px;gap:10px}
+.bar-l{display:flex;align-items:center;gap:16px;flex-shrink:0;flex-wrap:nowrap}
+.bstat{text-align:center;flex-shrink:0}
+.bval{font-family:var(--mono);font-size:1rem;font-weight:600;color:var(--accent);line-height:1;white-space:nowrap}
+.blbl{font-size:.56rem;color:var(--t2);margin-top:2px;text-transform:uppercase;letter-spacing:.07em;white-space:nowrap}
+.prog-track{width:100px;height:3px;background:var(--b);border-radius:2px;overflow:hidden;flex-shrink:0}
+.prog-fill{height:100%;background:var(--accent);border-radius:2px;transition:width 1s linear,background .5s}
+.exam-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.panel{background:var(--bg2);border:1px solid var(--b);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column}
+.ph{background:var(--bg3);padding:7px 12px;font-family:var(--mono);font-size:.6rem;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;border-bottom:1px solid var(--b);display:flex;justify-content:space-between;align-items:center;flex-shrink:0}
+.pb{padding:13px;flex:1;overflow-y:auto}
+.q-text{font-size:.83rem;line-height:1.8;white-space:pre-wrap}
+.q-meta{display:flex;gap:6px;margin-top:11px;flex-wrap:wrap}
+.answer-ta{width:100%;min-height:300px;background:var(--bg);border:1px solid var(--b);border-radius:var(--rs);color:var(--t);font-family:var(--font);font-size:.83rem;line-height:1.8;padding:11px;resize:none;outline:none;transition:border-color var(--tr);display:block}
+.answer-ta:focus{border-color:var(--accent)}
+.answer-ta::placeholder{color:var(--t3)}
+.ta-footer{display:flex;justify-content:space-between;align-items:center;margin-top:6px}
+.wc-lbl{font-family:var(--mono);font-size:.68rem;color:var(--t2)}
+.wc-lbl strong{color:var(--accent)}
+.mock-tabs{display:flex;gap:4px;overflow-x:auto;background:var(--bg2);border:1px solid var(--b);border-radius:var(--r);padding:4px;margin-bottom:10px}
+.mtab{font-size:.72rem;padding:5px 12px;border-radius:var(--rs);cursor:pointer;white-space:nowrap;transition:all var(--tr);color:var(--t2);background:transparent;border:1px solid transparent;font-family:var(--font)}
+.mtab:hover{color:var(--t)}
+.mtab.on{background:var(--accent);color:var(--bg);font-weight:600}
+.mtab.done{border-color:var(--gborder);color:var(--green)}
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:5px;padding:7px 14px;border-radius:var(--rs);font-size:.78rem;font-weight:600;cursor:pointer;border:none;font-family:var(--font);transition:all var(--tr);white-space:nowrap}
+.btn svg{stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.bp{background:var(--accent);color:var(--bg)}.bp:hover{opacity:.88}
+.bg{background:transparent;border:1px solid var(--b);color:var(--t2)}.bg:hover{border-color:var(--accent);color:var(--accent)}
+.bsm{padding:4px 10px;font-size:.7rem}
+/* RESULT */
+#result{max-width:780px;margin:0 auto;padding:34px 22px}
+.r-top{text-align:center;margin-bottom:24px}
+.r-top h2{font-size:1.35rem;font-weight:700;margin-bottom:3px;letter-spacing:-.3px}
+.r-top p{color:var(--t2);font-size:.78rem}
+.score-row{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-bottom:16px}
+.stile{background:var(--bg2);border:1px solid var(--b);border-radius:var(--r);padding:13px 8px;text-align:center}
+.stile-v{font-family:var(--mono);font-size:1.35rem;font-weight:600;color:var(--accent);line-height:1;margin-bottom:4px}
+.stile-l{font-size:.58rem;color:var(--t2);text-transform:uppercase;letter-spacing:.07em}
+.rcard{background:var(--bg2);border:1px solid var(--b);border-radius:var(--r);overflow:hidden;margin-bottom:10px}
+.rcard-h{background:var(--bg3);padding:7px 14px;font-family:var(--mono);font-size:.6rem;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;border-bottom:1px solid var(--b)}
+.rcard-b{padding:14px}
+.ans-box{background:var(--bg3);border:1px solid var(--b);border-radius:var(--rs);padding:11px;font-size:.8rem;line-height:1.75;white-space:pre-wrap;color:var(--t2)}
+.model-box{background:var(--bg3);border:1px solid var(--gborder);border-left:3px solid var(--green);border-radius:var(--rs);padding:11px;font-size:.8rem;line-height:1.8;white-space:pre-wrap}
+.loading-row{display:flex;align-items:center;gap:8px;color:var(--t2);font-size:.8rem;padding:12px 0}
+.spin{width:15px;height:15px;border:2px solid var(--b);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
+@keyframes spin{to{transform:rotate(360deg)}}
+.sbar{margin-bottom:11px}
+.sbar-top{display:flex;justify-content:space-between;font-size:.72rem;margin-bottom:4px;color:var(--t2)}
+.sbar-top span:last-child{font-family:var(--mono);color:var(--t)}
+.sbar-track{height:3px;background:var(--b);border-radius:2px;overflow:hidden}
+.sbar-fill{height:100%;border-radius:2px;transition:width 1s ease}
+.sbar-note{font-size:.68rem;color:var(--t2);margin-top:3px}
+.ftags{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px}
+.ftag{font-size:.68rem;padding:3px 9px;border-radius:20px;border:1px solid}
+.ftag-g{background:var(--gdim);border-color:var(--gborder);color:var(--green)}
+.ftag-a{background:rgba(217,119,6,.07);border-color:rgba(217,119,6,.22);color:var(--amber)}
+.verdict{background:var(--bg3);border:1px solid var(--b);border-radius:var(--rs);padding:11px;font-size:.8rem;line-height:1.7;margin-top:9px}
+.blbl-s{font-size:.6rem;font-family:var(--mono);color:var(--t2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
+.ract{display:flex;gap:7px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+.ai-notice{background:var(--bg3);border:1px solid var(--b);border-radius:var(--rs);padding:12px;font-size:.75rem;line-height:1.6;color:var(--t2)}
+.ai-notice strong{color:var(--amber)}
+/* TYPING */
+#typing{max-width:740px;margin:0 auto;padding:40px 24px}
+.tm-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
+.tmode{background:var(--bg2);border:1px solid var(--b);border-radius:var(--r);padding:13px;cursor:pointer;transition:all var(--tr)}
+.tmode:hover,.tmode.on{border-color:var(--accent);background:var(--adim)}
+.tmode-t{font-size:.82rem;font-weight:600;margin-bottom:2px}
+.tmode-d{font-size:.7rem;color:var(--t2)}
+.tl-row{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:13px}
+.tl-btn{font-size:.72rem;padding:5px 12px;border-radius:var(--rs);border:1px solid var(--b);background:transparent;color:var(--t2);cursor:pointer;transition:all var(--tr);font-family:var(--font)}
+.tl-btn:hover,.tl-btn.on{border-color:var(--accent);color:var(--accent);background:var(--adim)}
+.tl-cust{display:none;align-items:center;gap:7px;margin-bottom:12px;font-size:.72rem;color:var(--t2)}
+.tl-cust.show{display:flex}
+.paste-area{width:100%;background:var(--bg2);border:1px solid var(--b);border-radius:var(--r);padding:11px 13px;color:var(--t);font-family:var(--font);font-size:.83rem;outline:none;resize:vertical;min-height:80px;transition:border-color var(--tr);margin-bottom:11px}
+.paste-area:focus{border-color:var(--accent)}
+.typing-test{display:none}
+.typing-test.show{display:block}
+.tbar{display:flex;align-items:center;justify-content:space-between;background:var(--bg2);border:1px solid var(--b);border-radius:var(--r);padding:8px 13px;margin-bottom:10px}
+.tst-row{display:flex;gap:16px}
+.tst{text-align:center}
+.tst-v{font-family:var(--mono);font-size:1rem;font-weight:600;color:var(--accent);line-height:1}
+.tst-l{font-size:.56rem;color:var(--t2);margin-top:2px;text-transform:uppercase;letter-spacing:.07em}
+.cring{position:relative;width:38px;height:38px;flex-shrink:0}
+.ring-svg{transform:rotate(-90deg)}
+.ring-bg{fill:none;stroke:var(--b);stroke-width:3}
+.ring-f{fill:none;stroke:var(--accent);stroke-width:3;stroke-linecap:round;transition:stroke-dashoffset .5s linear,stroke .5s}
+.ring-txt{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:.65rem;font-weight:600;color:var(--accent)}
+.para-disp{background:var(--bg2);border:1px solid var(--b);border-radius:var(--r);padding:15px 17px;font-size:.88rem;line-height:2;margin-bottom:10px;word-break:break-word;min-height:68px}
+.pw{display:inline}
+.pw.correct{color:var(--green)}
+.pw.wrong{color:var(--red);text-decoration:underline;text-decoration-color:var(--red)}
+.pw.current{background:var(--adim);border-bottom:2px solid var(--accent);border-radius:2px 2px 0 0}
+.typing-input{width:100%;background:var(--bg2);border:1px solid var(--b);border-radius:var(--r);padding:10px 13px;color:var(--t);font-family:var(--font);font-size:.85rem;outline:none;resize:none;height:75px;line-height:1.6;transition:border-color var(--tr)}
+.typing-input:focus{border-color:var(--accent)}
+.typing-input::placeholder{color:var(--t3)}
+.submit-early{display:none;margin-top:10px;text-align:center}
+.submit-early.show{display:block}
+.trc{background:var(--bg2);border:1px solid var(--b);border-radius:var(--rl);padding:24px;margin-top:16px;text-align:center;display:none}
+.trc.show{display:block}
+.trc-grade{font-family:var(--mono);font-size:2.8rem;font-weight:700;line-height:1;margin-bottom:5px}
+.trc-sub{font-size:.75rem;color:var(--t2);margin-bottom:18px}
+.trc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:13px}
+.trc-tile{background:var(--bg3);border:1px solid var(--b);border-radius:var(--rs);padding:12px 8px}
+.trc-v{font-family:var(--mono);font-size:1.25rem;font-weight:600;color:var(--accent)}
+.trc-l{font-size:.6rem;color:var(--t2);text-transform:uppercase;letter-spacing:.06em;margin-top:2px}
+.trc-note{font-size:.75rem;color:var(--t2);line-height:1.65;background:var(--bg3);border-radius:var(--rs);padding:10px 12px;text-align:left}
+.qpick-btn{width:100%;background:var(--bg3);border:1px solid var(--b);border-radius:var(--r);padding:14px;cursor:pointer;transition:border-color var(--tr),background var(--tr);font-family:var(--font);text-align:left}
+.qpick-btn:hover{border-color:var(--accent);background:var(--adim)}
+/* CONFIRM OVERLAY */
+.cov{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:300;display:none;align-items:center;justify-content:center;padding:20px}
+.cov.open{display:flex}
+.cbox{background:var(--bg2);border:1px solid var(--b);border-radius:var(--rl);padding:26px 22px;max-width:340px;width:100%;text-align:center}
+.cbox-t{font-size:.95rem;font-weight:700;margin-bottom:7px}
+.cbox-s{font-size:.78rem;color:var(--t2);margin-bottom:20px;line-height:1.6}
+.cbox-btns{display:flex;gap:8px;justify-content:center}
+@media(max-width:640px){.exam-grid{grid-template-columns:1fr}.score-row{grid-template-columns:repeat(2,1fr)}.trc-grid{grid-template-columns:repeat(2,1fr)}.h-title{font-size:1.55rem}.tm-grid{grid-template-columns:1fr}.bar-l{gap:10px}.prog-track{display:none}}
+/* GIFT BOX */
+.gift-fab{position:fixed;top:70px;right:16px;z-index:150;cursor:pointer;display:none;flex-direction:column;align-items:center;gap:3px;animation:gift-bounce 2s ease-in-out infinite;}
+.gift-fab.show{display:flex}
+@keyframes gift-bounce{0%,100%{transform:translateY(0) rotate(-2deg);}50%{transform:translateY(-8px) rotate(2deg);}}
+.gift-icon{width:48px;height:48px;background:linear-gradient(135deg,#e2b714,#f5d062);border-radius:12px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(226,183,20,.5);font-size:26px;transition:transform .2s;}
+.gift-fab:hover .gift-icon{transform:scale(1.1);}
+.gift-lbl{font-size:.55rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.06em;background:var(--bg2);border:1px solid var(--aborder);border-radius:6px;padding:2px 5px;white-space:nowrap;}
+/* OFFERS POPUP */
+.offers-popup{position:fixed;top:70px;right:72px;background:var(--bg2);border:1px solid var(--b);border-radius:var(--rl);padding:20px;z-index:400;width:min(360px,90vw);max-height:80vh;overflow-y:auto;box-shadow:0 8px 32px rgba(0,0,0,.4);display:none;}
+.offers-popup.open{display:block;animation:popup-in .22s ease;}
+@keyframes popup-in{from{opacity:0;transform:scale(.93) translateY(-6px);}to{opacity:1;transform:scale(1) translateY(0);}}
+.op-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.op-title{font-size:.9rem;font-weight:700;display:flex;align-items:center;gap:7px;}
+.op-close{background:transparent;border:none;color:var(--t2);font-size:1.2rem;cursor:pointer;line-height:1;padding:0 2px;}
+.op-msg{background:var(--adim);border:1px solid var(--aborder);border-radius:var(--rs);padding:9px 12px;font-size:.75rem;line-height:1.6;margin-bottom:12px;}
+.offer-card{background:var(--bg3);border:1px solid var(--b);border-radius:var(--r);padding:13px;margin-bottom:9px;}
+.offer-card:last-child{margin-bottom:0;}
+.offer-logo-wrap{background:#fff;border-radius:6px;padding:4px 8px;display:inline-flex;align-items:center;margin-bottom:8px;max-width:100%;}
+.offer-logo-wrap img{max-height:28px;width:auto;display:block;}
+.oc-title{font-size:.82rem;font-weight:700;margin-bottom:3px;}
+.oc-badge{font-size:.6rem;background:rgba(217,119,6,.12);color:var(--amber);border:1px solid rgba(217,119,6,.25);border-radius:4px;padding:1px 6px;font-family:var(--mono);margin-left:5px;}
+.oc-desc{font-size:.72rem;color:var(--t2);line-height:1.55;margin-bottom:8px;}
+.oc-coupon{font-family:var(--mono);font-size:.72rem;background:var(--adim);border:1px solid var(--aborder);color:var(--accent);border-radius:5px;padding:3px 8px;margin-bottom:8px;display:inline-block;}
+.oc-link{display:inline-flex;align-items:center;gap:4px;font-size:.72rem;font-weight:600;color:var(--bg);background:var(--accent);border-radius:var(--rs);padding:5px 11px;text-decoration:none;transition:opacity .15s;}
+.oc-link:hover{opacity:.85;}
+</style>
+</head>
+<body>
+<header>
+  <a class="h-brand" id="h-brand" onclick="handleBrand(event)" href="#">
+    <img id="site-logo" class="site-logo" src="" alt="logo"/>
+    <span class="site-name" id="site-name">Descriptive Prep Today</span>
+  </a>
+  <div class="h-right">
+    <a class="tg-hbtn" id="tg-hbtn" href="#" target="_blank">
+      <svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 4.5L2.5 11.5l6 2m13-9L14.5 20l-4-5.5m11-10L8.5 13.5m0 0v5.5l3-3"/></svg>
+      <span id="tg-ht">Telegram</span>
+    </a>
+    <button class="ib" onclick="toggleP('fp',event)" title="Text size">
+      <svg width="14" height="14" viewBox="0 0 24 24"><path d="M4 20V7H2m4 0h8m0 0h2m-2 0V20m-8-7h7"/><path d="M15 20v-5a2.5 2.5 0 015 0V20m-5-2.5h5"/></svg>
+    </button>
+    <button class="ib" onclick="toggleP('tp',event)" title="Theme">
+      <svg id="theme-ico" width="14" height="14" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
+  </div>
+</header>
+<div class="panel-pop" id="fp" style="width:195px">
+  <div class="pop-title">Text Size</div>
+  <input type="range" id="fs-slider" min="12" max="20" value="15" oninput="setFS(this.value)"/>
+  <div class="fp-row"><span style="font-size:.72rem">A</span><span>A</span><span style="font-size:1.1rem">A</span></div>
+</div>
+<div class="panel-pop" id="tp">
+  <div class="pop-title">Theme</div>
+  <div class="tp-grp"><div class="tp-grp-lbl">Dark</div>
+    <div class="t-choice" data-t="dark-default" onclick="setTheme('dark-default')"><div class="t-swatch" style="background:linear-gradient(135deg,#0e1117 50%,#e2b714 50%)"></div>Navy &amp; gold</div>
+    <div class="t-choice" data-t="dark-vs" onclick="setTheme('dark-vs')"><div class="t-swatch" style="background:linear-gradient(135deg,#1e1e1e 50%,#4ec9b0 50%)"></div>Charcoal &amp; cyan</div>
+    <div class="t-choice" data-t="dark-obsidian" onclick="setTheme('dark-obsidian')"><div class="t-swatch" style="background:linear-gradient(135deg,#0a0a0a 50%,#7c6af7 50%)"></div>Obsidian &amp; violet</div>
+  </div>
+  <div class="tp-grp"><div class="tp-grp-lbl">Light</div>
+    <div class="t-choice" data-t="light-default" onclick="setTheme('light-default')"><div class="t-swatch" style="background:linear-gradient(135deg,#f8f9fc 50%,#2563eb 50%)"></div>Clean &amp; blue</div>
+    <div class="t-choice" data-t="light-warm" onclick="setTheme('light-warm')"><div class="t-swatch" style="background:linear-gradient(135deg,#faf8f5 50%,#c2460a 50%)"></div>Warm &amp; terracotta</div>
+    <div class="t-choice" data-t="light-clean" onclick="setTheme('light-clean')"><div class="t-swatch" style="background:linear-gradient(135deg,#f2f4f8 50%,#0f766e 50%)"></div>Grey &amp; teal</div>
+  </div>
+</div>
+<div class="cov" id="exit-cov">
+<!-- GIFT BOX FAB -->
+<div class="gift-fab" id="gift-fab" onclick="toggleOffersPopup(event)" title="Special Offers">
+  <div class="gift-icon">🎁</div>
+  <div class="gift-lbl">Special Offers</div>
+</div>
+<!-- OFFERS POPUP -->
+<div class="offers-popup" id="offers-popup">
+  <div class="op-head">
+    <div class="op-title">🎁 Special Offers</div>
+    <button class="op-close" onclick="closeOffersPopup()">×</button>
+  </div>
+  <div class="op-msg" id="offers-popup-msg">Support this channel by purchasing any course using my coupon code — it helps keep this platform free!</div>
+  <div id="offers-popup-cards"></div>
+</div>
+  <div class="cbox">
+    <div class="cbox-t">Exit exam?</div>
+    <div class="cbox-s">Your answer will be lost. Are you sure you want to leave?</div>
+    <div class="cbox-btns">
+      <button class="btn bg" onclick="closeCov()">Keep writing</button>
+      <button class="btn bp" onclick="doExit()">Exit</button>
+    </div>
+  </div>
+</div>
+<div id="home" class="screen active">
+  <div class="eyebrow" id="h-eyebrow">Free Practice Platform</div>
+  <h1 class="h-title" id="h-title">SBI PO Descriptive<br>Practice 2026</h1>
+  <p class="h-sub" id="h-sub">Exam-pattern interface · AI evaluation · Model answers · Typing speed tracker</p>
+  <div class="tg-strip" id="tg-strip">
+    <svg width="19" height="19" viewBox="0 0 24 24" stroke="var(--accent)" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 4.5L2.5 11.5l6 2m13-9L14.5 20l-4-5.5m11-10L8.5 13.5m0 0v5.5l3-3"/></svg>
+    <div class="tg-strip-body"><div class="tgs-title" id="tgs-title">Get daily questions on Telegram</div><div class="tgs-sub" id="tgs-sub">Free PDFs, updates and practice material</div></div>
+    <button class="tgs-cta" onclick="openTG()" id="tgs-btn">Join</button>
+  </div>
+  <div class="sec-lbl" id="h-plbl">Practice Sections</div>
+  <div class="card-grid" id="sec-practice-cards" style="margin-bottom:26px"></div>
+  <div class="sec-divider"></div>
+  <div class="sec-lbl">Full Mock Tests</div>
+  <div class="card-grid" id="sec-cards" style="margin-bottom:26px"></div>
+  <div class="sec-divider"></div>
+  <div class="sec-lbl" id="h-tlbl">Tools</div>
+  <div class="card-grid">
+    <div class="hcard" onclick="showS('typing')">
+      <div class="hc-icon"><svg width="16" height="16" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M8 12h.01M12 12h.01M16 12h.01M7 16h10"/></svg></div>
+      <div class="hc-title" id="typ-card-t">Typing Speed Test</div>
+      <div class="hc-desc" id="typ-card-d">Check your WPM and accuracy with a countdown timer</div>
+    </div>
+  </div>
+</div>
+<div id="qselect" class="screen">
+  <div class="page-wrap">
+    <button class="back-btn" onclick="showS('home')"><svg width="13" height="13" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back to Home</button>
+    <div style="font-size:1rem;font-weight:700;margin-bottom:3px" id="qs-head">SBI PO Mains 2026</div>
+    <div style="color:var(--t2);font-size:.78rem;margin-bottom:16px" id="qs-sub">Select a section and question</div>
+    <div class="sec-tabs" id="sec-tabs"></div>
+    <div class="timer-box" id="timer-box">
+      <div class="tb-lbl"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Timer setting</div>
+      <div class="topts">
+        <button class="tob on" data-v="default" onclick="setTO(this,'default')">Default</button>
+        <button class="tob" data-v="none" onclick="setTO(this,'none')">No timer</button>
+        <button class="tob" data-v="custom" onclick="setTO(this,'custom')">Custom</button>
+      </div>
+      <div class="cust-row" id="cust-row"><span>Minutes:</span><input class="mini-n" type="number" id="cust-mins" value="10" min="1" max="120"/></div>
+    </div>
+    <div class="q-list" id="q-list"></div>
+  </div>
+</div>
+<div id="exam" class="screen">
+  <div class="exam-bar">
+    <div class="bar-l">
+      <div class="bstat"><div class="bval" id="exam-timer">--:--</div><div class="blbl">Time</div></div>
+      <div class="prog-track"><div class="prog-fill" id="exam-prog" style="width:100%"></div></div>
+      <div class="bstat"><div class="bval" id="exam-wpm">0</div><div class="blbl">WPM</div></div>
+      <div class="bstat"><div class="bval" id="exam-wc-top">0</div><div class="blbl">Words</div></div>
+    </div>
+    <div style="display:flex;gap:6px;flex-shrink:0">
+      <button class="btn bg bsm" onclick="askExit('qselect')"><svg width="11" height="11" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Exit</button>
+      <button class="btn bp bsm" onclick="submitSingle()">Submit</button>
+    </div>
+  </div>
+  <div class="exam-grid">
+    <div class="panel">
+      <div class="ph"><span id="exam-type-lbl">Question</span><span id="exam-wl" style="color:var(--t2)"></span></div>
+      <div class="pb"><div class="q-text" id="exam-qtext"></div><div class="q-meta" id="exam-qmeta"></div></div>
+    </div>
+    <div class="panel">
+      <div class="ph"><span>Your Answer</span><span id="exam-pwc" style="color:var(--t2)">0 words</span></div>
+      <div class="pb" style="padding:10px;display:flex;flex-direction:column;gap:6px">
+        <textarea class="answer-ta" id="exam-ta" placeholder="Start writing here…"></textarea>
+        <div class="ta-footer"><div class="wc-lbl">Words: <strong id="exam-wc">0</strong></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="fullmock" class="screen">
+  <div class="exam-bar">
+    <div class="bar-l">
+      <div class="bstat"><div class="bval" id="mock-timer">--:--</div><div class="blbl">Mock Time</div></div>
+      <div class="prog-track"><div class="prog-fill" id="mock-prog" style="width:100%"></div></div>
+      <div class="bstat"><div class="bval" id="mock-done">0/<span id="mock-total">0</span></div><div class="blbl">Done</div></div>
+    </div>
+    <div style="display:flex;gap:6px;flex-shrink:0">
+      <button class="btn bg bsm" onclick="askExit('home')"><svg width="11" height="11" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Exit</button>
+      <button class="btn bp bsm" onclick="submitMock()">Submit All</button>
+    </div>
+  </div>
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;flex-wrap:wrap;gap:6px">
+    <div style="font-family:var(--mono);font-size:.6rem;color:var(--t2);letter-spacing:.08em;text-transform:uppercase">SBI PO Mains · Real Pattern · Email → Situation → Report/Precis</div>
+    <div style="font-family:var(--mono);font-size:.6rem;color:var(--t2)">30 min combined timer</div>
+  </div>
+  <div class="mock-tabs" id="mock-tabs"></div>
+  <div class="exam-grid">
+    <div class="panel">
+      <div class="ph"><span id="mock-type-lbl">Question</span><span id="mock-wl" style="color:var(--t2)"></span></div>
+      <div class="pb"><div class="q-text" id="mock-qtext"></div><div class="q-meta" id="mock-qmeta"></div></div>
+    </div>
+    <div class="panel">
+      <div class="ph"><span>Your Answer</span><span id="mock-pwc" style="color:var(--t2)">0 words</span></div>
+      <div class="pb" style="padding:10px;display:flex;flex-direction:column;gap:6px">
+        <textarea class="answer-ta" id="mock-ta" placeholder="Start writing here…"></textarea>
+        <div class="ta-footer"><div class="wc-lbl">Words: <strong id="mock-wc">0</strong></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="result" class="screen">
+  <div class="r-top"><h2>Your Result</h2><p id="r-sub"></p></div>
+  <div class="score-row">
+    <div class="stile"><div class="stile-v" id="r-score">-</div><div class="stile-l">AI Score</div></div>
+    <div class="stile"><div class="stile-v" id="r-words">-</div><div class="stile-l">Words</div></div>
+    <div class="stile"><div class="stile-v" id="r-wpm">-</div><div class="stile-l">WPM</div></div>
+    <div class="stile"><div class="stile-v" id="r-time">-</div><div class="stile-l">Time</div></div>
+  </div>
+  <div class="rcard"><div class="rcard-h">Score Breakdown</div><div class="rcard-b" id="sbars"></div></div>
+  <div class="rcard"><div class="rcard-h">Your Answer</div><div class="rcard-b"><div class="ans-box" id="r-ans"></div></div></div>
+  <div class="rcard"><div class="rcard-h">AI Feedback</div><div class="rcard-b"><div id="r-ai"><div class="loading-row"><div class="spin"></div>Evaluating...</div></div></div></div>
+  <div class="rcard"><div class="rcard-h">Model Answer</div><div class="rcard-b"><div class="model-box" id="r-model"></div></div></div>
+  <div class="ract">
+    <button class="btn bg" onclick="showS('qselect')">Try Another</button>
+    <button class="btn bp" onclick="showS('home')">Home</button>
+  </div>
+</div>
+<div id="typing" class="screen">
+  <div style="max-width:740px;margin:0 auto;padding:40px 24px">
+    <button class="back-btn" onclick="showS('home')"><svg width="13" height="13" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back to Home</button>
+    <div style="font-size:1rem;font-weight:700;margin-bottom:3px" id="typ-head">Typing Speed Test</div>
+    <div style="color:var(--t2);font-size:.78rem;margin-bottom:20px" id="typ-sub">Test your WPM and accuracy before the exam</div>
+    <div id="typ-setup">
+      <div class="sec-lbl" style="margin-bottom:7px">Paragraph source</div>
+      <div class="tm-grid" style="margin-bottom:14px">
+        <div class="tmode on" id="tm-given" onclick="selMode('given')"><div class="tmode-t">Given paragraph</div><div class="tmode-d">Banking passage — exam difficulty</div></div>
+        <div class="tmode" id="tm-custom" onclick="selMode('custom')"><div class="tmode-t">Paste your own</div><div class="tmode-d">Paste any text to test on</div></div>
+      </div>
+      <div id="paste-sec" style="display:none"><textarea class="paste-area" id="paste-in" placeholder="Paste paragraph here (minimum 15 words)..."></textarea></div>
+      <div class="sec-lbl" style="margin-bottom:7px">Time limit</div>
+      <div class="tl-row">
+        <button class="tl-btn" data-tl="60" onclick="setTL(this,60)">1 min</button>
+        <button class="tl-btn on" data-tl="120" onclick="setTL(this,120)">2 min</button>
+        <button class="tl-btn" data-tl="180" onclick="setTL(this,180)">3 min</button>
+        <button class="tl-btn" data-tl="240" onclick="setTL(this,240)">4 min</button>
+        <button class="tl-btn" data-tl="300" onclick="setTL(this,300)">5 min</button>
+        <button class="tl-btn" data-tl="-1" onclick="setTL(this,-1)">No timer</button>
+        <button class="tl-btn" data-tl="0" onclick="setTL(this,0)">Custom</button>
+      </div>
+      <div class="tl-cust" id="tl-cust"><span>Seconds:</span><input class="mini-n" type="number" id="tl-cust-v" value="90" min="10" max="600"/></div>
+      <button class="btn bp" onclick="startTyping()">Start Test</button>
+    </div>
+    <div class="typing-test" id="typ-test">
+      <div class="tbar">
+        <div class="tst-row">
+          <div class="tst"><div class="tst-v" id="t-wpm">0</div><div class="tst-l">WPM</div></div>
+          <div class="tst"><div class="tst-v" id="t-acc">100%</div><div class="tst-l">Accuracy</div></div>
+          <div class="tst"><div class="tst-v" id="t-cor">0</div><div class="tst-l">Correct</div></div>
+        </div>
+        <div class="cring">
+          <svg class="ring-svg" width="38" height="38" viewBox="0 0 40 40"><circle class="ring-bg" cx="20" cy="20" r="17"/><circle class="ring-f" id="ring-f" cx="20" cy="20" r="17" stroke-dasharray="106.8" stroke-dashoffset="0"/></svg>
+          <div class="ring-txt" id="ring-txt">--</div>
+        </div>
+        <button class="btn bg bsm" onclick="resetTyping()">Reset</button>
+      </div>
+      <div class="para-disp" id="para-disp"></div>
+      <textarea class="typing-input" id="typ-in" placeholder="Start typing here - timer starts automatically..." oninput="onType()" onkeydown="if(event.key===' '&&this.value.slice(-1)===' '){event.preventDefault();}" onpaste="return false"></textarea>
+      <div class="submit-early" id="sub-early">
+        <button class="btn bp" onclick="finishTyping(document.getElementById('typ-in').value,true)" style="margin-top:8px">
+          <svg width="12" height="12" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Submit - I'm done
+        </button>
+      </div>
+    </div>
+    <div class="trc" id="typ-res">
+      <div class="trc-grade" id="trc-grade">-</div>
+      <div class="trc-sub" id="trc-sub">-</div>
+      <div class="trc-grid">
+        <div class="trc-tile"><div class="trc-v" id="trc-wpm">-</div><div class="trc-l">WPM</div></div>
+        <div class="trc-tile"><div class="trc-v" id="trc-acc">-</div><div class="trc-l">Accuracy</div></div>
+        <div class="trc-tile"><div class="trc-v" id="trc-time">-</div><div class="trc-l">Time (sec)</div></div>
+      </div>
+      <div class="trc-note" id="trc-note"></div>
+      <button class="btn bp" onclick="resetTyping()" style="margin-top:14px">Try Again</button>
+    </div>
+  </div>
+</div>
+<script>
+function D(){try{return JSON.parse(localStorage.getItem("dpt_data"))||DD();}catch(e){return DD();}}
+function DD(){return{siteSettings:{name:"Descriptive Prep Today",tagline:"",tgLink:"",tgText:"Join Telegram",logoUrl:"",logoUrlDark:"",logoUrlLight:"",accentColor:"",fontFamily:"Inter",fontSize:15,apiProxy:"",homeEyebrow:"Free Practice Platform",homeTitle:"SBI PO Descriptive\nPractice 2026",homeSub:"Exam-pattern interface · AI evaluation · Model answers · Typing speed tracker",practiceSectionLabel:"Practice Sections",toolsLabel:"Tools",typingCardTitle:"Typing Speed Test",typingCardDesc:"Check your WPM and accuracy with a countdown timer",typingHeading:"Typing Speed Test",typingSubhead:"Test your WPM and accuracy before the exam",tgStripTitle:"Get daily questions on Telegram",tgStripSub:"Free PDFs, updates and practice material",offersMsg:"Support this channel — purchase any course using my coupon code. It helps me keep this platform free for everyone!"},sectionTypes:[{id:"email",name:"Email Writing",wordLimit:"150-200 words",marks:20,timer:10,noTimer:true},{id:"situation",name:"Situation Analysis",wordLimit:"100-150 words",marks:15,timer:10,noTimer:true},{id:"report",name:"Report Writing",wordLimit:"100-150 words",marks:15,timer:10,noTimer:true},{id:"precis",name:"Precis Writing",wordLimit:"~1/3rd of passage",marks:15,timer:10,noTimer:true}],exams:[{id:"sbi_po",name:"SBI PO Mains 2026",duration:30,status:"active",desc:"Email, Situation Analysis, Report, Precis",sections:["email","situation","report","precis"]}],typingParas:["Financial inclusion remains one of the most pressing developmental challenges facing India today. Despite significant progress over the past decade, a large section of the population continues to lack access to formal banking services. The Pradhan Mantri Jan Dhan Yojana has been a landmark initiative bringing millions of unbanked households into the formal financial fold.","The Reserve Bank of India plays a pivotal role in maintaining monetary stability and regulating the banking sector. Its primary objectives include controlling inflation, managing foreign exchange reserves, and ensuring the smooth functioning of the payment and settlement system. The RBI also acts as the banker to the government."],offers:[],questions:[{id:"q1",examId:"sbi_po",type:"email",text:"You are a PO at SBI, Connaught Place Branch. A customer Mr. Ramesh Gupta has complained that his net banking access has been blocked for 3 days. Write a formal email explaining the reason (scheduled server maintenance) and the resolution timeline.",wordLimit:"150-200 words",marks:20,difficulty:"medium",modelAnswer:"To: ramesh.gupta@email.com\nSubject: Resolution of Net Banking Access Issue\n\nDear Mr. Gupta,\n\nI sincerely apologise for the disruption to your net banking services. The temporary suspension was due to scheduled server maintenance from 14th to 16th June 2026. Your access has been fully restored.\n\nPlease reset your password via Forgot Password if you face any difficulty. For assistance call 1800-11-2211.\n\nYours sincerely,\n[Your Name]\nProbationary Officer, SBI",active:true},{id:"q2",examId:"sbi_po",type:"situation",text:"You are a PO at a semi-urban SBI branch. Mrs. Kamla Devi (72) reports she shared her OTP with a fraudster and Rs 45,000 was debited. She is in tears. Describe your immediate steps.",wordLimit:"100-150 words",marks:15,difficulty:"medium",modelAnswer:"I would calm Mrs. Kamla Devi and offer her a seat. I would immediately block her debit card and help her call 1800-11-2211 to report the fraud. I would assist in filing a branch complaint and guide her to cybercrime.gov.in. I would explain the RBI Zero Liability policy and educate her about never sharing OTPs with anyone.",active:true},{id:"q3",examId:"sbi_po",type:"report",text:"You participated in a Financial Literacy Camp in village Rampur on 5th June 2026. Write a formal report to your Branch Manager covering objectives, activities, attendance, outcomes and recommendations.",wordLimit:"100-150 words",marks:15,difficulty:"easy",modelAnswer:"REPORT ON FINANCIAL LITERACY CAMP - RAMPUR\n\nDate: 6th June 2026\nTo: Branch Manager, SBI\n\nA camp was held at Gram Panchayat Hall on 5th June 2026. Topics: PMJDY, RuPay card, UPI, fraud awareness. 180 villagers attended; 42 new accounts opened.\n\nRecommendation: Continue monthly camps and deploy a Business Correspondent.\n\n[Your Name] | PO",active:true},{id:"q4",examId:"sbi_po",type:"precis",text:"Read the following passage and write a precis in approximately 100 words.\n\nFinancial inclusion remains one of the most pressing challenges facing India. Despite PMJDY bringing millions into formal banking, merely opening accounts does not guarantee meaningful inclusion. The real challenge lies in ensuring accounts are actively used for credit, savings, insurance and remittances. Financial literacy, digital infrastructure and trust in banking institutions must be strengthened simultaneously.",wordLimit:"~100 words",marks:15,difficulty:"easy",modelAnswer:"Financial inclusion remains a major challenge in India. While PMJDY has brought millions into the banking system, account ownership alone is insufficient. True inclusion requires active usage for savings, credit, insurance and transfers. Achieving this depends on strengthening financial literacy, expanding digital infrastructure and building public trust in banking institutions.",active:true}]}};
+let CQ=null,TI=null,WI=null,tLeft=0,tTotal=0,tStart=null,tyStarted=false,tMode="default";
+let MS={s:[],a:{},idx:0,st:null},exitDest=null;
+let tyMode="given",tyPara="",tyLim=120,tyStart=null,tyInterval=null,tyDone=false,tyTStarted=false,tLeft2=0;
+const EX=()=>{try{const d=D();return d.exams.find(e=>e.status==="active")||d.exams[0];}catch(e){return null;}};
+async function init(){
+  const th=localStorage.getItem("dpt_theme")||"dark-default";
+  applyTheme(th,false);
+  const fs=localStorage.getItem("dpt_font")||"15";
+  setFS(fs,false);document.getElementById("fs-slider").value=fs;
+  try{const r=await fetch("./config.json?v="+Date.now(),{cache:"no-store"});if(r.ok){const d=await r.json();if(d&&d.siteSettings)localStorage.setItem("dpt_data",JSON.stringify(d));}}catch(e){}
+  renderHome();
+}
+function applyTheme(t,save=true){
+  document.documentElement.setAttribute("data-theme",t);
+  if(save)localStorage.setItem("dpt_theme",t);
+  const dark=t.startsWith("dark");
+  const ico=document.getElementById("theme-ico");
+  ico.innerHTML=dark?'<path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/>':'<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>';
+  document.querySelectorAll(".t-choice").forEach(e=>e.classList.toggle("on",e.dataset.t===t));
+  updateLogo(t);
+}
+function setTheme(t){applyTheme(t);document.getElementById("tp").classList.remove("open");}
+function updateLogo(t){
+  const d=D(),cfg=d.siteSettings||{},dark=t.startsWith("dark");
+  const url=dark?(cfg.logoUrlDark||cfg.logoUrl||""):(cfg.logoUrlLight||cfg.logoUrl||"");
+  const l=document.getElementById("site-logo");
+  if(url){l.src=url;l.style.display="block";}else l.style.display="none";
+}
+function setFS(v,save=true){document.documentElement.style.setProperty("--fs",v+"px");if(save)localStorage.setItem("dpt_font",v);}
+function toggleP(id,e){e.stopPropagation();const el=document.getElementById(id);el.classList.toggle("open");["fp","tp"].filter(x=>x!==id).forEach(x=>document.getElementById(x).classList.remove("open"));}
+document.addEventListener("click",()=>{["fp","tp"].forEach(id=>document.getElementById(id).classList.remove("open"));});
+function showS(id){document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));document.getElementById(id).classList.add("active");window.scrollTo(0,0);["fp","tp"].forEach(id=>document.getElementById(id).classList.remove("open"));}
+function handleBrand(e){e.preventDefault();const inExam=document.getElementById("exam").classList.contains("active")||document.getElementById("fullmock").classList.contains("active");if(inExam)askExit("home");else showS("home");}
+function askExit(dest){exitDest=dest;document.getElementById("exit-cov").classList.add("open");}
+function closeCov(){document.getElementById("exit-cov").classList.remove("open");exitDest=null;}
+function doExit(){clearInterval(TI);clearInterval(WI);document.getElementById("exit-cov").classList.remove("open");if(exitDest)showS(exitDest);exitDest=null;}
+function setT(id,v){const e=document.getElementById(id);if(e&&v)e.textContent=v;}
+function openTG(){const l=D().siteSettings?.tgLink||"";if(l)window.open(l,"_blank");}
+function toggleOffersPopup(e){e.stopPropagation();const p=document.getElementById("offers-popup");p.classList.toggle("open");}
+function closeOffersPopup(){document.getElementById("offers-popup").classList.remove("open");}
+document.addEventListener("click",e=>{
+  const popup=document.getElementById("offers-popup");
+  const fab=document.getElementById("gift-fab");
+  if(popup&&fab&&!popup.contains(e.target)&&!fab.contains(e.target)){popup.classList.remove("open");}
+});
+function renderHome(){
+  const d=D(),cfg=d.siteSettings||{};
+  if(cfg.name)document.getElementById("site-name").textContent=cfg.name;
+  updateLogo(localStorage.getItem("dpt_theme")||"dark-default");
+  setT("h-eyebrow",cfg.homeEyebrow);
+  const ht=document.getElementById("h-title");if(ht&&cfg.homeTitle)ht.innerHTML=cfg.homeTitle.replace("\n","<br>");
+  setT("h-sub",cfg.homeSub);setT("h-plbl",cfg.practiceSectionLabel);setT("h-tlbl",cfg.toolsLabel);
+  setT("typ-card-t",cfg.typingCardTitle);setT("typ-card-d",cfg.typingCardDesc);
+  setT("typ-head",cfg.typingHeading);setT("typ-sub",cfg.typingSubhead);
+  if(cfg.tgLink){
+    document.getElementById("tg-strip").classList.add("show");
+    setT("tgs-title",cfg.tgStripTitle);setT("tgs-sub",cfg.tgStripSub);setT("tgs-btn",cfg.tgText||"Join");
+    const hb=document.getElementById("tg-hbtn");hb.href=cfg.tgLink;hb.classList.add("show");setT("tg-ht",cfg.tgText||"Telegram");
+  }
+  // Offers — gift box
+  const offers=d.offers||[];
+  const giftFab=document.getElementById("gift-fab");
+  if(offers.length>0){
+    giftFab.classList.add("show");
+    if(cfg.offersMsg)document.getElementById("offers-popup-msg").textContent=cfg.offersMsg;
+    document.getElementById("offers-popup-cards").innerHTML=offers.map(o=>`
+      <div class="offer-card">
+        ${o.logoUrl?`<div class="offer-logo-wrap"><img src="${o.logoUrl}" alt="${o.title} logo" onerror="this.parentElement.style.display='none'"/></div>`:""}
+        <div class="oc-title">${o.title||""}${o.badge?`<span class="oc-badge">${o.badge}</span>`:""}</div>
+        ${o.desc?`<div class="oc-desc">${o.desc}</div>`:""}
+        ${o.coupon?`<div class="oc-coupon">Coupon: ${o.coupon}</div>`:""}
+        ${o.link?`<a class="oc-link" href="${o.link}" target="_blank">View Offer <svg width="11" height="11" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>`:""}
+      </div>`).join("");
+  } else {
+    giftFab.classList.remove("show");
+  }
+  const tm={};d.sectionTypes.forEach(s=>tm[s.id]=s);
+  const activeExams=d.exams.filter(e=>e.status==="active");
+  const icons={email:'<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>',situation:'<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>',report:'<path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>',precis:'<line x1="21" y1="10" x2="3" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="13" y1="18" x2="3" y2="18"/>'};
+  const examCards=activeExams.map(ex=>{
+    const qCount=d.questions.filter(q=>q.examId===ex.id&&q.active).length;
+    const iconHtml=ex.icon?`<img src="${ex.icon}" style="width:20px;height:20px;object-fit:contain"/>`:`<svg width="16" height="16" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>`;
+    return `<div class="hcard exam-card" onclick="startFullMockFor('${ex.id}')" style="border-color:var(--aborder);background:var(--adim)">
+      <div class="hc-icon" style="background:var(--accent);border-color:var(--accent);color:var(--bg)">${iconHtml}</div>
+      <div class="hc-title">${ex.name}</div>
+      <div class="hc-desc">${ex.desc||""}</div>
+      <div class="chips" style="margin-top:8px"><span class="chip">${ex.duration||30}min mock</span><span class="chip">${qCount} questions</span></div>
+    </div>`;
+  }).join("");
+  document.getElementById("sec-cards").innerHTML=examCards||"<div style='color:var(--t2);font-size:.8rem;padding:12px 0'>No active exams. Add exams in Admin panel.</div>";
+  // Practice section — NO exam name shown, just section types
+  const allSections=d.sectionTypes;
+  document.getElementById("sec-practice-cards").innerHTML=allSections.map(s=>`
+    <div class="hcard" onclick="goSec('${s.id}')">
+      <div class="hc-icon"><svg width="16" height="16" viewBox="0 0 24 24">${icons[s.id]||icons.report}</svg></div>
+      <div class="hc-title">${s.name}</div>
+      <div class="hc-desc">${s.wordLimit} &middot; ${s.marks} marks</div>
+    </div>`).join("");
+}
+function goSec(t){renderQS(t);showS("qselect");}
+function renderQS(type){
+  const d=D();
+  const tm={};d.sectionTypes.forEach(s=>tm[s.id]=s);const sec=tm[type]||{};
+  // Practice: show section name, not exam name
+  document.getElementById("qs-head").textContent=sec.name||type;
+  document.getElementById("qs-sub").textContent=(sec.wordLimit||"")+" · "+(sec.marks||"")+" marks — Practice Mode";
+  // Tabs: all section types
+  document.getElementById("sec-tabs").innerHTML=d.sectionTypes.map(s=>`<button class="stab ${s.id===type?"on":""}" onclick="renderQS('${s.id}')">${s.name}</button>`).join("");
+  document.getElementById("timer-box").style.display=sec.noTimer?"block":"none";
+  document.querySelectorAll(".tob").forEach(b=>b.classList.remove("on"));
+  document.querySelector("[data-v='default']").classList.add("on");
+  document.getElementById("cust-row").classList.remove("show");tMode="default";
+  // Show up to 20 questions for practice
+  const qs=d.questions.filter(q=>q.type===type&&q.active).slice(0,20);
+  document.getElementById("q-list").innerHTML=qs.length===0?"<div class='empty-q'>No questions yet for this section. Add questions in the Admin panel.</div>":qs.map((q,i)=>`<div class="q-item" onclick="launchExam('${q.id}')"><div class="q-n">Q${i+1}</div><div><div class="q-prev">${q.text.split("\n")[0].substring(0,130)}...</div><div class="chips"><span class="chip">${q.wordLimit}</span><span class="chip">${q.marks} marks</span><span class="chip">${q.difficulty||"medium"}</span></div></div></div>`).join("");
+}
+function setTO(btn,v){document.querySelectorAll(".tob").forEach(b=>b.classList.remove("on"));btn.classList.add("on");tMode=v;document.getElementById("cust-row").classList.toggle("show",v==="custom");}
+function launchExam(qid){
+  const d=D();CQ=d.questions.find(q=>q.id===qid);if(!CQ)return;
+  const tm={};d.sectionTypes.forEach(s=>tm[s.id]=s);const sec=tm[CQ.type]||{timer:10};
+  let mins=sec.timer||10;if(tMode==="none")mins=0;else if(tMode==="custom")mins=parseInt(document.getElementById("cust-mins").value)||10;
+  document.getElementById("exam-type-lbl").textContent=(tm[CQ.type]?.name||"").toUpperCase();
+  document.getElementById("exam-wl").textContent=CQ.wordLimit;
+  document.getElementById("exam-qtext").textContent=CQ.text;
+  document.getElementById("exam-qmeta").innerHTML=`<span class="chip">${CQ.wordLimit}</span><span class="chip">${CQ.marks} marks</span>`;
+  const ta=document.getElementById("exam-ta");ta.value="";tyStarted=false;tStart=null;
+  updWC("exam-ta","exam-wc","exam-wc-top","exam-pwc");
+  clearInterval(TI);clearInterval(WI);
+  startTimer(mins*60,"exam-timer","exam-prog",()=>submitSingle());
+  WI=setInterval(()=>calcWPM("exam-ta","exam-wpm"),2000);
+  ta.oninput=()=>{if(!tyStarted){tyStarted=true;tStart=Date.now();}updWC("exam-ta","exam-wc","exam-wc-top","exam-pwc");calcWPM("exam-ta","exam-wpm");};
+  showS("exam");setTimeout(()=>ta.focus(),300);
+}
+function startTimer(sec,tid,bid,onEnd){
+  clearInterval(TI);tLeft=sec;tTotal=sec;
+  if(sec===0){document.getElementById(tid).textContent="inf";return;}
+  tickT(tid,bid);
+  TI=setInterval(()=>{tLeft--;tickT(tid,bid);if(tLeft<=0){clearInterval(TI);if(onEnd)onEnd();}},1000);
+}
+function tickT(tid,bid){
+  const m=Math.floor(tLeft/60),s=tLeft%60;
+  document.getElementById(tid).textContent=String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+  if(bid){const p=tTotal>0?(tLeft/tTotal)*100:100;const b=document.getElementById(bid);b.style.width=p+"%";b.style.background=p>40?"var(--accent)":p>15?"var(--amber)":"var(--red)";}
+}
+function cw(t){return t.trim()===""?0:t.trim().split(/\s+/).length;}
+function updWC(ta,wc,top,panel){const v=cw(document.getElementById(ta).value);[wc,top].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent=v;});const pe=document.getElementById(panel);if(pe)pe.textContent=v+" words";}
+function calcWPM(ta,wid){if(!tStart||!tyStarted)return;const e=(Date.now()-tStart)/60000,v=cw(document.getElementById(ta).value);const el=document.getElementById(wid);if(el)el.textContent=e>0?Math.round(v/e):0;}
+async function submitSingle(){
+  clearInterval(TI);clearInterval(WI);
+  const ans=document.getElementById("exam-ta").value.trim();
+  const taken=tTotal>0?tTotal-tLeft:Math.round((Date.now()-(tStart||Date.now()))/1000);
+  const wc=cw(ans),el=tyStarted&&tStart?(Date.now()-tStart)/60000:1,wpm=el>0?Math.round(wc/el):0;
+  showResult(ans,wc,wpm,taken);showS("result");await runAI(ans,wc,wpm);
+}
+let _pendingMockExamId=null;
+function startFullMockFor(examId){
+  const d=D();
+  const ex=d.exams.find(e=>e.id===examId);
+  if(!ex){alert("Exam not found.");return;}
+  _pendingMockExamId=examId;
+  // Show instructions popup
+  document.getElementById("mock-instr-title").textContent="📋 "+ex.name+" — Instructions";
+  document.getElementById("mock-instr-cov").classList.add("open");
+}
+function startMockAfterInstr(){
+  document.getElementById("mock-instr-cov").classList.remove("open");
+  const examId=_pendingMockExamId;_pendingMockExamId=null;
+  const d=D();
+  const ex=d.exams.find(e=>e.id===examId);
+  if(!ex){alert("Exam not found.");return;}
+  MS.currentExam=ex;
+  const tm={};d.sectionTypes.forEach(s=>tm[s.id]=s);
+  const hasBoth=(ex.sections||[]).includes("report")&&(ex.sections||[]).includes("precis");
+  if(hasBoth){
+    const fixedIds=(ex.sections||[]).filter(s=>s!=="report"&&s!=="precis");
+    const fixed=fixedIds.map(tid=>{
+      const qs=d.questions.filter(q=>q.examId===ex.id&&q.type===tid&&q.active);
+      if(!qs.length)return null;
+      return{typeId:tid,meta:tm[tid]||{},questions:qs,question:null};
+    }).filter(Boolean);
+    if(!fixed.length){alert("No questions available for this exam. Please add questions in the Admin panel.");return;}
+    MS.s=fixed;MS.a={};MS.idx=0;MS.st=null;MS.choiceNeeded=true;
+  } else {
+    const secs=(ex.sections||[]).map(tid=>{
+      const qs=d.questions.filter(q=>q.examId===ex.id&&q.type===tid&&q.active);
+      if(!qs.length)return null;
+      return{typeId:tid,meta:tm[tid]||{},questions:qs,question:null};
+    }).filter(Boolean);
+    if(!secs.length){alert("No questions available for this exam. Please add questions in the Admin panel.");return;}
+    MS.s=secs;MS.a={};MS.idx=0;MS.st=null;MS.choiceNeeded=false;
+  }
+  showQPicker(0);
+}
+
+function showQPicker(secIdx){
+  // For each section, show 2 question options for user to pick
+  const sec=MS.s[secIdx];if(!sec)return;
+  const d=D();
+  const qs=sec.questions||[];
+  if(!qs.length){sec.question=null;proceedAfterPick(secIdx);return;}
+  if(qs.length===1){sec.question=qs[0];proceedAfterPick(secIdx);return;}
+  // Show picker overlay
+  const overlay=document.getElementById("qpick-cov");
+  const title=document.getElementById("qpick-title");
+  const list=document.getElementById("qpick-list");
+  title.textContent="Choose a question — "+(sec.meta.name||sec.typeId);
+  const showQs=qs.slice(0,2);// show max 2
+  list.innerHTML=showQs.map((q,i)=>`
+    <button class="qpick-btn" onclick="pickQ(${secIdx},${i})">
+      <div style="font-size:.62rem;font-family:var(--mono);color:var(--accent);margin-bottom:5px">Option ${i+1}</div>
+      <div style="font-size:.8rem;line-height:1.5;color:var(--t);text-align:left">${q.text.split("\n")[0].substring(0,160)}...</div>
+      <div style="display:flex;gap:5px;margin-top:7px"><span class="chip">${q.wordLimit}</span><span class="chip">${q.marks} marks</span></div>
+    </button>`).join("");
+  overlay.classList.add("open");
+}
+
+function pickQ(secIdx,qIdx){
+  document.getElementById("qpick-cov").classList.remove("open");
+  const sec=MS.s[secIdx];
+  sec.question=sec.questions[qIdx];
+  proceedAfterPick(secIdx);
+}
+
+function proceedAfterPick(secIdx){
+  const nextIdx=secIdx+1;
+  if(nextIdx<MS.s.length){
+    showQPicker(nextIdx);
+  } else {
+    // All sections picked — start the exam
+    startMockExam();
+  }
+}
+
+function startMockExam(){
+  const ex=MS.currentExam;
+  MS.st=Date.now();
+  document.getElementById("mock-total").textContent=MS.s.length;
+  // If SBI PO pattern — add choice-needed placeholder for report/precis
+  if(MS.choiceNeeded){
+    MS.s.push({typeId:"choice",meta:{name:"Report / Precis"},question:null,isChoice:true});
+    document.getElementById("mock-total").textContent=MS.s.length;
+  }
+  clearInterval(TI);startTimer((ex.duration||30)*60,"mock-timer","mock-prog",()=>submitMock());
+  renderMTabs();loadMS(0);showS("fullmock");setTimeout(()=>document.getElementById("mock-ta").focus(),300);
+}
+
+function chooseSection(type){
+  document.getElementById("choice-cov").classList.remove("open");
+  const d=D();const ex=MS.currentExam||EX();if(!ex)return;
+  const tm={};d.sectionTypes.forEach(s=>tm[s.id]=s);
+  const allQs=d.questions.filter(q=>q.examId===ex.id&&q.type===type&&q.active);
+  if(!allQs.length){alert("No "+type+" questions available. Add some in Admin.");return;}
+  // Replace the choice placeholder with 2-option picker
+  const choiceIdx=MS.s.findIndex(s=>s.isChoice);
+  if(choiceIdx>=0){
+    MS.s[choiceIdx]={typeId:type,meta:tm[type]||{},questions:allQs,question:null,isChoice:false};
+    showQPickerChoice(choiceIdx);
+  }
+}
+
+function showQPickerChoice(secIdx){
+  const sec=MS.s[secIdx];const qs=sec.questions||[];
+  if(!qs.length){sec.question=qs[0]||null;loadMS(secIdx);return;}
+  if(qs.length===1){sec.question=qs[0];loadMS(secIdx);return;}
+  const overlay=document.getElementById("qpick-cov");
+  document.getElementById("qpick-title").textContent="Choose a question — "+(sec.meta.name||sec.typeId);
+  const showQs=qs.slice(0,2);
+  document.getElementById("qpick-list").innerHTML=showQs.map((q,i)=>`
+    <button class="qpick-btn" onclick="pickQChoice(${secIdx},${i})">
+      <div style="font-size:.62rem;font-family:var(--mono);color:var(--accent);margin-bottom:5px">Option ${i+1}</div>
+      <div style="font-size:.8rem;line-height:1.5;color:var(--t);text-align:left">${q.text.split("\n")[0].substring(0,160)}...</div>
+      <div style="display:flex;gap:5px;margin-top:7px"><span class="chip">${q.wordLimit}</span><span class="chip">${q.marks} marks</span></div>
+    </button>`).join("");
+  overlay.classList.add("open");
+}
+
+function pickQChoice(secIdx,qIdx){
+  document.getElementById("qpick-cov").classList.remove("open");
+  MS.s[secIdx].question=MS.s[secIdx].questions[qIdx];
+  renderMTabs();loadMS(secIdx);
+}
+function renderMTabs(){
+  document.getElementById("mock-tabs").innerHTML=MS.s.map((s,i)=>{
+    const done=MS.a[i]?.trim()?"done":"";
+    const active=i===MS.idx?"on":"";
+    const name=s.isChoice?"Report / Precis":(s.meta.name||s.typeId);
+    const tag=s.isChoice?'<span style="font-size:.56rem;opacity:.7;margin-left:3px">↓ choose</span>':"";
+    return `<button class="mtab ${active} ${done}" onclick="loadMS(${i})">${name}${tag}</button>`;
+  }).join("");
+}
+function loadMS(idx){
+  const s=MS.s[idx];if(!s)return;MS.idx=idx;
+  renderMTabs();
+  // If this is the choice section, show the choice overlay
+  if(s.isChoice){
+    document.getElementById("choice-cov").classList.add("open");
+    return;
+  }
+  // If question not yet chosen (shouldn't happen but safety check)
+  if(!s.question){
+    if(s.questions&&s.questions.length)showQPickerChoice(idx);
+    return;
+  }
+  document.getElementById("mock-type-lbl").textContent=(s.meta.name||"").toUpperCase();
+  document.getElementById("mock-wl").textContent=s.question.wordLimit;
+  document.getElementById("mock-qtext").textContent=s.question.text;
+  document.getElementById("mock-qmeta").innerHTML=`<span class="chip">${s.question.wordLimit}</span><span class="chip">${s.question.marks} marks</span>`;
+  const ta=document.getElementById("mock-ta");ta.value=MS.a[idx]||"";updMWC();
+  ta.oninput=()=>{MS.a[idx]=ta.value;updMWC();const done=Object.values(MS.a).filter(a=>a.trim()&&!MS.s[parseInt(Object.keys(MS.a).find(k=>MS.a[k]===a))??-1]?.isChoice).length;document.getElementById("mock-done").innerHTML=done+"/<span id='mock-total'>"+(MS.s.filter(s=>!s.isChoice).length)+"</span>";renderMTabs();};
+}
+function updMWC(){const v=cw(document.getElementById("mock-ta").value);document.getElementById("mock-wc").textContent=v;document.getElementById("mock-pwc").textContent=v+" words";}
+async function submitMock(){
+  clearInterval(TI);
+  const idx=parseInt(Object.keys(MS.a).find(i=>MS.a[i]?.trim())||0);
+  const s=MS.s[idx];if(!s){showS("home");return;}CQ=s.question;
+  const ans=MS.a[idx]||"",wc=cw(ans),el=(Date.now()-MS.st)/60000,wpm=el>0?Math.round(wc/el):0;
+  const taken=(EX()?.duration||30)*60-tLeft;
+  showResult(ans,wc,wpm,taken);showS("result");await runAI(ans,wc,wpm);
+}
+function showResult(ans,wc,wpm,taken){
+  const d=D(),tm={};d.sectionTypes.forEach(s=>tm[s.id]=s);
+  document.getElementById("r-sub").textContent=(tm[CQ?.type]?.name||"")+" · "+(CQ?.wordLimit||"");
+  document.getElementById("r-words").textContent=wc;document.getElementById("r-wpm").textContent=wpm;
+  const mm=Math.floor(taken/60),ss=taken%60;document.getElementById("r-time").textContent=mm+"m "+ss+"s";
+  document.getElementById("r-score").textContent="...";
+  document.getElementById("r-ans").textContent=ans||"(No answer submitted)";
+  document.getElementById("r-model").textContent=CQ?.modelAnswer||"";
+  document.getElementById("r-ai").innerHTML='<div class="loading-row"><div class="spin"></div>Evaluating...</div>';
+  document.getElementById("sbars").innerHTML="";
+}
+async function runAI(ans,wc,wpm){
+  const d=D(),cfg=d.siteSettings||{},q=CQ;if(!q)return;
+  const tm={};d.sectionTypes.forEach(s=>tm[s.id]=s);
+  const typeName=tm[q.type]?.name||q.type,max=q.marks;
+  const ep=cfg.apiProxy||"https://api.anthropic.com/v1/messages";
+  const sys="You are an expert SBI PO Mains Descriptive Paper evaluator. Evaluate strictly as per the 2026 new pattern. Respond ONLY with valid JSON - no markdown, no preamble.";
+  const p=`TYPE: ${typeName}\nWORD LIMIT: ${q.wordLimit}\nMAX MARKS: ${max}\nQUESTION: ${q.text}\nANSWER: ${ans||"(blank)"}\nWORDS: ${wc} | WPM: ${wpm}\n\nEvaluate on 4 params each out of ${Math.round(max/4)}: Content and Relevance, Structure and Format, Language and Grammar, Word Limit Adherence.\n\nReturn ONLY JSON: {"totalScore":<n>,"parameters":[{"name":"Content & Relevance","score":<n>,"max":${Math.round(max/4)},"comment":"<1 sentence>"},{"name":"Structure & Format","score":<n>,"max":${Math.round(max/4)},"comment":"<1 sentence>"},{"name":"Language & Grammar","score":<n>,"max":${Math.round(max/4)},"comment":"<1 sentence>"},{"name":"Word Limit","score":<n>,"max":${Math.round(max/4)},"comment":"<1 sentence>"}],"strengths":["<pt>","<pt>"],"improvements":["<pt>","<pt>","<pt>"],"overallVerdict":"<2-3 sentences>","typingFeedback":"<1 sentence on ${wpm} WPM>"}`;
+  try{
+    const res=await fetch(ep,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:1000,system:sys,messages:[{role:"user",content:p}]})});
+    const data=await res.json();if(data.error)throw new Error(data.error.message);
+    const result=JSON.parse(data.content.map(i=>i.text||"").join("").replace(/```json|```/g,"").trim());
+    renderAI(result,max);
+  }catch(e){document.getElementById("r-ai").innerHTML='<div class="ai-notice"><strong>AI evaluation not configured.</strong> Set up a Cloudflare Worker and add the URL in Admin to enable scoring.</div>';}
+}
+function renderAI(result,max){
+  const pct=Math.round((result.totalScore/max)*100);
+  document.getElementById("r-score").textContent=result.totalScore+"/"+max;
+  document.getElementById("sbars").innerHTML=result.parameters.map(p=>{const p100=Math.round((p.score/p.max)*100),col=p100>=70?"var(--green)":p100>=45?"var(--amber)":"var(--red)";return`<div class="sbar"><div class="sbar-top"><span>${p.name}</span><span>${p.score}/${p.max}</span></div><div class="sbar-track"><div class="sbar-fill" style="width:${p100}%;background:${col}"></div></div><div class="sbar-note">${p.comment}</div></div>`;}).join("");
+  const s=(result.strengths||[]).map(x=>`<span class="ftag ftag-g">${x}</span>`).join("");
+  const imp=(result.improvements||[]).map(x=>`<span class="ftag ftag-a">${x}</span>`).join("");
+  document.getElementById("r-ai").innerHTML=`<div style="margin-bottom:13px"><div class="blbl-s" style="margin-bottom:3px">Overall</div><div style="font-family:var(--mono);font-size:1.15rem;color:var(--accent)">${result.totalScore}/${max} <span style="font-size:.72rem;color:var(--t2)">(${pct}%)</span></div></div><div style="margin-bottom:10px"><div class="blbl-s" style="margin-bottom:4px">Strengths</div><div class="ftags">${s||"<span style='font-size:.72rem;color:var(--t2)'>None noted</span>"}</div></div><div style="margin-bottom:10px"><div class="blbl-s" style="margin-bottom:4px">Improve</div><div class="ftags">${imp}</div></div><div class="verdict"><div class="blbl-s">Verdict</div>${result.overallVerdict}</div><div class="verdict" style="margin-top:8px"><div class="blbl-s">Typing Speed</div>${result.typingFeedback}</div>`;
+}
+let tlSec=120;
+function selMode(m){tyMode=m;document.getElementById("tm-given").classList.toggle("on",m==="given");document.getElementById("tm-custom").classList.toggle("on",m==="custom");document.getElementById("paste-sec").style.display=m==="custom"?"block":"none";}
+function setTL(btn,v){document.querySelectorAll(".tl-btn").forEach(b=>b.classList.remove("on"));btn.classList.add("on");tlSec=v;document.getElementById("tl-cust").classList.toggle("show",v===0);}
+function startTyping(){
+  const d=D();
+  if(tyMode==="custom"){tyPara=(document.getElementById("paste-in").value||"").trim();if(tyPara.split(/\s+/).length<15){alert("Please paste at least 15 words.");return;}}
+  else{const p=d.typingParas||[];tyPara=p[Math.floor(Math.random()*p.length)]||"The quick brown fox jumps over the lazy dog.";}
+  tyLim=tlSec===0?(parseInt(document.getElementById("tl-cust-v").value)||90):(tlSec===-1?0:tlSec);
+  document.getElementById("typ-setup").style.display="none";
+  document.getElementById("typ-test").classList.add("show");
+  document.getElementById("typ-res").classList.remove("show");
+  tyStart=null;tyDone=false;tyTStarted=false;tLeft2=tyLim;
+  clearInterval(tyInterval);
+  if(window._tyCountdown){clearInterval(window._tyCountdown);window._tyCountdown=null;}
+  document.getElementById("t-wpm").textContent="0";document.getElementById("t-acc").textContent="100%";document.getElementById("t-cor").textContent="0";
+  document.getElementById("typ-in").value="";document.getElementById("sub-early").classList.remove("show");
+  updRing(tyLim,tyLim);renderWords("");
+  // Start the countdown timer immediately — independent of typing
+  if(tyLim>0){
+    tyStart=Date.now();tyTStarted=true;
+    window._tyCountdown=setInterval(()=>{
+      const elapsed=(Date.now()-tyStart)/1000;
+      tLeft2=Math.max(0,tyLim-elapsed);
+      updRing(tLeft2,tyLim);
+      // Update live stats
+      const currentVal=document.getElementById("typ-in").value;
+      const tw=currentVal.trim().split(/\s+/).filter(w=>w);
+      const pw=tyPara.trim().split(/\s+/);
+      const correct=tw.filter((w,i)=>w===pw[i]).length;
+      const wpm=elapsed>0?Math.round(tw.length/(elapsed/60)):0;
+      const acc=tw.length>0?Math.round((correct/tw.length)*100):100;
+      document.getElementById("t-wpm").textContent=wpm;
+      document.getElementById("t-acc").textContent=acc+"%";
+      document.getElementById("t-cor").textContent=correct;
+      // AUTO SUBMIT when time is up
+      if(elapsed>=tyLim){
+        clearInterval(window._tyCountdown);window._tyCountdown=null;
+        tLeft2=0;updRing(0,tyLim);
+        if(!tyDone){tyDone=true;doFinishTyping(document.getElementById("typ-in").value,tyLim);}
+      }
+    },200);
+  }
+  document.getElementById("typ-in").focus();
+}
+function updRing(left,total){
+  if(total<=0){
+    const r=document.getElementById("ring-f");r.style.strokeDashoffset=0;r.style.stroke="var(--accent)";
+    document.getElementById("ring-txt").textContent="inf";return;
+  }
+  const pct=total>0?left/total:1,circ=106.8,offset=circ*(1-pct);
+  const r=document.getElementById("ring-f");r.style.strokeDashoffset=offset;
+  r.style.stroke=pct>0.4?"var(--accent)":pct>0.15?"var(--amber)":"var(--red)";
+  const s=Math.ceil(left);document.getElementById("ring-txt").textContent=s>=60?Math.ceil(s/60)+"m":s+"s";
+}
+function renderWords(val){
+  const pw=tyPara.split(" "),tw=val.split(" "),ci=tw.length-1;
+  const el=document.getElementById("para-disp");el.innerHTML="";
+  pw.forEach((word,i)=>{
+    const span=document.createElement("span");span.className="pw";span.textContent=word;
+    if(i<tw.length-1)span.classList.add(tw[i]===word?"correct":"wrong");
+    else if(i===ci)span.classList.add("current");
+    el.appendChild(span);if(i<pw.length-1)el.appendChild(document.createTextNode(" "));
+  });
+}
+function onType(){
+  if(tyDone)return;
+  const val=document.getElementById("typ-in").value;
+  // Start elapsed tracking on first keystroke (no-timer mode)
+  if(!tyTStarted&&val.length>0&&tyLim===0){
+    tyTStarted=true;tyStart=Date.now();
+  }
+  renderWords(val);
+  // Count words by splitting on whitespace, ignore empty strings
+  const pwArr=tyPara.trim().split(/\s+/).filter(Boolean);
+  const twArr=val.trim().split(/\s+/).filter(Boolean);
+  // AUTO-SUBMIT: split val WITHOUT trim so the in-progress last word is counted.
+  // "word1 word2 word3"  → 3 tokens (triggers on 1st char of word3)
+  // "word1 word2 "       → 2 tokens (space after word2 does NOT trigger yet)
+  // This means: fires the moment user types the first letter of the Nth word.
+  const rawTokens = val.split(/\s+/).filter(Boolean);
+  // Only submit when last word is fully completed:
+  // Either user typed a space after it, OR the last typed word exactly matches the last para word
+  const lastParaWord = pwArr[pwArr.length - 1] || "";
+  const lastTypedWord = rawTokens[rawTokens.length - 1] || "";
+  const lastWordDone = val.endsWith(" ") || lastTypedWord === lastParaWord;
+  if(rawTokens.length >= pwArr.length && lastWordDone){
+    tyDone=true;
+    if(window._tyCountdown){clearInterval(window._tyCountdown);window._tyCountdown=null;}
+    const elapsed=tyStart?Math.max(1,(Date.now()-tyStart)/1000):(tyLim||1);
+    const pd=document.getElementById("para-disp");
+    pd.style.transition="opacity 0.3s";
+    pd.style.opacity="0.3";
+    setTimeout(()=>{doFinishTyping(val,elapsed);},320);
+  }
+}
+// Single source of truth for showing results
+function doFinishTyping(val,elapsedSec){
+  const elapsed=Math.max(1,elapsedSec||1);
+  const pwArr=tyPara.trim().split(/\s+/).filter(Boolean);
+  const twArr=val.trim().split(/\s+/).filter(Boolean);
+  const correct=twArr.filter((w,i)=>w===pwArr[i]).length;
+  const acc=twArr.length>0?Math.round((correct/twArr.length)*100):0;
+  const wpm=Math.round(twArr.length/(elapsed/60));
+  document.getElementById("typ-test").classList.remove("show");
+  document.getElementById("typ-res").classList.add("show");
+  let grade,color,note;
+  if(wpm>=50&&acc>=95){grade="A+";color="var(--green)";note="Excellent! Speed and accuracy are exam-ready for SBI PO descriptive.";}
+  else if(wpm>=40&&acc>=90){grade="A";color="var(--green)";note="Good performance. Aim to push above 50 WPM consistently.";}
+  else if(wpm>=30&&acc>=85){grade="B";color="var(--accent)";note="Average speed. Practice daily on banking passages to improve.";}
+  else if(wpm>=20){grade="C";color="var(--amber)";note="Speed needs work. Focus on accuracy first, then build speed.";}
+  else{grade="D";color="var(--red)";note="Significant improvement needed. Start with short daily typing sessions.";}
+  document.getElementById("trc-grade").textContent=grade;
+  document.getElementById("trc-grade").style.color=color;
+  document.getElementById("trc-sub").textContent=grade==="A+"||grade==="A"?"Exam ready":"Needs more practice";
+  document.getElementById("trc-wpm").textContent=wpm;
+  document.getElementById("trc-acc").textContent=acc+"%";
+  document.getElementById("trc-time").textContent=Math.round(elapsed)+"s";
+  document.getElementById("trc-note").textContent=note;
+}
+// Manual submit button handler
+function finishTyping(val,manual){
+  if(tyDone)return;
+  tyDone=true;
+  if(window._tyCountdown){clearInterval(window._tyCountdown);window._tyCountdown=null;}
+  const elapsed=tyStart?Math.max(1,(Date.now()-tyStart)/1000):(tyLim||1);
+  doFinishTyping(val,elapsed);
+}
+function resetTyping(){
+  clearInterval(tyInterval);
+  if(window._tyCountdown){clearInterval(window._tyCountdown);window._tyCountdown=null;}
+  if(window._autoSubmitTimer){clearTimeout(window._autoSubmitTimer);window._autoSubmitTimer=null;}
+  tyStart=null;tyTStarted=false;tyDone=false;
+  const pd=document.getElementById("para-disp");if(pd){pd.style.opacity="1";pd.style.transition="";}
+  document.getElementById("typ-res").classList.remove("show");document.getElementById("typ-test").classList.remove("show");
+  document.getElementById("sub-early").classList.remove("show");document.getElementById("typ-setup").style.display="block";
+  document.getElementById("paste-in").value="";selMode("given");
+  document.querySelectorAll(".tl-btn").forEach(b=>b.classList.remove("on"));document.querySelector("[data-tl='120']").classList.add("on");
+  tlSec=120;document.getElementById("tl-cust").classList.remove("show");
+}
+init();
+</script>
+<!-- REPORT/PRECIS CHOICE OVERLAY -->
+<div class="cov" id="choice-cov">
+  <div class="cbox" style="max-width:420px">
+    <div class="cbox-t">Choose your third section</div>
+    <div class="cbox-s">In SBI PO Mains you must attempt <strong style="color:var(--t)">either Report Writing or Precis Writing.</strong> Choose one to continue.</div>
+    <div style="display:flex;flex-direction:column;gap:9px">
+      <button class="btn bp" onclick="chooseSection('report')" style="justify-content:flex-start;padding:12px 16px;font-size:.82rem">
+        <svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        <div style="text-align:left"><div style="font-weight:700">Report Writing</div><div style="font-size:.72rem;opacity:.8;margin-top:1px">100–150 words · Formal banking report</div></div>
+      </button>
+      <button class="btn bg" onclick="chooseSection('precis')" style="justify-content:flex-start;padding:12px 16px;font-size:.82rem;color:var(--t)">
+        <svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><line x1="21" y1="10" x2="3" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="13" y1="18" x2="3" y2="18"/></svg>
+        <div style="text-align:left"><div style="font-weight:700">Precis Writing</div><div style="font-size:.72rem;color:var(--t2);margin-top:1px">~1/3rd of passage · Summarisation skill</div></div>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- MOCK INSTRUCTIONS POPUP -->
+<div class="cov" id="mock-instr-cov">
+  <div class="cbox" style="max-width:500px;text-align:left">
+    <div class="cbox-t" id="mock-instr-title" style="text-align:center">📋 Mock Exam Instructions</div>
+    <div style="margin:14px 0;border:1px solid var(--b);border-radius:var(--rs);overflow:hidden">
+      <div style="background:var(--bg3);padding:10px 14px;font-size:.7rem;font-family:var(--mono);color:var(--accent);text-transform:uppercase;letter-spacing:.08em;border-bottom:1px solid var(--b)">Before you begin</div>
+      <div style="padding:14px;font-size:.8rem;line-height:1.9;color:var(--t2)" id="mock-instr-body">
+        <div>📌 <strong style="color:var(--t)">Sections:</strong> This mock covers all descriptive sections of the exam.</div>
+        <div style="margin-top:6px">⏱️ <strong style="color:var(--t)">Timer:</strong> A single combined countdown timer runs for the full exam duration.</div>
+        <div style="margin-top:6px">✍️ <strong style="color:var(--t)">Question choice:</strong> Each section gives you <strong style="color:var(--accent)">2 questions</strong> — choose one to answer.</div>
+        <div style="margin-top:6px">📝 <strong style="color:var(--t)">Word limits:</strong> Stay within the prescribed word limit for each section.</div>
+        <div style="margin-top:6px">🚫 <strong style="color:var(--t)">No going back:</strong> Once you submit, your answers are final.</div>
+        <div style="margin-top:6px">💡 <strong style="color:var(--t)">Tip:</strong> Manage your time wisely — allocate time per section before starting.</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;justify-content:center">
+      <button class="btn bg" onclick="document.getElementById('mock-instr-cov').classList.remove('open')">Cancel</button>
+      <button class="btn bp" id="mock-instr-ok" onclick="startMockAfterInstr()">I Understand — Start Mock</button>
+    </div>
+  </div>
+</div>
+
+<!-- QUESTION PICKER OVERLAY -->
+<div class="cov" id="qpick-cov">
+  <div class="cbox" style="max-width:580px;width:100%">
+    <div class="cbox-t" id="qpick-title">Choose a question</div>
+    <div class="cbox-s">Pick one of the two options below to attempt in this section.</div>
+    <div id="qpick-list" style="display:flex;flex-direction:column;gap:10px"></div>
+  </div>
+</div>
+
+</body>
+</html>
