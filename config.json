@@ -57,6 +57,14 @@
       "marks": 15,
       "timer": 10,
       "noTimer": true
+    },
+    {
+      "id": "fff",
+      "name": "hhhh",
+      "wordLimit": "55",
+      "marks": 15,
+      "timer": 10,
+      "noTimer": true
     }
   ],
   "exams": [
@@ -82,7 +90,7 @@
       "desc": "",
       "icon": "https://i.postimg.cc/D0TYjg00/state-bank-india-kiosk-banking-registration-apply-sbi-3.png",
       "sections": [
-        "email",
+        "situation",
         "report"
       ]
     }
