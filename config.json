@@ -1,0 +1,157 @@
+{
+  "siteSettings": {
+    "name": "Descriptive Prep Today",
+    "tagline": "Free SBI PO 2026 Practice Platform",
+    "tgLink": "",
+    "tgText": "Join Telegram",
+    "logoUrl": "",
+    "accentColor": "#2563eb",
+    "fontFamily": "Inter",
+    "fontSize": 15,
+    "apiProxy": "",
+    "darkBg": "",
+    "darkText": "",
+    "lightBg": "",
+    "lightText": "",
+    "homeEyebrow": "Free Practice Platform",
+    "homeTitle": "SBI PO Descriptive\nPractice 2026",
+    "homeSub": "Exam-pattern interface · AI evaluation · Model answers · Typing speed tracker. No registration. No cost. Just practice.",
+    "practiceSectionLabel": "Practice Sections",
+    "toolsLabel": "Tools",
+    "typingCardTitle": "Typing Speed Test",
+    "typingCardDesc": "Check your WPM and accuracy. Use a given paragraph or paste your own text.",
+    "typingHeading": "Typing Speed Test",
+    "typingSubhead": "Test your words per minute and accuracy before the exam",
+    "tgStripTitle": "Get daily questions on Telegram",
+    "tgStripSub": "Free PDFs, updates and practice material"
+  },
+  "sectionTypes": [
+    {
+      "id": "email",
+      "name": "Email Writing",
+      "wordLimit": "150–200 words",
+      "marks": 20,
+      "timer": 10,
+      "noTimer": true
+    },
+    {
+      "id": "situation",
+      "name": "Situation Analysis",
+      "wordLimit": "100–150 words",
+      "marks": 15,
+      "timer": 10,
+      "noTimer": true
+    },
+    {
+      "id": "report",
+      "name": "Report Writing",
+      "wordLimit": "100–150 words",
+      "marks": 15,
+      "timer": 10,
+      "noTimer": true
+    },
+    {
+      "id": "precis",
+      "name": "Precis Writing",
+      "wordLimit": "~1/3rd of passage",
+      "marks": 15,
+      "timer": 10,
+      "noTimer": true
+    },
+    {
+      "id": "fff",
+      "name": "hhhh",
+      "wordLimit": "55",
+      "marks": 15,
+      "timer": 10,
+      "noTimer": true
+    }
+  ],
+  "exams": [
+    {
+      "id": "sbi_po",
+      "name": "SBI PO Mains 2026",
+      "duration": 30,
+      "status": "active",
+      "desc": "New pattern — Email, Situation Analysis, Report, Precis",
+      "icon": "https://i.postimg.cc/D0TYjg00/state-bank-india-kiosk-banking-registration-apply-sbi-3.png",
+      "sections": [
+        "email",
+        "situation",
+        "report",
+        "precis"
+      ]
+    },
+    {
+      "id": "exam_1781838707550",
+      "name": "IBPS PO Mains 2026",
+      "duration": 30,
+      "status": "active",
+      "desc": "",
+      "icon": "https://i.postimg.cc/D0TYjg00/state-bank-india-kiosk-banking-registration-apply-sbi-3.png",
+      "sections": [
+        "situation",
+        "report"
+      ]
+    }
+  ],
+  "typingParas": [
+    "Financial inclusion remains one of India's most pressing developmental challenges. Despite significant progress, a large section of the population continues to lack access to formal banking services. The Pradhan Mantri Jan Dhan Yojana has been a landmark initiative, bringing millions of unbanked households into the formal financial fold. However, merely opening bank accounts does not guarantee meaningful financial inclusion.",
+    "The Reserve Bank of India plays a pivotal role in maintaining monetary stability and regulating the banking sector. Its primary objectives include controlling inflation, managing foreign exchange reserves, and ensuring the smooth functioning of the payment and settlement system. The RBI also acts as the banker to the government and formulates policies that influence the flow of credit in the economy."
+  ],
+  "offers": [
+    {
+      "title": "Guidely sbi po moks",
+      "badge": "tes kddff l",
+      "desc": "dfkkbddf",
+      "coupon": "PAW12",
+      "link": "www.google.com"
+    }
+  ],
+  "questions": [
+    {
+      "id": "q1",
+      "examId": "sbi_po",
+      "type": "email",
+      "text": "You are a PO at SBI. A customer Mr. Ramesh Gupta has complained that his net banking access has been blocked for 3 days. Write a formal email explaining the reason (scheduled maintenance) and the resolution timeline.",
+      "wordLimit": "150–200 words",
+      "marks": 20,
+      "difficulty": "medium",
+      "modelAnswer": "To: ramesh.gupta@email.com\nSubject: Resolution of Net Banking Access Issue\n\nDear Mr. Gupta,\n\nI sincerely apologise for the disruption to your net banking services. The temporary suspension was due to scheduled server maintenance from 14th to 16th June 2026. Your access has been fully restored.\n\nPlease reset your password via \"Forgot Password\" if you face difficulty. For assistance call 1800-11-2211.\n\nYours sincerely,\n[Your Name] | Probationary Officer, SBI",
+      "active": true
+    },
+    {
+      "id": "q2",
+      "examId": "sbi_po",
+      "type": "situation",
+      "text": "You are a PO at a semi-urban SBI branch. Mrs. Kamla Devi (72) reports she shared her OTP with a fraudster and ₹45,000 was debited. She is in tears. Describe your immediate steps.",
+      "wordLimit": "100–150 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "modelAnswer": "I would calm Mrs. Kamla Devi and offer her a seat. I would immediately block her debit card and help her call 1800-11-2211 to report the fraud. I would assist in filing a branch complaint and guide her to cybercrime.gov.in. I would explain the RBI Zero Liability policy and educate her about never sharing OTPs with anyone.",
+      "active": true
+    },
+    {
+      "id": "q3",
+      "examId": "sbi_po",
+      "type": "report",
+      "text": "You participated in a Financial Literacy Camp in village Rampur on 5th June 2026. Write a formal report to your Branch Manager.",
+      "wordLimit": "100–150 words",
+      "marks": 15,
+      "difficulty": "easy",
+      "modelAnswer": "REPORT ON FINANCIAL LITERACY CAMP — RAMPUR\n\nDate: 6th June 2026\nTo: Branch Manager, SBI\n\nA camp was held at Gram Panchayat Hall on 5th June 2026. Topics covered: PMJDY, RuPay card, UPI, and fraud awareness. 180 villagers attended; 42 new accounts opened.\n\nRecommendation: Continue monthly camps and deploy a Business Correspondent.\n\n[Your Name] | PO",
+      "active": true
+    },
+    {
+      "id": "q4",
+      "examId": "sbi_po",
+      "type": "precis",
+      "text": "Read the passage and write a precis in ~100 words.\n\n\"Financial inclusion remains one of India's most pressing challenges. Despite PMJDY bringing millions into formal banking, merely opening accounts is not enough. Active usage for credit, savings, insurance and remittances is the real measure of inclusion. Financial literacy, digital infrastructure and trust in banking institutions must be strengthened simultaneously.\"",
+      "wordLimit": "~100 words",
+      "marks": 15,
+      "difficulty": "easy",
+      "modelAnswer": "Financial inclusion remains a major challenge in India. While PMJDY has brought millions into the banking system, account ownership alone is insufficient. True inclusion requires active usage for savings, credit, insurance and transfers. Achieving this depends on strengthening financial literacy, expanding digital infrastructure and building public trust in banking institutions.",
+      "active": true
+    }
+  ]
+}
