@@ -4,7 +4,7 @@
     "tagline": "Free SBI PO 2026 Practice Platform",
     "tgLink": "",
     "tgText": "Join Telegram",
-    "logoUrl": "",
+    "logoUrl": "https://i.postimg.cc/rpyxqZZW/Untitled-June-14-2026-at-10-51-00.png",
     "accentColor": "#2563eb",
     "fontFamily": "Inter",
     "fontSize": 15,
@@ -23,7 +23,9 @@
     "typingHeading": "Typing Speed Test",
     "typingSubhead": "Test your words per minute and accuracy before the exam",
     "tgStripTitle": "Get daily questions on Telegram",
-    "tgStripSub": "Free PDFs, updates and practice material"
+    "tgStripSub": "Free PDFs, updates and practice material",
+    "logoUrlDark": "https://i.postimg.cc/rpyxqZZW/Untitled-June-14-2026-at-10-51-00.png",
+    "logoUrlLight": "https://i.postimg.cc/Vs2qXRvF/Untitled-June-14-2026-at-10-49-05.png"
   },
   "sectionTypes": [
     {
