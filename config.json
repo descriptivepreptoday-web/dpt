@@ -25,7 +25,8 @@
     "tgStripTitle": "Get daily questions on Telegram",
     "tgStripSub": "Free PDFs, updates and practice material",
     "logoUrlDark": "https://i.postimg.cc/rpyxqZZW/Untitled-June-14-2026-at-10-51-00.png",
-    "logoUrlLight": "https://i.postimg.cc/Vs2qXRvF/Untitled-June-14-2026-at-10-49-05.png"
+    "logoUrlLight": "https://i.postimg.cc/Vs2qXRvF/Untitled-June-14-2026-at-10-49-05.png",
+    "offersMsg": "hi"
   },
   "sectionTypes": [
     {
@@ -108,6 +109,14 @@
       "desc": "dfkkbddf",
       "coupon": "PAW12",
       "link": "www.google.com"
+    },
+    {
+      "title": "huh",
+      "badge": "kj",
+      "desc": "kk",
+      "coupon": "nm",
+      "link": "kl",
+      "logoUrl": ""
     }
   ],
   "questions": [
