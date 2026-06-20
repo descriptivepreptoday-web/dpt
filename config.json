@@ -71,9 +71,21 @@
     {
       "id": "essay",
       "name": "Essay Writing",
-      "wordLimit": "250",
+      "wordLimit": "250-300 words",
       "marks": 15,
-      "timer": 15,
+      "timer": 18,
+      "noTimer": true,
+      "key": "essay",
+      "icon": "🖋️"
+    },
+    {
+      "id": "comprehension",
+      "name": "Comprehension",
+      "key": "comprehension",
+      "wordLimit": "~120-150 words (short answers)",
+      "marks": 10,
+      "timer": 12,
+      "icon": "📖",
       "noTimer": true
     }
   ],
@@ -81,10 +93,10 @@
     {
       "id": "sbi_po",
       "name": "SBI PO Mains 2026",
+      "key": "sbi_po",
       "duration": 30,
       "status": "active",
       "desc": "New pattern — No essay writing",
-      "icon": "https://i.postimg.cc/D0TYjg00/state-bank-india-kiosk-banking-registration-apply-sbi-3.png",
       "sections": [
         "email",
         "situation",
@@ -97,12 +109,12 @@
       "name": "IBPS PO Mains 2026",
       "duration": 30,
       "status": "active",
-      "desc": "Descriptive paper — Letter & Essay",
-      "icon": "https://i.postimg.cc/tRkWNqxx/ibps-logo.png",
+      "desc": "New pattern — Essay & Comprehension (25 marks, Letter Writing removed)",
       "sections": [
-        "email",
-        "essay"
-      ]
+        "essay",
+        "comprehension"
+      ],
+      "key": "ibps_po"
     }
   ],
   "questions": [
@@ -153,50 +165,51 @@
     {
       "id": "q5",
       "examId": "ibps_po",
-      "type": "letter",
-      "text": "You are a customer of Punjab National Bank. You have been wrongly charged a processing fee of ₹2,500 for a loan you did not apply for. Write a formal letter to the Branch Manager requesting a refund and explanation.",
-      "wordLimit": "150–200 words",
-      "marks": 20,
+      "type": "essay",
+      "text": "Write an essay in about 250–300 words on the following topic:\n\n\"Digital Banking and Financial Inclusion: Opportunities and Challenges in India.\"",
+      "wordLimit": "250-300 words",
+      "marks": 15,
       "difficulty": "medium",
-      "modelAnswer": "To,\nThe Branch Manager\nPunjab National Bank\n[Branch Address]\n\nDate: 10th June 2026\n\nSubject: Request for Refund of Wrongly Charged Processing Fee — Account No. XXXX1234\n\nRespected Sir/Madam,\n\nI am writing to bring to your attention an erroneous debit of ₹2,500 from my savings account (No. XXXX1234) on 8th June 2026, shown as a loan processing fee. I wish to clarify that I have not applied for any loan with your branch, nor have I authorised any such transaction.\n\nI request you to kindly investigate this matter at the earliest and arrange for an immediate reversal of ₹2,500 to my account. I also request a written explanation of how this charge was applied without my consent.\n\nI trust that this matter will be resolved promptly. Please feel free to contact me at [mobile number].\n\nYours faithfully,\n[Your Name]\n[Account Number]\n[Contact Details]",
+      "modelAnswer": "India has witnessed a remarkable shift towards digital banking over the past decade, driven by initiatives such as the Pradhan Mantri Jan Dhan Yojana, the Unified Payments Interface (UPI), and the spread of affordable smartphones and internet connectivity. This transformation has opened up unprecedented opportunities to extend formal financial services to previously unbanked populations, particularly in rural and semi-urban areas.\n\nUPI alone processes billions of transactions every month, allowing even small vendors and farmers to receive payments instantly without visiting a branch. Digital lending platforms have made credit accessible to small businesses lacking traditional collateral, while mobile-based insurance and investment products have widened the reach of financial planning to first-time users.\n\nHowever, several challenges limit the full potential of this shift. Digital literacy remains uneven, with many elderly and rural users struggling to navigate banking apps confidently. Cybersecurity threats, including phishing and OTP fraud, disproportionately affect first-time digital users unfamiliar with safe practices. Connectivity gaps in remote regions further continue to exclude a significant section of the population.\n\nTo address this, banks must invest in vernacular-language interfaces, simplified user experiences, and continuous financial literacy campaigns run with local self-help groups and Business Correspondents. Strengthening cybersecurity awareness and grievance redressal is equally important to build trust.\n\nIn conclusion, while digital banking has significantly advanced financial inclusion in India, true inclusion will only be achieved when access is matched by usage, trust and safety — a balance of technology, education and protection.",
       "active": true
     },
     {
       "id": "q_1781760136257",
-      "examId": "sbi_po",
-      "type": "essay",
-      "text": "dfasdvdfgfgf",
-      "modelAnswer": "assdfgafgfgsfgdfdfd",
-      "wordLimit": "100",
-      "marks": 20,
+      "examId": "ibps_po",
+      "type": "comprehension",
+      "text": "Read the passage and answer the questions that follow in your own words.\n\n\"The Unified Payments Interface (UPI) has emerged as one of the most successful digital payment innovations in the world, processing billions of transactions every month across India. Launched in 2016 by the National Payments Corporation of India, UPI allows users to transfer money instantly between bank accounts using just a mobile number or a virtual payment address, without sharing sensitive banking details. Its real-time nature, zero transaction cost for small payments, and interoperability across banks and apps have made it the preferred mode of payment for millions of Indians, from large retailers to roadside vendors. The success of UPI has drawn international attention, with several countries exploring similar real-time payment systems or partnering with India to enable UPI-based transactions for tourists and businesses abroad. However, experts caution that the rapid growth of digital payments must be matched by stronger fraud prevention measures, as cybercriminals increasingly target inexperienced users through fake payment requests and phishing links.\"\n\n(a) What does UPI allow users to do, and what information is required to make a transfer? (2 marks)\n(b) Name two factors that have made UPI the preferred mode of payment in India. (2 marks)\n(c) How has UPI's success been recognised beyond India's borders? (2 marks)\n(d) What concern do experts raise regarding the rapid growth of digital payments? (2 marks)\n(e) Find one word from the passage that means \"the quality of being able to work together across different systems.\" (2 marks)",
+      "modelAnswer": "(a) UPI allows users to transfer money instantly between bank accounts using only a mobile number or virtual payment address, without sharing sensitive banking details.\n(b) Its real-time nature and zero transaction cost for small payments, along with interoperability across banks and apps, have made it the preferred payment mode.\n(c) Several countries are exploring similar real-time payment systems or partnering with India to enable UPI-based transactions for tourists and businesses abroad.\n(d) Experts caution that growth must be matched by stronger fraud prevention measures, as cybercriminals target inexperienced users through fake payment requests and phishing links.\n(e) Interoperability.",
+      "wordLimit": "~120-150 words (short answers)",
+      "marks": 10,
       "difficulty": "medium",
       "active": true
     },
     {
-      "id": "q_1781869267383",
-      "examId": "sbi_po",
-      "type": "email",
-      "text": "You are working as a branch manager in Saharanpur branch of ABC Bank. One of\nyour customers, Mr. Shinde has sent a mail to the branch mail id asking for transfer of his\naccounts from your branch to Cochin branch of your bank. You have done the task. Please\ndo send a reply to him.",
-      "modelAnswer": "Email address: e mail of Mr Shinde\nCC: branch e mail of Cochin branch\nSubject: Transfer of Accounts\nDear Sir,\nNamaste / Greetings from ABC Bank.\nWe acknowledge receipt of your email dated DD/MM/YYYY requesting for transfer of your\naccounts to our Cochin branch.\nWe are pleased to inform you that the following accounts have been transferred to Cochin\nBranch Name on DD/MM/YYYY.\ni. Savings Account No xxxxxx\nii. Fixed Deposit Account No xxxxxx\n2. We value your relationship with us. In case of any query or further information, please\nget in touch with Mr. Branch Manager of Cochin branch (, Cochin branch e mail id and\nContact No).\n3. We thank you for banking with us and assure you our best services.\nWith regards,\n< Name>\n<Branch Manager>\n<Saharanpur Branch>\n< Address in Short with City and pin code >\n<Contact details>",
-      "wordLimit": "150",
-      "marks": 20,
+      "id": "q9",
+      "examId": "ibps_po",
+      "type": "essay",
+      "text": "Write an essay in about 250–300 words on the following topic:\n\n\"Artificial Intelligence in Banking: Transforming Customer Service and Risk Management.\"",
+      "wordLimit": "250-300 words",
+      "marks": 15,
       "difficulty": "medium",
+      "modelAnswer": "Artificial Intelligence is rapidly reshaping the banking sector, fundamentally altering how financial institutions interact with customers and manage risk. From chatbots handling routine queries around the clock to algorithms detecting fraudulent transactions in real time, AI has become central to modern banking operations.\n\nIn customer service, AI-powered virtual assistants now resolve a large share of routine queries instantly, freeing human staff to focus on complex grievances and relationship management. Personalised product recommendations based on a customer's transaction history have improved cross-selling while enhancing satisfaction. Voice and chat interfaces in regional languages are also making banking more accessible to non-English speaking customers.\n\nOn the risk management front, AI models analyse vast volumes of transaction data to identify unusual patterns indicative of fraud, often flagging suspicious activity within seconds — far faster than traditional rule-based systems. Credit scoring has similarly benefited, with machine learning models incorporating alternative data such as utility payments to assess creditworthiness for customers without a formal credit history.\n\nDespite these benefits, AI adoption raises concerns. Algorithmic bias can disadvantage certain customer segments if training data is not carefully curated. Over-reliance on automated decisions may reduce human oversight in sensitive cases, while data privacy remains a persistent challenge as more customer information is processed.\n\nGoing forward, banks must adopt AI responsibly — ensuring transparency, regular algorithm audits, and robust data protection. Deployed thoughtfully, AI can make banking more efficient, inclusive and secure for millions of customers across India.",
+      "active": true
+    },
+    {
+      "id": "q10",
+      "examId": "ibps_po",
+      "type": "comprehension",
+      "text": "Read the passage and answer the questions that follow in your own words.\n\n\"Climate finance has become a critical pillar of India's strategy to meet its net-zero emissions target by 2070. Banks and financial institutions are increasingly directing credit towards renewable energy projects, electric vehicle infrastructure, and sustainable agriculture, often supported by concessional lending rates and government-backed guarantee schemes. The Reserve Bank of India has encouraged banks to factor climate-related financial risks into their lending decisions, recognising that extreme weather events can affect borrowers' ability to repay loans, particularly in agriculture-dependent regions. Green bonds, which raise funds specifically for environmentally beneficial projects, have gained popularity among public sector banks and private corporations seeking to diversify funding sources while demonstrating environmental commitment. Despite this progress, experts note that climate finance in India remains a fraction of what is required to meet stated targets, and call for clearer regulatory frameworks, standardised green taxonomies, and greater private sector participation to bridge the funding gap.\"\n\n(a) What is India's stated net-zero emissions target year? (2 marks)\n(b) Name two sectors towards which banks are increasingly directing credit. (2 marks)\n(c) Why has the RBI encouraged banks to factor climate-related risks into lending decisions? (2 marks)\n(d) What is the purpose of green bonds, as described in the passage? (2 marks)\n(e) According to experts, what is needed to bridge India's climate finance gap? (2 marks)",
+      "wordLimit": "~120-150 words (short answers)",
+      "marks": 10,
+      "difficulty": "medium",
+      "modelAnswer": "(a) 2070.\n(b) Renewable energy projects and electric vehicle infrastructure (or sustainable agriculture).\n(c) Because extreme weather events can affect borrowers' ability to repay loans, particularly in agriculture-dependent regions.\n(d) Green bonds raise funds specifically for environmentally beneficial projects, helping issuers diversify funding sources while showing environmental commitment.\n(e) Clearer regulatory frameworks, standardised green taxonomies, and greater private sector participation.",
       "active": true
     }
   ],
   "typingParas": [
     "Success comes from consistent effort, not sudden motivation. Every day offers a chance to improve skills, learn something new, and move closer to goals through patience, discipline, and persistence.",
-    "In 2025, a group of college students founded Greenovation, a startup focused on developing sustainable packaging solutions. Their mission was to reduce plastic waste by 80% and offer eco-friendly alternatives to businesses. With a $50,000 grant from a local incubator, they began researching and prototyping biodegradable materials. After two years of relentless work and numerous setbacks, they secured a contract with a major retailer. Greenovation's packaging replaced 10 million plastic containers in the first year alone. The company's rapid growth attracted investors, and they soon expanded their product line to include compostable cutlery and reusable shopping bags. Greenovation became a leading force in the sustainability movement, proving that profit and purpose can go hand in hand.",
-    "Success is built on patience and consistent daily effort. As your fingers glide across the keyboard, focus completely on your rhythm and accuracy rather than speed. Every keystroke is a step toward mastering a new skill, so trust your muscle memory, breathe deeply, and believe in your ability to achieve your goals today!"
-  ],
-  "offers": [
-    {
-      "title": "All in One PDF Course Subscription",
-      "badge": "",
-      "desc": "Special Offer Price\n368",
-      "coupon": "yhu",
-      "link": "www.google.com",
-      "logoUrl": "https://i.postimg.cc/Vs2qXRvF/Untitled-June-14-2026-at-10-49-05.png"
-    }
+    "The Mains Examination covers various topics from reasoning and computer aptitude, English language, Data Analysis & Interpretation, and general/economy/banking awareness. Computer Aptitude is a part of the Reasoning section in the mains exam. The subject-wise topics that need to be covered for preparing for the SBI PO 2026 Mains Exam have been listed below.",
+    "SBI PO Descriptive Test is a part of the mains examination. It is based on two questions for 50 marks for 30 minutes. It is a Test of English Language (Letter Writing & Essay). Besides the preliminary exam and the main exam, an interview process is also conducted for candidates who qualify for the first two phases of the SBI PO exam. The final merit list is made based on marks obtained by a candidate in his/ her main exam and interview process."
   ]
 }
