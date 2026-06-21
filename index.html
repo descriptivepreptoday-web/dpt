@@ -536,6 +536,15 @@ async function init(){
   // Also try live config.json from server
   try{const r=await fetch("./config.json?v="+Date.now(),{cache:"no-store"});if(r.ok){const d=await r.json();if(d&&d.siteSettings){const ls=localStorage.getItem("dpt_data");const prev=ls?JSON.parse(ls):{};d.siteSettings.apiProxy=d.siteSettings.apiProxy||prev.siteSettings?.apiProxy||"";localStorage.setItem("dpt_data",JSON.stringify(d));}}}catch(e){}
   renderHome();
+  // Restore screen from URL on load/refresh, where it's safe to do so.
+  // Stateful screens (exam/fullmock/result) can't be restored after a hard
+  // refresh since their in-memory data is gone, so those fall back to home.
+  const startId=location.hash?location.hash.slice(1):"home";
+  if(startId!=="home"&&document.getElementById(startId)&&!STATEFUL_SCREENS.has(startId)){
+    showS(startId,{replace:true});
+  }else{
+    history.replaceState({screen:"home"},"","#home");
+  }
 }
 function applyTheme(t,save=true){
   document.documentElement.setAttribute("data-theme",t);
@@ -556,7 +565,62 @@ function updateLogo(t){
 function setFS(v,save=true){document.documentElement.style.setProperty("--fs",v+"px");if(save)localStorage.setItem("dpt_font",v);}
 function toggleP(id,e){e.stopPropagation();const el=document.getElementById(id);el.classList.toggle("open");["fp","tp"].filter(x=>x!==id).forEach(x=>document.getElementById(x).classList.remove("open"));}
 document.addEventListener("click",()=>{["fp","tp"].forEach(id=>document.getElementById(id).classList.remove("open"));});
-function showS(id){document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));document.getElementById(id).classList.add("active");window.scrollTo(0,0);["fp","tp"].forEach(id=>document.getElementById(id).classList.remove("open"));}
+// ---- SPA routing: keeps Back/Refresh on the site instead of leaving it ----
+// Screens that depend on live in-memory state (current question/mock progress).
+// A hard refresh loses that state, so on reload we land somewhere safe instead
+// of pretending to restore an exam/mock that no longer has data behind it.
+const STATEFUL_SCREENS=new Set(["exam","fullmock","result"]);
+let _routing=false; // guards against showS() re-triggering its own popstate handling
+function showS(id,opts){
+  opts=opts||{};
+  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+  const el=document.getElementById(id);
+  if(!el){showS("home");return;}
+  el.classList.add("active");
+  window.scrollTo(0,0);
+  ["fp","tp"].forEach(pid=>document.getElementById(pid).classList.remove("open"));
+  if(!_routing){
+    const hash="#"+id;
+    if(opts.replace||location.hash===hash){
+      history.replaceState({screen:id},"",hash);
+    }else{
+      history.pushState({screen:id},"",hash);
+    }
+  }
+}
+window.addEventListener("popstate",e=>{
+  const wasActive=document.querySelector(".screen.active");
+  const fromId=wasActive&&wasActive.id;
+  const toId=(e.state&&e.state.screen)||(location.hash?location.hash.slice(1):"home");
+  // If the user hits Back while mid-exam/mid-mock, confirm first (same as the
+  // in-app Exit button) instead of silently dropping their answer.
+  if((fromId==="exam"||fromId==="fullmock")&&toId!==fromId){
+    history.pushState({screen:fromId},"","#"+fromId); // cancel the back nav for now
+    exitDest=toId;
+    document.getElementById("exit-cov").classList.add("open");
+    return;
+  }
+  _routing=true;
+  if(STATEFUL_SCREENS.has(toId)&&!CQ&&!(MS&&MS.s&&MS.s.length)){
+    // No live exam/mock data to show (e.g. after a refresh) — go home instead
+    // of rendering a blank exam screen.
+    showS("home",{replace:true});
+  }else if(document.getElementById(toId)){
+    showS(toId);
+  }else{
+    showS("home",{replace:true});
+  }
+  _routing=false;
+});
+// Warn before an accidental refresh/close while mid-answer, since that state can't survive a reload
+window.addEventListener("beforeunload",e=>{
+  const active=document.querySelector(".screen.active");
+  const id=active&&active.id;
+  if(id==="exam"||id==="fullmock"){
+    e.preventDefault();e.returnValue="";
+    return "";
+  }
+});
 function handleBrand(e){e.preventDefault();const inExam=document.getElementById("exam").classList.contains("active")||document.getElementById("fullmock").classList.contains("active");if(inExam)askExit("home");else showS("home");}
 function askExit(dest){exitDest=dest;document.getElementById("exit-cov").classList.add("open");}
 function closeCov(){document.getElementById("exit-cov").classList.remove("open");exitDest=null;}
