@@ -112,6 +112,8 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
 .answer-ta{width:100%;min-height:300px;background:var(--bg);border:1px solid var(--b);border-radius:var(--rs);color:var(--t);font-family:var(--font);font-size:.83rem;line-height:1.8;padding:11px;resize:none;outline:none;transition:border-color var(--tr);display:block}
 .answer-ta:focus{border-color:var(--accent)}
 .answer-ta::placeholder{color:var(--t3)}
+.answer-ta.ta-locked{border-color:#ef4444!important;animation:taShake .2s}
+@keyframes taShake{0%,100%{transform:translateX(0)}25%{transform:translateX(-3px)}75%{transform:translateX(3px)}}
 .ta-footer{display:flex;justify-content:space-between;align-items:center;margin-top:6px}
 .wc-lbl{font-family:var(--mono);font-size:.68rem;color:var(--t2)}
 .wc-lbl strong{color:var(--accent)}
@@ -641,6 +643,7 @@ function launchExam(qid){
   document.getElementById("exam-qtext").textContent=CQ.text;
   document.getElementById("exam-qmeta").innerHTML=`<span class="chip">${CQ.wordLimit}</span><span class="chip">${CQ.marks} marks</span>`;
   const ta=document.getElementById("exam-ta");ta.value="";tyStarted=false;tStart=null;
+  restrictTA(ta);
   updWC("exam-ta","exam-wc","exam-wc-top","exam-pwc");
   clearInterval(TI);clearInterval(WI);
   startTimer(mins*60,"exam-timer","exam-prog",()=>submitSingle());
@@ -684,6 +687,25 @@ function tickT(tid,bid){
   if(bid){const p=tTotal>0?(tLeft/tTotal)*100:100;const b=document.getElementById(bid);b.style.width=p+"%";b.style.background=p>40?"var(--accent)":p>15?"var(--amber)":"var(--red)";}
 }
 function cw(t){return t.trim()===""?0:t.trim().split(/\s+/).length;}
+// Locks a textarea: no paste/drop, no double-space, no blank-line skipping (max one Enter at a time)
+function restrictTA(ta){
+  if(!ta||ta._restricted)return;ta._restricted=true;
+  const block=e=>{e.preventDefault();flashLock(ta);};
+  ta.addEventListener("paste",block);
+  ta.addEventListener("drop",block);
+  ta.addEventListener("contextmenu",e=>e.preventDefault());
+  ta.addEventListener("keydown",e=>{
+    const v=ta.value,pos=ta.selectionStart,prev=v.slice(0,pos).slice(-1);
+    if(e.key===" "&&prev===" "){e.preventDefault();flashLock(ta);return;}
+    if(e.key==="Enter"&&prev==="\n"){e.preventDefault();flashLock(ta);return;}
+  });
+}
+let _lockT=null;
+function flashLock(ta){
+  ta.classList.add("ta-locked");
+  clearTimeout(_lockT);
+  _lockT=setTimeout(()=>ta.classList.remove("ta-locked"),220);
+}
 function updWC(ta,wc,top,panel){const v=cw(document.getElementById(ta).value);[wc,top].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent=v;});const pe=document.getElementById(panel);if(pe)pe.textContent=v+" words";}
 function calcWPM(ta,wid){if(!tStart||!tyStarted)return;const e=(Date.now()-tStart)/60000,v=cw(document.getElementById(ta).value);const el=document.getElementById(wid);if(el)el.textContent=e>0?Math.round(v/e):0;}
 async function submitSingle(){
@@ -834,6 +856,7 @@ function loadMSContent(idx){
   const changeBtn=canChange?`<button class="btn bg bsm" style="margin-top:8px" onclick="showQPicker(${idx},true)"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 4v6h6"/><path d="M23 20v-6h-6"/><path d="M20.49 9A9 9 0 005.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 013.51 15"/></svg>Change question</button>`:"";
   document.getElementById("mock-qmeta").innerHTML=`<span class="chip">${s.question.wordLimit}</span><span class="chip">${s.question.marks} marks</span>${changeBtn}`;
   const ta=document.getElementById("mock-ta");ta.value=MS.a[idx]||"";updMWC();
+  restrictTA(ta);
   ta.oninput=()=>{
     MS.a[idx]=ta.value;updMWC();
     const done=Object.values(MS.a).filter(a=>a.trim()).length;
