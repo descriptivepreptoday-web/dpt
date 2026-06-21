@@ -410,6 +410,14 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
       <button class="btn bg" id="r-try-btn" onclick="showS('qselect')">Try Another</button>
       <button class="btn bp" onclick="showS('home')">Home</button>
     </div>
+    <div id="worker-test-bar" style="margin-top:14px;text-align:center;display:none">
+      <div style="font-size:.7rem;color:var(--t2);margin-bottom:6px">AI not working? Test your Worker connection:</div>
+      <button class="btn bg" style="font-size:.72rem" onclick="testWorker()">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Test Worker
+      </button>
+      <div id="worker-test-result" style="margin-top:8px;font-size:.75rem;font-family:var(--mono)"></div>
+    </div>
   </div>
 </div>
 <div id="typing" class="screen">
@@ -933,7 +941,7 @@ async function runAIMock(){
       const scoreEl=document.getElementById(`mock-sec-score-${i}`);
       if(scoreEl)scoreEl.textContent="AI unavailable";
       const aiEl=document.getElementById(`mock-sec-ai-${i}`);
-      if(aiEl)aiEl.innerHTML='<div class="ai-notice"><strong>AI evaluation not configured.</strong></div>';
+      if(aiEl)aiEl.innerHTML='<div class="ai-notice"><strong>AI evaluation not configured.</strong></div>';const tb=document.getElementById('worker-test-bar');if(tb)tb.style.display='block';
     }
   }
 }
@@ -941,11 +949,15 @@ async function runAIForSection(q,ans,wc,wpm){
   const d=D(),cfg=d.siteSettings||{};
   const tm={};d.sectionTypes.forEach(s=>tm[s.id]=s);
   const typeName=tm[q.type]?.name||q.type,max=q.marks;
-  const ep=cfg.apiProxy||"https://api.anthropic.com/v1/messages";
+  // Always read apiProxy fresh from localStorage to avoid bundled config overriding it
+  let ep=cfg.apiProxy||"";
+  try{const ls=localStorage.getItem("dpt_data");if(ls){const p=JSON.parse(ls)?.siteSettings?.apiProxy;if(p)ep=p;}}catch(e){}
+  if(!ep){document.getElementById("r-ai")&&(document.getElementById("r-ai").innerHTML='<div class="ai-notice"><strong>AI evaluation not configured.</strong> Add your Cloudflare Worker URL in Admin → Settings → AI Evaluation Proxy to enable scoring.</div>');return null;}
+  const realEp=ep;
   const sys="You are an expert SBI PO Mains Descriptive Paper evaluator. Evaluate strictly as per the 2026 new pattern. Respond ONLY with valid JSON - no markdown, no preamble.";
   const p=`TYPE: ${typeName}\nWORD LIMIT: ${q.wordLimit}\nMAX MARKS: ${max}\nQUESTION: ${q.text}\nANSWER: ${ans||"(blank)"}\nWORDS: ${wc} | WPM: ${wpm}\n\nEvaluate on 4 params each out of ${Math.round(max/4)}: Content and Relevance, Structure and Format, Language and Grammar, Word Limit Adherence.\n\nReturn ONLY JSON: {"totalScore":<n>,"parameters":[{"name":"Content & Relevance","score":<n>,"max":${Math.round(max/4)},"comment":"<1 sentence>"},{"name":"Structure & Format","score":<n>,"max":${Math.round(max/4)},"comment":"<1 sentence>"},{"name":"Language & Grammar","score":<n>,"max":${Math.round(max/4)},"comment":"<1 sentence>"},{"name":"Word Limit","score":<n>,"max":${Math.round(max/4)},"comment":"<1 sentence>"}],"strengths":["<pt>","<pt>"],"improvements":["<pt>","<pt>","<pt>"],"overallVerdict":"<2-3 sentences>","typingFeedback":"<1 sentence on ${wpm} WPM>"}`;
   try{
-    const res=await fetch(ep,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"gemini-2.5-flash-lite",max_tokens:1000,system:sys,messages:[{role:"user",content:p}]})});
+    const res=await fetch(realEp,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"gemini-2.5-flash-lite",max_tokens:1000,system:sys,messages:[{role:"user",content:p}]})});
     const data=await res.json();if(data.error)throw new Error(data.error.message);
     return JSON.parse(data.content.map(i=>i.text||"").join("").replace(/```json|```/g,"").trim());
   }catch(e){return null;}
@@ -1113,6 +1125,28 @@ function resetTyping(){
   document.getElementById("paste-in").value="";selMode("given");
   document.querySelectorAll(".tl-btn").forEach(b=>b.classList.remove("on"));document.querySelector("[data-tl='120']").classList.add("on");
   tlSec=120;document.getElementById("tl-cust").classList.remove("show");
+}
+async function testWorker(){
+  const res=document.getElementById("worker-test-result");
+  res.style.color="var(--t2)";res.textContent="Testing…";
+  let ep="";
+  try{const ls=localStorage.getItem("dpt_data");if(ls){ep=JSON.parse(ls)?.siteSettings?.apiProxy||"";}}catch(e){}
+  if(!ep){res.style.color="var(--red)";res.textContent="❌ No Worker URL saved. Go to Admin → Settings → AI Evaluation Proxy.";return;}
+  try{
+    const r=await fetch(ep,{method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({model:"gemini-2.5-flash-lite",max_tokens:50,system:"Reply with valid JSON only.",
+        messages:[{role:"user",content:"Say hello in JSON: {"hello":"world"}"}]})});
+    const data=await r.json();
+    if(data.content&&data.content[0]){
+      res.style.color="var(--green)";res.textContent="✅ Worker is working! URL: "+ep;
+    } else if(data.error){
+      res.style.color="var(--red)";res.textContent="❌ Worker error: "+data.error.message;
+    } else {
+      res.style.color="var(--amber)";res.textContent="⚠️ Unexpected response: "+JSON.stringify(data).substring(0,120);
+    }
+  }catch(e){
+    res.style.color="var(--red)";res.textContent="❌ Cannot reach Worker: "+e.message+". Check the URL and CORS settings.";
+  }
 }
 init();
 </script>
