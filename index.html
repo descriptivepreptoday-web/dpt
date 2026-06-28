@@ -81,10 +81,11 @@
         }
 
         // Run as soon as the page finishes reading the structure
+        // Run as soon as the page finishes reading the structure
         document.addEventListener("DOMContentLoaded", () => {
             loadSection("practice-placeholder", "components/practice.html");
-            loadSection("offers-placeholder", "components/offer.html");
-            loadSection("mocks-placeholder", "components/mock.html");
+            loadSection("offers-placeholder", "components/offer.html");  // Changed from offers.html to offer.html
+            loadSection("mocks-placeholder", "components/mock.html");    // Changed from mocks.html to mock.html
             loadSection("tracker-placeholder", "components/tracker.html");
         });
     </script>
